@@ -16,7 +16,7 @@ if($_POST){
     $price = $_POST['price'];
     $description = $_POST['description'];
 
-    $addService = $database->query("insert into services(service, price, description, created_at, updated_at) values('$service_name', '$price', '$description', '$today', '$today')");
+    $addService = $database->query("INSERT INTO services (service, price, description, created_at, updated_at) VALUES ('$service_name', '$price', '$description', '$today', '$today')");
     $_SESSION['message'] = 'Service was added.';
     header('location: services.php');
 }

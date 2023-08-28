@@ -19,6 +19,8 @@ $title = $title ?? 'Famiñial Dental Clinic';
 ob_start();
 session_start();
 
+    //This script check whether the user is logged in, what type of user.
+
     if(isset($_SESSION["user"])){
         if(($_SESSION["user"])=="" or $_SESSION['usertype']!='p' and $_SESSION['usertype']!='d'){
             header("location: ../login-1.php");
@@ -35,6 +37,7 @@ session_start();
         $userfetch=$userrow->fetch_assoc();
         $userid= $userfetch["id"];
         $username=$userfetch["first_name"];
+        //THese are the link for patient. Will have to fix the routing.
         $med_link = "../patients/request_medicine.php";
         $med_link_sidebar = "../patients/medicine_requests.php";
         $appointment_link = "appointments.php";
@@ -47,6 +50,7 @@ session_start();
         $userfetch=$userrow->fetch_assoc();
         $userid= $userfetch["id"];
         $username=$userfetch["first_name"]." ".$userfetch["last_name"];
+          //These are the link for clinic side. Will have to fix the routing.
         $med_link = "../doctors/medicine_inventory.php";
         $appointment_link = "../doctors/appointments.php";
         $med_link_sidebar = "../doctors/medicine_requests.php";
@@ -58,7 +62,7 @@ session_start();
 
 ?>
 <script>
-    //write an ajax function to delete a service from database
+    //ajax function to delete a service from database
     function deleteService(id){
         var xhttp = new XMLHttpRequest();
         responseText = confirm("Are you sure you want to delete this service?");

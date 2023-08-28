@@ -4,9 +4,10 @@ include_once(__DIR__ . '/../_header_v2.php');
 
 
 
-//write a query that also gets the first and last name of the patient and inner join it in appointments table
+//query that also gets the first and last name of the patient and inner join it in appointments table
 
 $result = $database->query("SELECT appointments.id, appointments.appointmentDate, appointments.appointmentTime, appointments.service_id, appointments.created_at, patient.first_name, patient.last_name, services.service FROM appointments INNER JOIN patient ON appointments.patient_id = patient.id INNER JOIN services ON appointments.service_id = services.id WHERE appointments.patient_id = '$userid' AND appointments.cancel_details = ''");
+
 //get all the appointments of patient by 10
 if($result->num_rows>0){
     $appointments = $result->fetch_all(MYSQLI_ASSOC);
@@ -32,16 +33,8 @@ if($result->num_rows>0){
                             </tr>
                         </thead>
                         <tbody>
-                        <?php
-                        
-                             $number = 0; 
-                             $appo = 'app';
-                            foreach($appointments as $appointment):
-                                $number++;
-                                $app = $appo.$number;
-                            $_SESSION['appointment_id'] = $appointment['id'];
-                            ?>
-                            
+                        <!-- This scripts loops and get all the appointments of the patient -->
+                        <?php foreach($appointments as $appointment): ?>
                             <tr>
                                 <td><?php echo $appointment['first_name']." ".$appointment['last_name'] ?></td>
                                 <form class="d-flex justify-content-center flex-wrap my-2" method="post" action="deleteAppointment.php">
@@ -54,13 +47,7 @@ if($result->num_rows>0){
                                     <a href="cancellation.php" class="btn btn-outline-danger btn-sm" type="button" style="border-style: none; margin-left: 10px;">Cancel</a>
                                     <input type="checkbox" name="appointment_ids[]" value="<?php echo $appointment['id']; ?>" style="margin-left: 20px;"></td>
                             </tr>
-                        <?php 
-                        $totalNumber = $number;
-
-                        $_SESSION['totalNumber'] = $totalNumber;
-                        $_SESSION['app'] = $app;
-                        endforeach; ?>
-                        </tbody>
+                        <?php endforeach; ?>
                     </table>
                 </div>
                 <nav class="d-lg-flex justify-content-lg-center" style="font-family: Alexandria, sans-serif;color: var(--bs-secondary);padding-top: 9px;">
@@ -80,4 +67,5 @@ if($result->num_rows>0){
             </div>
         </div>
     </div>
+    
 <?php include_once('../_footer.php'); ?>

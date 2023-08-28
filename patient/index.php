@@ -26,7 +26,6 @@ session_start();
         $appointment_link_sidebar = "../patients/appointments.php";
         $index = "../patients/index.php";
         $services = "../patient/services.php";
-
     }else{
         //import database
         include("../connection.php");
@@ -56,8 +55,17 @@ session_start();
 </head>
 
 <body style="font-family: Alexandria, sans-serif;background: #fbfff1;">
-    <div class="container">
-        <section class="text-white py-4 py-xl-5" style="height: 534px;">
+    <div class="container py-2">
+    <div class="row df-l mb-3">
+        <nav class="col navbar d-flex navbar-expand-md bg-body d-flex d-xxl-flex flex-row justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center rubberBand animated py-3" style="background: rgb(44,62,80);font-family: Alexandria, sans-serif;border-radius: 6px;box-shadow: 2px 2px var(--bs-primary-border-subtle);border: 2px solid var(--bs-primary-border-subtle);width: auto;">
+            <div class="container-fluid"><a class="navbar-brand d-flex align-items-center" href="index.php"><img src="../assets/img/logo.png" width="54" height="54" /><span class="d-flex px-sm-4" style="color: var(--bs-gray-600);font-size: 18px;text-shadow: 1px 1px #1abc9c;margin-left: -19px;margin-right: -19px;">Faminial-Mendoza Dental Clinic</span><a class="px-lg-5 px-xxl-3"><?php echo $username; ?></a><button class="navbar-toggler" data-bs-toggle="collapse"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        </div>
+    </nav>
+    <?php if(isset($_SESSION['message']) && $_SESSION['message'] !=''){
+                    echo '<div id="message" class="alert text-center text-bold fade show" role="alert" style="margin-top: 18px; font-family: Alexandria, sans-serif; background-color: none;">'.$_SESSION['message'].'</div>';
+                    unset($_SESSION['message']);} ?>
+    </div>
+        <section class="text-white" style="height: 534px;">
             <div class="container">
                 <div class="border rounded border-0 d-flex flex-column justify-content-center align-items-center p-4 py-5" style="background: linear-gradient(rgba(0,123,255,0.2) 0%, rgba(0,123,255,0.2) 84%, rgb(44,62,80) 100%), url(&quot;../assets/img/bg.png&quot;) center / cover;height: 500px;box-shadow: 5px 5px var(--bs-primary-border-subtle);border: 2px solid var(--bs-gray-500);border-bottom: 2px none #abb2b9;">
                     <div class="row">
