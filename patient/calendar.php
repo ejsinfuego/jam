@@ -50,7 +50,7 @@ $availableServices = $services->fetch_assoc();
 <div class="container d-flex flex-column justify-content-center justify-content-xxl-center align-items-xxl-center">
     <div class="row d-md-flex d-lg-flex justify-content-md-center justify-content-lg-center">
             <div class="col-md-12 d-md-flex d-xxl-flex justify-content-center align-items-center align-content-center justify-content-xxl-center" style="background: #1abc9c;color: #f1f0f0;width: 560px;">
-                <h1 class="text-center" style="font-family: Alexandria, sans-serif;"><?php echo $today->format('F Y') ?></h1>
+                <h1 class="text-center" style="font-family: Alexandria, sans-serif;"><?php echo $today->format('F Y'); ?></h1>
             </div>
         </div>
             <div class="row d-flex d-xxl-flex justify-content-center align-content-center align-self-center flex-nowrap" style="font-family: Alexandria, sans-serif;width: 560px; border-radius: 6px;">

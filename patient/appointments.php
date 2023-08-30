@@ -47,8 +47,10 @@ if($result->num_rows>0){
                                     <a href="cancellation.php" class="btn btn-outline-danger btn-sm" type="button" style="border-style: none; margin-left: 10px;">Cancel</a>
                                     <input type="checkbox" name="appointment_ids[]" value="<?php echo $appointment['id']; ?>" style="margin-left: 20px;"></td>
                             </tr>
-                        <?php endforeach; ?>
-                    </table>
+                        <?php
+                        $_SESSION['appointment_id'] = $appointment['id'];
+                     endforeach; ?>
+                    </table>    
                 </div>
                 <nav class="d-lg-flex justify-content-lg-center" style="font-family: Alexandria, sans-serif;color: var(--bs-secondary);padding-top: 9px;">
                     <ul class="pagination">

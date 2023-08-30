@@ -11,7 +11,6 @@ $today = Carbon::now('Asia/Kolkata');
 
 $editAppointment = $database->query("select appointments.id, appointments.appointmentDate, appointments.appointmentTime, appointments.service_id, services.id, services.service from appointments inner join services on appointments.service_id = services.id where appointments.id = ".$_SESSION['appointment_id']);
 $editAppointment = $editAppointment->fetch_assoc();
-
 $services = $database->query("select id, service from services;");
 $availableServices = $services->fetch_assoc();
 
@@ -20,7 +19,7 @@ if($_POST){
     $time = $_POST['time'];
     $service = $_POST['service_id'];
 
-    $updateAppointment = $database->query("update appointments set appointmentDate = '$date', appointmentTime = '$time', service_id = '$service', updated_at = '$today' where id = ".$_SESSION['appointment_id']);
+    $updateAppointment = $database->query("update appointments set appointmentDate = '$date', appointmentTime = '$time', service_id = '$service', updated_at = '$today' where id = ".$_SESSION['id']);
     $_SESSION['message'] = 'Appointment was updated.';
     header('location: appointments.php');
 }

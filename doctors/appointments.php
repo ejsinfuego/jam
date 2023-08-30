@@ -8,7 +8,9 @@ if($_SESSION['usertype'] != 'd'){
 }
 
 $result = $database->query("SELECT appointments.id, appointments.appointmentDate, appointments.cancel_details,appointments.appointmentTime, appointments.service_id, appointments.created_at, patient.first_name, patient.last_name, services.service FROM appointments INNER JOIN patient ON appointments.patient_id = patient.id INNER JOIN services ON appointments.service_id = services.id");
+
 //get all the appointments of patient by 10
+
 if($result->num_rows>0){
     $appointments = $result->fetch_all(MYSQLI_ASSOC);
     $appointments = array_chunk($appointments, 10);

@@ -5,6 +5,7 @@ $title = 'Services';
 $services = $database->query("select * from services");
 $availableServices = $services->fetch_assoc();
 ?>
+
 <div class="col">
                 <section>
                     <p id="message"></p>

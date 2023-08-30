@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,8 +44,6 @@ include("connection.php");
 
 
 
-
-
 if(isset($_POST['submit'])){
 
     $date = date('Y-m-d H:i:s');
@@ -68,7 +64,7 @@ if(isset($_POST['submit'])){
             header('location: public/login-1.php');
         }else{
             //insert query into patient table;
-            $database->query('insert into patient (first_name,last_name,email,password,created_at,updated_at) values("'.$fname.'","'.$lname.'","'.$email.'","'.$password.'","'.$created_at.'","'.$updated_at.'")');
+            $database->query('insert into patient(first_name,last_name,email,password,created_at,updated_at) values("'.$fname.'","'.$lname.'","'.$email.'","'.$password.'","'.$created_at.'","'.$updated_at.'")');
             $database->query("insert into webuser values('$email','p')");
 
             //print_r("insert into patient values($pid,'$email','$fname','$lname','$newpassword','$address','$nic','$dob','$tele');");
