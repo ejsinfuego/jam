@@ -29,7 +29,7 @@ if($result->num_rows > 0){
             <h2 class="d-lg-flex justify-content-lg-center" style="font-family: Alexandria, sans-serif;margin-bottom: 20px;margin-top: 20px;text-shadow: 3px 2px #abb2b9;">Patients</h2>
 
                 <div class="table-responsive" style="font-family: Alexandria, sans-serif;">
-                    <table class="table table-striped table-striped-columns table-hover table-sm">
+                    <table class="table table-striped table-striped-columns table-hover table-sm" id="sortTable">
                         <thead>
                             <tr>
                                 <th>Complete Name</th>

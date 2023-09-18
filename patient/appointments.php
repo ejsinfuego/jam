@@ -6,7 +6,7 @@ include_once(__DIR__ . '/../_header_v2.php');
 
 //query that also gets the first and last name of the patient and inner join it in appointments table
 
-$result = $database->query("SELECT appointments.id, appointments.appointmentDate, appointments.appointmentTime, appointments.service_id, appointments.created_at, patient.first_name, patient.last_name, services.service FROM appointments INNER JOIN patient ON appointments.patient_id = patient.id INNER JOIN services ON appointments.service_id = services.id WHERE appointments.patient_id = '$userid' AND appointments.cancel_details = ''");
+$result = $database->query("SELECT appointments.id, appointments.appointmentDate, appointments.appointmentTime, appointments.service_id, appointments.created_at, patient.first_name, patient.last_name, services.service FROM appointments INNER JOIN patient ON appointments.patient_id = patient.id INNER JOIN services ON appointments.service_id = services.id WHERE appointments.patient_id = '$userid' AND appointments.cancel_details = ' ';");
 
 //get all the appointments of patient by 10
 if($result->num_rows>0){
@@ -52,13 +52,6 @@ if($result->num_rows>0){
                      endforeach; ?>
                     </table>    
                 </div>
-                <nav class="d-lg-flex justify-content-lg-center" style="font-family: Alexandria, sans-serif;color: var(--bs-secondary);padding-top: 9px;">
-                    <ul class="pagination">
-                        <li class="page-item" style="color: var(--bs-secondary);"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
-                        <li class="page-item" style="color: var(--bs-secondary);"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item" style="color: var(--bs-secondary);"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
-                    </ul>
-                </nav>
                 <section class="py-4 py-xl-5" style="font-family: Alexandria, sans-serif;">
                     <div class="container">
                     <label class="my-2">This will delete all the rows that are checked.</label>

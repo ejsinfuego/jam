@@ -3,7 +3,7 @@
  session_start();
 
     include('../connection.php');
-//code to delete appointment from this client side script
+//code to delete appointment from this client side-script
     if(isset($_POST['appointment_ids'])){
         $appointment_ids = $_POST['appointment_ids'];
         foreach($appointment_ids as $appointment_id){

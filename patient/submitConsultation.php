@@ -18,7 +18,7 @@ $timeNow = Carbon::now('Asia/Kolkata');
         $pid=$_POST['patient_id'];
         $timestamp= $timeNow;
 
-        $search = $database->query("select * from appointments where appointmentDate='$date' and appointmentTime='$time'");
+        $search = $database->query("select * from appointments where appointmentDate='$date' and appointmentTime='$time'"); //check whether the scheduled date has already been taken
 
         if($search->num_rows==0){
             if(($timeNow->format('Y') <= date('Y', strtotime($date)) and $timeNow->format('m') <= date('m', strtotime($date)) and $timeNow->format('d') <= date('d', strtotime($date)) and $timeNow->format('h:i a') != date('h:i a', strtotime($time)))){

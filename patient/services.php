@@ -1,10 +1,9 @@
 <?php 
-$title = 'Services  ';
+$title = 'Services';
 include_once(__DIR__ . '/../_header_v2.php'); 
 
 $services = $database->query("select * from services");
 $availableServices = $services->fetch_assoc();
-
 
 ?>
             <div class="col">

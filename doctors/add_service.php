@@ -11,15 +11,7 @@ $today = Carbon::now('Asia/Kolkata');
 if($_SESSION['usertype'] != 'd'){
     header('location: ../something_went_wrong.php');
 }
-if($_POST){
-    $service_name = $_POST['service_name'];
-    $price = $_POST['price'];
-    $description = $_POST['description'];
 
-    $addService = $database->query("INSERT INTO services (service, price, description, created_at, updated_at) VALUES('$service_name', '$price', '$description', '$today', '$today')");
-    $_SESSION['message'] = 'Service was added.';
-    header('location: services.php');
-}
 ?>
             <div class="col">
                 <div class="row d-md-flex d-lg-flex justify-content-md-center justify-content-lg-center" style="border-radius: 6px;margin-left: 6px;background: var(--bs-tertiary-bg);box-shadow: 5px 5px var(--bs-primary-border-subtle);border: 2px solid var(--bs-primary-border-subtle);border-bottom-style: none;border-bottom-color: #1abc9c;">
@@ -31,7 +23,7 @@ if($_POST){
                                         <div class="card-body p-sm-5" style="font-family: Alexandria, sans-serif;box-shadow: 3px 3px var(--bs-primary-border-subtle);border-radius: 6px;">
                                             <h2 class="text-center mb-4" style="color: #6c757d;">Add Services</h2>
                                             <h6 class="text-center mb-4" style="font-family: Alexandria, sans-serif;color: #6c757d;margin: -19px;">Fill out necessary information.</h6>
-                                            <form method="post">
+                                            <form method="post" action="addServiceScript.php">
                                                 <div class="mb-3"><label class="form-label">Service</label>
                                                 <input class="form-control" type="text" id="name-2" name="service_name" placeholder="Service Name" required="">
                                                 <label class="form-label" style="padding-top: 0px;margin-top: 8px;">Price</label>
