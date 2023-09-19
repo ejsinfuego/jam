@@ -138,7 +138,7 @@ unset($_SESSION['show_modal']);?>" class="modal fade" tabindex="-1" role="dialog
     </div>
             <div class="container" style="margin-top: 15px;">
             <div class="row">
-            <div class="col pt-3 col-md-2 col-lg-2 col-xxl-2 d-flex flex-column flex-grow-0 flex-shrink-0" style="background: #4c657d;font-family: Alexandria, sans-serif;border-radius: 6px;box-shadow: 5px 5px 0px var(--bs-primary-border-subtle); font-size: 14px;">
+            <div class="col pt-3 col-md-2 col-lg-2 col-xxl-2 d-flex flex-column pb-4" style="background: #4c657d;font-family: Alexandria, sans-serif;border-radius: 6px;box-shadow: 5px 5px 0px var(--bs-primary-border-subtle); font-size: 14px;">
                 <a href="calendar.php" class="d-flex d-lg-flex d-xxl-flex p-1 nav-link" style="margin-top: 0px; border-radius: 5px; color: white;">
                         <div class="pe-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-32 0 512 512" width="1em" height="1em" fill="currentColor" style="font-size: 40px;background: #6786a3;padding: 9px;border-radius: 15px;">
                                 <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
@@ -206,7 +206,7 @@ unset($_SESSION['show_modal']);?>" class="modal fade" tabindex="-1" role="dialog
                             </div>
                         </div>
                     </div>
-            </div>
+                </div>
 <script>
    
 </script>

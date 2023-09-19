@@ -54,7 +54,7 @@ if($result->num_rows>0){
 <div class="col">
         <h2 class="d-lg-flex justify-content-lg-center" style="font-family: Alexandria, sans-serif;">Appointments</h2>
                 <div class="table-responsive" style="font-family: Alexandria, sans-serif;">
-                <table id="sortTable" class="table table-striped table-responsive table-striped-columns table-hover table-sm">
+                <table id="sortTable" class="table table-striped table-striped-columns table-hover table-sm">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -70,7 +70,6 @@ if($result->num_rows>0){
                         <tbody>
                             <!-- This the block where it displays all the appointments of all the patient -->
                             <?php foreach($appointments as $appointment) : ?>
-
                         <tr>
                                 <td><?php echo $appointment['first_name']." ".$appointment['last_name'] ?></td>
                                 <form class="d-flex justify-content-center flex-wrap my-2" method="post" action="deleteAppointment.php">
@@ -83,8 +82,8 @@ if($result->num_rows>0){
                                     <?php if($appointment['status'] == null) : ?>
                                     <button onclick="approveAppointment(<?php echo $appointment['id']; ?>)" class="btn btn-primary btn-sm" type="button" style="background: #2ecc71;border-style: none;">Approve</button>
                                     <?php endif; ?>
-                                    <button onclick="deleteAppointment(<?php echo $appointment['id']; ?>)" class="btn btn-danger btn-sm" 
-                                    type="button" style="background: #2ecc71;border-style: none; margin-left: 10px;">Cancel</button></td>
+                                    <button onclick="deleteAppointment(<?php echo $appointment['id']; ?>)" class="btn btn-outline-danger btn-sm" 
+                                    type="button" style="border-style: none; margin-left: 10px;">Delete</button></td>
                             </tr>
                             <?php endforeach; ?>
                         </tbody>

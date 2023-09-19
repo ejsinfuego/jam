@@ -18,10 +18,43 @@ if($result->num_rows>0){
 }
 
 ?>
+<script>
+    $(document).ready(function(){
+        $('.cancelButton').click(function(){
+            $('#cancelModal').modal('show');
+        });
+    });
+
+    function cancelAppointment(id){
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                location.reload();
+            }
+        };
+        //post method of ajax
+        xhttp.open("POST", "cancelAppointment.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("id="+id+"&cancel_details="+document.getElementById('cancel_details').value);
+    }
+
+    function editAppointment(id){
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                location.reload();
+            }
+        };
+        xhttp.open("GET", "editAppointment.php?id="+id, true);
+        xhttp.send();
+
+    }
+
+</script>
             <div class="col">
                 <h2 class="d-lg-flex justify-content-lg-center" style="font-family: Alexandria, sans-serif;">Appointments</h2>
                 <div class="table-responsive" style="font-family: Alexandria, sans-serif;">
-                    <table class="table table-striped table-striped-columns table-hover table-sm">
+                    <table id="sortTable" class="table table-striped table-striped-columns table-hover table-sm">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -42,10 +75,29 @@ if($result->num_rows>0){
                                 <td><?php echo date('M-d-Y', strtotime($appointment['appointmentDate'])); ?></td>
                                 <td><?php echo date('h:i A', strtotime($appointment['appointmentTime'])); ?></td>
                                 <td><?php echo date('m-d-y h:i A', strtotime($appointment['created_at'])); ?></td>
-                                <td class="d-lg-flex justify-content-lg-center">
+                                <td class="d-lg-flex">
                                     <a href="edit_appointment.php" class="btn btn-primary btn-sm" type="button" style="background: #2ecc71;border-style: none;">Update</a>
-                                    <a href="cancellation.php" class="btn btn-outline-danger btn-sm" type="button" style="border-style: none; margin-left: 10px;">Cancel</a>
-                                    <input type="checkbox" name="appointment_ids[]" value="<?php echo $appointment['id']; ?>" style="margin-left: 20px;"></td>
+                                    <button class="cancelButton btn btn-outline-danger btn-sm" type="button" style="border-style: none; margin-left: 10px;">Cancel</button>
+                                    <input type="checkbox" name="appointment_ids[]" value="<?php echo $appointment['id']; ?>" style="margin-left: 20px;">
+                                    <div id="cancelModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <p>We will be glad to know why you will cancel.</p>
+                                                    <label for="cancel_details">Reason for cancellation :</label>
+                                                    <textarea type="text" name="cancel_details" id="cancel_details" class="form-control">
+                                                    </textarea>
+
+                                                </div>
+                                                    <div class="modal-footer">
+                                                        <button onclick="cancelAppointment(<?php echo $appointment['id']; ?>)" class="btn btn-danger btn-sm" type="button" style="border-style: none; margin-left: 10px;">Submit</button>
+                                                        <button class="btn btn-secondary btn-sm" type="button" style="border-style: none; margin-left: 10px;" data-bs-dismiss="modal">Close</button>
+                                                    </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
                         <?php
                         $_SESSION['appointment_id'] = $appointment['id'];
@@ -62,5 +114,6 @@ if($result->num_rows>0){
             </div>
         </div>
     </div>
+</div>
     
 <?php include_once('../_footer.php'); ?>

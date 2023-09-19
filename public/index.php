@@ -1,3 +1,18 @@
+<?php
+
+session_start();
+
+require '../vendor/autoload.php';
+
+use Carbon\Carbon;
+
+$today = Carbon::today();
+
+include('../connection.php');
+
+$services = $database->query('select * from services');
+
+?>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 
@@ -33,53 +48,22 @@
     </div>
     <div class="container py-4 py-xl-5" data-aos="fade-up">
         <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
+            <?php foreach($services as $service) : ?>
             <div class="col">
-                <div class="card"><img class="img-fluid card-img-top w-100 d-block bounce animated fit-cover" style="height: 200px;box-shadow: 5px 5px var(--bs-primary-border-subtle);border-radius: 6px;border-top-left-radius: 6px;border: 2px solid var(--bs-primary-border-subtle) ;" src="../assets/img/Screenshot%202023-08-15%20202507.png">
-                    <div class="card-body bounce animated p-4" style="box-shadow: 5px 5px var(--bs-primary-border-subtle);border-radius: 6px;border-top-left-radius: 6px;border: 2px solid var(--bs-primary-border-subtle) ;">
-                        <p class="text-primary card-text mb-0">Article</p>
-                        <h4 class="card-title">Services for all ages.</h4>
-                        <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                        <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                            <div>
-                                <p class="fw-bold mb-0">John Smith</p>
-                                <p class="text-muted mb-0">Erat netus</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col">
-                <?php echo "Test" ?>
                 <div class="card"><img class="card-img-top w-100 d-block bounce animated fit-cover" style="height: 200px;border: 2px solid var(--bs-primary-bg-subtle);border-radius: 6px;box-shadow: 5px 5px var(--bs-primary-border-subtle);" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
                     <div class="card-body bounce animated p-4" style="border: 2px solid var(--bs-primary-bg-subtle);border-radius: 6px;box-shadow: 5px 5px var(--bs-primary-border-subtle);">
-                        <p class="text-primary card-text mb-0">Article</p>
-                        <h4 class="card-title">Lorem libero donec</h4>
-                        <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                        <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                            <div>
-                                <p class="fw-bold mb-0">John Smith</p>
-                                <p class="text-muted mb-0">Erat netus</p>
-                            </div>
+                        <p class="text-primary card-text mb-0">Service</p>
+                        <h4 class="card-title"><?php echo $service['service'] ?></h4>
+                        <p class="card-text"><?php echo $service['description']; ?></p>
+                        <div class="d-flex"><a href="../login-1.php">
+                            Book an appointment..
+                        </a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="card"><img class="card-img-top w-100 d-block bounce animated fit-cover" style="height: 200px;box-shadow: 5px 5px var(--bs-primary-border-subtle);border-radius: 6px;border-style: solid;border-color: var(--bs-primary-bg-subtle);" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                    <div class="card-body bounce animated p-4" style="box-shadow: 5px 5px var(--bs-primary-border-subtle);border-style: solid;border-color: var(--bs-primary-border-subtle);border-radius: 6px;">
-                        <p class="text-primary card-text mb-0">Article</p>
-                        <h4 class="card-title">Lorem libero donec</h4>
-                        <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                        <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                            <div>
-                                <p class="fw-bold mb-0">John Smith</p>
-                                <p class="text-muted mb-0">Erat netus</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php endforeach; ?>
+
         </div>
         <section class="position-relative py-4 py-xl-5" id="register">
             <div class="container position-relative">
