@@ -10,9 +10,8 @@ $today = Carbon::today();
 
 include(__DIR__ . '/../_header_v2.php'); 
 
-$available = $database->query('select appointmentDate, appointmentTime from appointments where cancel_details = ""');
+$available = $database->query('select appointmentDate, appointmentTime from appointments where cancel_details = "" and status = "approved"');
 $availableDates = $available->fetch_assoc();
-
 
 $dateTaken = Carbon::today();
 $timeTaken = Carbon::today();
@@ -48,12 +47,13 @@ $availableServices = $services->fetch_assoc();
 ?>
 <script>
     $(document).ready(function(){
-        $('.appointmentDate').click(function(){
+        $('.appointmentDate').click(function(date){
             $('#appointment').modal('show');
 
         })
     
     });
+
 </script>
 <style>
     .appointmentDate:hover{
@@ -115,7 +115,7 @@ $availableServices = $services->fetch_assoc();
             <?php if ($day == 8 or $day == 15 or $day == 22 or $day == 29) : ?>
             <div class="d-flex flex-wrap w-100"></div>
             <?php endif; ?>
-            <a onclick="submitAppointment()"  class="appointmentDate col-md-3 col-lg-1 col-xxl-1 d-flex justify-content-lg-start flex-column" style="border: 1.4px none #1abc9c;border-top-style: none;border-top-color: var(--bs-gray-500);border-right-style: solid;border-right-color: var(--bs-primary-border-subtle);border-bottom-style: solid;border-bottom-color: var(--bs-primary-border-subtle);border-left-style: solid;border-left-color: var(--bs-primary-border-subtle);color: var(--bs-gray-600); cursor: pointer">
+            <a class="appointmentDate col-md-3 col-lg-1 col-xxl-1 d-flex justify-content-lg-start flex-column" style="border: 1.4px none #1abc9c;border-top-style: none;border-top-color: var(--bs-gray-500);border-right-style: solid;border-right-color: var(--bs-primary-border-subtle);border-bottom-style: solid;border-bottom-color: var(--bs-primary-border-subtle);border-left-style: solid;border-left-color: var(--bs-primary-border-subtle);color: var(--bs-gray-600); cursor: pointer">
                     <h5 class="text-start d-xxl-flex flex-row align-content-center align-self-center flex-wrap pt-lg-0" style="font-size: 11px;margin-top: 11px;color: #6c757d;padding-left: 0px;margin-left: -4px;width: 100%;"><?php echo $day; ?></h5>
                     <h5 class="text-start d-xxl-flex flex-row align-content-center align-self-center flex-wrap pt-lg-0 pt-xxl-0" style="font-size: 11px;color: white; padding-left: 0px;margin-left: -4px;width: auto;margin-top: -2px; background-color:#1abc9c;">
                     <?php foreach ($available as $availableDates) : ?>
@@ -130,4 +130,4 @@ $availableServices = $services->fetch_assoc();
 </div>
 </div>
 <div class="col-2"></div>
- <?php include_once(__DIR__ . '/../_footer.php'); ?>
+<?php include(__DIR__ . '/../_footer.php'); ?>

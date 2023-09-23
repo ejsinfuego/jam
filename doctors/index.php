@@ -17,7 +17,7 @@ $today = Carbon::now()->format('Y-m-d');
 //get the name of user
 $name = $database->query("SELECT * FROM doctor WHERE id = {$_SESSION['id']}")->fetch_assoc();
 
-$appointments = $database->query("SELECT * FROM appointments WHERE cancel_details='no'")->fetch_all();
+$appointments = $database->query("SELECT * FROM appointments WHERE cancel_details=''")->fetch_all();
 $appointmentsToday = count($database->query("SELECT * FROM appointments WHERE appointmentDate = '$today' AND cancel_details='no'")->fetch_all());
 
 $patients = $database->query("SELECT * FROM patient")->fetch_all();
@@ -42,14 +42,14 @@ $services = $database->query("SELECT * FROM services")->fetch_all();
 </head>
 
 <body style="font-family: Alexandria, sans-serif;background: #fbfff1;">
- <div class="container" style="margin-top: 18px;">
+ <div class="container" style="margin-top: 1rem;">
     <div class="row df-l mb-3">
         <nav class="col navbar d-flex navbar-expand-md bg-body d-flex d-xxl-flex flex-row justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center rubberBand animated py-3" style="background: rgb(44,62,80);font-family: Alexandria, sans-serif;border-radius: 6px;box-shadow: 2px 2px var(--bs-primary-border-subtle);border: 2px solid var(--bs-primary-border-subtle);width: auto;">
             <div class="container-fluid"><a class="navbar-brand d-flex align-items-center" href="index.php"><img src="../assets/img/logo.png" width="54" height="54" /><span class="d-flex px-sm-4" style="color: var(--bs-gray-600);font-size: 18px;text-shadow: 1px 1px #1abc9c;margin-left: -19px;margin-right: -19px;">Faminial-Mendoza Dental Clinic</span></a><button class="navbar-toggler" data-bs-toggle="collapse"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button></div>
     </nav>
     </div>
     <div class="container" style="padding: 0px;">
-        <section class="text-white py-4 py-xl-5" style="height: 152px;">
+        <section class="text-white">
             <div class="container" style="padding: 0px;">
                 <div class="border rounded border-0 d-flex flex-column justify-content-center align-items-center p-4 py-5" style="background: linear-gradient(rgba(0,123,255,0.2) 0%, rgba(0,123,255,0.2) 84%, rgb(44,62,80) 100%), url(&quot;../assets/img/bg.png&quot;) center / cover;height: 121px;box-shadow: 5px 5px var(--bs-primary-border-subtle);border: 2px solid var(--bs-gray-500);border-bottom: 2px none #abb2b9;">
                     <div class="row d-flex d-xxl-flex">
@@ -81,6 +81,7 @@ $services = $database->query("SELECT * FROM services")->fetch_all();
                 </a>
             </div>
             <div class="col">
+            <a href="check_patients.php" class="text-decoration-none text-body">
                 <div class="text-center d-flex flex-column justify-content-center align-items-center py-3" style="border-style: solid;border-color: #6c757d;border-radius: 6px;box-shadow: 4px 3px #6c757d;">
                     <div class="bs-icon-xl bs-icon-circle bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-2 bs-icon lg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="1em" height="1em" fill="currentColor">
                             <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
@@ -91,8 +92,11 @@ $services = $database->query("SELECT * FROM services")->fetch_all();
                         <p class="mb-0">Patients</p>
                     </div>
                 </div>
+            </a>
             </div>
             <div class="col">
+            <a href="services.php" class="text-decoration-none text-body">
+
                 <div class="text-center d-flex flex-column justify-content-center align-items-center py-3" style="border-style: solid;border-color: #6c757d;border-radius: 6px;box-shadow: 4px 3px #6c757d;">
                     <div class="bs-icon-xl bs-icon-circle bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-2 bs-icon lg"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-person-workspace">
                             <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H4Zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"></path>
@@ -103,6 +107,7 @@ $services = $database->query("SELECT * FROM services")->fetch_all();
                         <p class="mb-0">Services</p>
                     </div>
                 </div>
+            </a>
             </div>
             <div class="col">
                 <div class="text-center d-flex flex-column justify-content-center align-items-center py-3" style="border-style: solid;border-color: #6c757d;border-radius: 6px;box-shadow: 4px 3px #6c757d;">

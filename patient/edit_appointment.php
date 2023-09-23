@@ -1,6 +1,6 @@
 <?php
-$title = "Edit Appointment";
-include_once(__DIR__ . '/../_header_v2.php');
+// $title = "Edit Appointment";
+// include_once(__DIR__ . '/../_header_v2.php');
 
 include '../vendor/autoload.php';
 
@@ -9,24 +9,25 @@ use Carbon\Carbon;
 $today = Carbon::now('Asia/Kolkata');
 
 
-$editAppointment = $database->query("select appointments.id, appointments.appointmentDate, appointments.appointmentTime, appointments.service_id, services.id, services.service from appointments inner join services on appointments.service_id = services.id where appointments.id = ".$_SESSION['appointment_id']);
-$editAppointment = $editAppointment->fetch_assoc();
-$services = $database->query("select id, service from services;");
-$availableServices = $services->fetch_assoc();
+// $editAppointment = $database->query("select appointments.id, appointments.appointmentDate, appointments.appointmentTime, appointments.service_id, services.id, services.service from appointments inner join services on appointments.service_id = services.id where appointments.id = ".$_SESSION['appointment_id']);
+// $editAppointment = $editAppointment->fetch_assoc();
+// $services = $database->query("select id, service from services;");
+// $availableServices = $services->fetch_assoc();
 
 if($_POST){
+    $id = $_POST['id'];
     $date = $_POST['date'];
     $time = $_POST['time'];
     $service = $_POST['service_id'];
 
-    $updateAppointment = $database->query("update appointments set appointmentDate = '$date', appointmentTime = '$time', service_id = '$service', updated_at = '$today' where id = ".$_SESSION['id']);
+    $updateAppointment = $database->query("update appointments set appointmentDate = '$date', appointmentTime = '$time', service_id = '$service', updated_at = '$today' where id = ".$id);
     $_SESSION['message'] = 'Appointment was updated.';
     header('location: appointments.php');
 }
 
 
 ?>
-            <div class="col">
+            <!-- <div class="col">
                 <div class="row d-md-flex d-lg-flex justify-content-md-center justify-content-lg-center" style="border-radius: 6px;margin-left: 6px;background: var(--bs-tertiary-bg);box-shadow: 5px 5px var(--bs-primary-border-subtle);border: 2px solid var(--bs-primary-border-subtle);border-bottom-style: none;border-bottom-color: #1abc9c;">
                     <section class="position-relative py-4 py-xl-5">
                         <div class="container position-relative">
@@ -94,4 +95,4 @@ if($_POST){
     <script src="assets/js/bs-init.js"></script>
 </body>
 
-</html>
+</html> -->

@@ -23,6 +23,7 @@
             <p class="mb-0">Copyright © 2023 Faminial-Mendoza Dental</p>
         </div>
     </footer>
+    <?php unset($_SESSION['show_modal']); unset($_SESSION['message'])  ;?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>

@@ -18,10 +18,9 @@ if(isset($_GET['id'])){
     $service_id = $_GET['id'];
     $deleteService = $database->query("delete from services where id='$service_id'");
     $_SESSION['message'] = 'Service was deleted.';
-    header('location: services.php');
+    $_SESSION['show_modal'] = "myModal";
+    header("location: services.php");
 }
 $_SESSION['message'] = 'Service was not deleted.';
+$_SESSION['show_modal'] = 'myModal';
 header('location: services.php');
-
-
-?>

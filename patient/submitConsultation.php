@@ -23,20 +23,21 @@ $timeNow = Carbon::now('Asia/Kolkata');
         if($search->num_rows==0){
             if(($timeNow->format('Y') <= date('Y', strtotime($date)) and $timeNow->format('m') <= date('m', strtotime($date)) and $timeNow->format('d') <= date('d', strtotime($date)) and $timeNow->format('h:i a') != date('h:i a', strtotime($time)))){
             $database->query("insert into appointments(service_id, appointmentDate, appointmentTime, patient_id, created_at, updated_at) values('$type','$date','$time','$pid','$timestamp','$timestamp')");
+            $_SESSION['show_modal']="myModal";
             $_SESSION['message']="Appointment Request Sent!";
             header("location: calendar.php");
             }elseif($timeNow->format('Y') > date('Y', strtotime($date)) and $timeNow->format('m') > date('m', strtotime($date)) and $timeNow->format('d') > date('d', strtotime($date)) and $timeNow->format('h:i a') > date('h:i a', strtotime($time))){
+                $_SESSION['show_modal']="myModal";
                 $_SESSION['message']="Time and Date already passed!";
                 header("location: calendar.php");
             }
-            
         }else{
+            $_SESSION['show_modal']="myModal";
             $_SESSION['message']="Time and Date already taken!";
             header("location: calendar.php");
         }
     }else{
-    header("location: ../something_went_wrong.php");
+        $_SESSION['show_modal']="myModal";
+        $_SESSION['message']="Something went wrong.";
+        header("location: calendar.php");
     }
-
-    
-?>

@@ -1,6 +1,6 @@
 <?php 
-$title = $title ?? 'Famiñial Dental Clinic'; 
-?>
+$title = $title ?? 'Famiñial Dental Clinic';
+ ?>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 
@@ -34,22 +34,13 @@ $title = $title ?? 'Famiñial Dental Clinic';
         }
         xhttp.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200){
-                document.getElementById("message").innerHTML = this.responseText;
                 location.reload();
             }
         };
         xhttp.open("GET", "delete_service.php?id="+id, true);
         xhttp.send();
     }
-    
 
-    $(document).ready(function() {
-    $('#sortTable').DataTable({
-       destroy: true,
-       responsive: true,
-       select: true,
-    });
-    });
 
      //logout function
      $('#logout').click(function(){
@@ -59,10 +50,68 @@ $title = $title ?? 'Famiñial Dental Clinic';
         }
         window.location.href = "../logout.php";
     });
-</script>
-<?php 
-session_start();
 
+    function cancelAppointment(id){
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                location.reload();
+            }
+        };
+        //post method of ajax
+        xhttp.open("POST", "cancelAppointment.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("id="+id+"&cancel_details="+document.getElementById('cancel_details').value);
+        $('#secondModal').modal('show');
+        
+    }
+
+    function editAppointment(id){
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                location.reload();
+            }
+        };
+        xhttp.open("GET", "editAppointment.php?id="+id, true);
+        xhttp.send();
+
+    }
+    function deleteAppointment(appointment_id){
+        var xhttp = new XMLHttpRequest();
+        if(confirm("Are you sure you want to delete this appointment?")){
+            xhttp.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                    $('#secondModal').modal('show');
+                    $('#message').html("Appointment deleted successfully.");
+                    window.location.reload();
+                   
+                }
+            };
+            xhttp.open("GET", "deleteAppointment.php?appointment_id="+appointment_id, true);
+            xhttp.send();
+           
+        }
+       
+    }
+
+    $(document).ready(function() {
+    $('#sortTable').DataTable({
+       destroy: true,
+       responsive: true,
+       select: true,
+    });
+
+    $('#myModal').modal('show');
+
+    $('.cancelButton').click(function(){
+            $('#cancelModal').modal('show');
+        });
+
+    });
+</script>
+<?php
+session_start();
     //This script check whether the user is logged in, what type of user.
 
     if(isset($_SESSION["user"])){
@@ -87,6 +136,7 @@ session_start();
         $appointment_link = "appointments.php";
         $index = "../patients/index.php";
         $services = "../patient/services.php";
+        $patients = "profile.php";
     }else{
         //import database
         include("connection.php");
@@ -105,9 +155,13 @@ session_start();
         $patients = "../doctors/check_patients.php";
     }
 
-?>
-<div id="<?php echo (isset($_SESSION['show_modal'])) ? $_SESSION['show_modal'] : ''; 
-unset($_SESSION['show_modal']);?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="false" style="font-family: Alexandria, sans-serif;">
+    if(isset($_SESSION['message']) && $_SESSION['message'] !='' && isset($_SESSION['show_modal']) && $_SESSION['show_modal'] !=''){
+        $myModal = $_SESSION['show_modal'];
+        
+    }
+
+?><body style="background: #fbfff1;">
+<div id="<?php echo $myModal; ?>" class="modal fade" style="font-family: Alexandria, sans-serif;">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -117,18 +171,16 @@ unset($_SESSION['show_modal']);?>" class="modal fade" tabindex="-1" role="dialog
                 </button>
             </div>
             <div class="modal-body">
-                <p><?php echo $_SESSION['message'];
-                unset($_SESSION['message']); ?></p>
+                <p><?php echo $_SESSION['message'];?></p>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-outline-primary">
+                <button data-bs-dismiss="modal" class="btn btn-outline-primary">
                     Close
                 </button>
             </div>
         </div>
     </div>
 </div>
-<body style="background: #fbfff1;">
     <div class="container" style="margin-top: 18px;">
         <div class="row df-l mb-3">
             <nav class="col navbar d-flex navbar-expand-md bg-body d-flex d-xxl-flex flex-row justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center py-3" style="background: rgb(44,62,80);font-family: Alexandria, sans-serif;border-radius: 6px;box-shadow: 2px 2px var(--bs-primary-border-subtle);border: 2px solid var(--bs-primary-border-subtle);width: auto;">
@@ -163,7 +215,7 @@ unset($_SESSION['show_modal']);?>" class="modal fade" tabindex="-1" role="dialog
                                 <path d="M272 304h-96C78.8 304 0 382.8 0 480c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32C448 382.8 369.2 304 272 304zM48.99 464C56.89 400.9 110.8 352 176 352h96c65.16 0 119.1 48.95 127 112H48.99zM224 256c70.69 0 128-57.31 128-128c0-70.69-57.31-128-128-128S96 57.31 96 128C96 198.7 153.3 256 224 256zM224 48c44.11 0 80 35.89 80 80c0 44.11-35.89 80-80 80S144 172.1 144 128C144 83.89 179.9 48 224 48z"></path>
                             </svg></div>
                         <div class="pt-2">
-                            <p style="margin-bottom: 0px;">Patients</p>
+                            <p style="margin-bottom: 0px;"><?php echo ($_SESSION['usertype'] == 'p') ? 'Profile' : 'Patients' ; ?></p>
                         </div>
                 </a>
                 <a href="<?php echo $services; ?>"class="d-flex d-lg-flex d-xxl-flex p-1 nav-link" style="margin-top: 0px; border-radius: 5px; color: white;">
@@ -181,7 +233,7 @@ unset($_SESSION['show_modal']);?>" class="modal fade" tabindex="-1" role="dialog
                                 <path d="M14 14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5V14zM4 1a1 1 0 0 0-1 1v10l2.224-2.224a.5.5 0 0 1 .61-.075L8 11l2.157-3.02a.5.5 0 0 1 .76-.063L13 10V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4z"></path>
                             </svg></div>
                         <div class="pt-2">
-                            <p style="margin-bottom: 0px;">Gallery</p>
+                            <p style="margin-bottom: 0px;"><?php echo ($_SESSION['usertype'] == 'p') ? 'Records' : 'Patients' ; ?></p>
                         </div>
                 </a>
             <a href="../logout.php" class="d-flex d-lg-flex d-xxl-flex p-1 nav-link" style="margin-top: 0px; border-radius: 5px; color: white;">
@@ -207,6 +259,3 @@ unset($_SESSION['show_modal']);?>" class="modal fade" tabindex="-1" role="dialog
                         </div>
                     </div>
                 </div>
-<script>
-   
-</script>

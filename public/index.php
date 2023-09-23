@@ -30,15 +30,15 @@ $services = $database->query('select * from services');
 
 <body style="font-family: Alexandria, sans-serif;background: #fbfff1;">
     <div class="container">
-        <section class="text-white py-4 py-xl-5" style="height: 534px;">
+        <section class="text-white py-4 py-xl-5">
             <div class="container">
                 <div class="border rounded border-0 d-flex flex-column justify-content-center align-items-center p-4 py-5" style="background: linear-gradient(rgba(0,123,255,0.2) 0%, rgba(0,123,255,0.2) 84%, rgb(44,62,80) 100%), url(&quot;../assets/img/bg.png&quot;) center / cover;height: 500px;box-shadow: 5px 5px var(--bs-primary-border-subtle);border: 2px solid var(--bs-gray-500);border-bottom: 2px none #abb2b9;" data-aos="fade-up">
                     <div class="row">
                         <div class="col-md-10 col-xl-8 text-center d-flex d-sm-flex d-md-flex justify-content-center align-items-center mx-auto justify-content-md-start align-items-md-center justify-content-xl-center">
                             <div>
                                 <h1 class="text-uppercase fw-bold animated mb-3" style="text-shadow: -3px 4px #1abc9c;">Orfanel-Mendoza Dental Clinic</h1>
-                                <p class="faded animated mb-4" data-aos="fade-up">Have your teeth a treat.</p>
-                                <a href="../login-1.php"class="btn btn-primary fs-5 me-2 py-2 px-4" type="button" style="background: #1abc9c;border-style: none;color: rgb(213,219,219);">Login</a><a href="../sign_up.php" class="btn btn-light fs-5 py-2 px-4 my-0 mx-0" type="button" style="background: transparent;border-style: none;color: #1abc9c;">Register</a>
+                                <p class="faded animated mb-4" data-aos="fade-up">At Orfanel-Mendoza Dental Clinic, your oral health and smile are our top priorities. We are a dedicated team of dental professionals committed to providing you and your family with the highest quality dental care in a warm and welcoming environment.</p>
+                                <a href="../login-1.php"class="btn btn-primary fs-5 me-2 py-2 px-4" type="button" style="background: #1abc9c;border-style: none;color: rgb(213,219,219);">Login</a><a href="#register" class="btn btn-light fs-5 py-2 px-4 my-0 mx-0" type="button" style="background: transparent;border-style: none;color: #1abc9c;">Register</a>
                             </div>
                         </div>
                     </div>
@@ -46,7 +46,23 @@ $services = $database->query('select * from services');
             </div>
         </section>
     </div>
-    <div class="container py-4 py-xl-5" data-aos="fade-up">
+    <div class="container">
+         <div class="container">
+    <div class="row gy-4 gy-md-0">
+        <div class="col-md-6">
+            <div class="p-xl-5 d-flex justify-content-end"><img class="rounded img-fluid w-50 fit-cover" style="min-height: 300px; max-height: 500px; box-shadow: 5px 5px var(--bs-primary-border-subtle);border: 2px solid var(--bs-primary-border-subtle);border-radius: 5px;" src="../assets/img/dentist.jpg" /></div>
+        </div>
+        <div class="col-md-6 d-md-flex align-items-md-center">
+            <div style="max-width: 400px;">
+                <h2 class="text-uppercase fw-bold">Dr. Josefina Eligia Orfanel-Mendoza</h2>
+                <p class="my-3">With over 10 years of experience, <strong>Dr. Josefina Eligia Orfanel-Mendoza</strong> is a trusted name in the field of dentistry. Our state-of-the-art dental practice is equipped with the latest technology to ensure that you receive the best possible care.</p><a class="btn btn-primary btn-lg me-2" role="button" href="#services">Services</a>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+   
+    <div class="container py-4 py-xl-5" data-aos="fade-up" id="services">
         <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
             <?php foreach($services as $service) : ?>
             <div class="col">
@@ -63,7 +79,6 @@ $services = $database->query('select * from services');
                 </div>
             </div>
             <?php endforeach; ?>
-
         </div>
         <section class="position-relative py-4 py-xl-5" id="register">
             <div class="container position-relative">
@@ -91,6 +106,24 @@ $services = $database->query('select * from services');
                 </div>
             </div>
         </section>
+        <section class="position-relative py-4 py-xl-5" style="border-radius: 5px;border-style: solid;border-color: var(--bs-primary-border-subtle);box-shadow: 5px 5px var(--bs-primary-border-subtle);">
+    <div class="container position-relative">
+        <div class="row">
+            <div class="col"><iframe allowfullscreen frameborder="0" src="https://cdn.bootstrapstudio.io/placeholders/map.html" width="100%" height="100%"></iframe></div>
+            <div class="col-md-6 col-lg-6 col-xl-4">
+                <div>
+                    <form class="p-3 p-xl-4" method="post">
+                        <h4>Contact us</h4>
+                        <p class="text-muted">Eros ligula lobortis elementum amet commodo ac nibh ornare, eu lobortis.</p>
+                        <div class="mb-3"><label class="form-label" for="name">Name</label><input id="name" class="form-control" type="text" name="name" /></div>
+                        <div class="mb-3"><label class="form-label" for="email">Email</label><input id="email" class="form-control" type="email" name="email" /></div>
+                        <div class="mb-3"><label class="form-label" for="message">Message</label><textarea id="message" class="form-control" name="message" rows="6"></textarea></div>
+                        <div class="mb-3"><button class="btn btn-primary" type="submit">Send </button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
     <footer class="text-center">
         <div class="container text-muted py-4 py-lg-5" style="box-shadow: 8px 3px rgb(171,178,185);border-radius: 6px;border: 2px solid rgb(171,178,185);">

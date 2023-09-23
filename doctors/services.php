@@ -1,5 +1,5 @@
 <?php 
-include_once(__DIR__ . '/../_header_v2.php'); 
+include(__DIR__ . '/../_header_v2.php'); 
 $title = 'Services';
 
 $services = $database->query("select * from services");
@@ -41,4 +41,4 @@ $availableServices = $services->fetch_assoc();
             </div>
         </div>
     </div>
-<?php include_once(__DIR__ . '/../_footer.php'); ?>
+<?php include(__DIR__ . '/../_footer.php'); ?>
