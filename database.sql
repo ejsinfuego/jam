@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 28, 2023 at 03:25 PM
+-- Generation Time: Sep 23, 2023 at 05:07 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -69,9 +69,12 @@ CREATE TABLE `appointments` (
 --
 
 INSERT INTO `appointments` (`id`, `patient_id`, `doctor_id`, `service_id`, `appointmentDate`, `appointmentTime`, `status`, `details`, `resched_details`, `cancel_details`, `doctor_remarks`, `service_charge`, `notif_status`, `notif_status_client`, `created_at`, `updated_at`) VALUES
-(46, 8, NULL, 7, '2023-08-25', '09:03:00', NULL, '', '', '', '', 0, NULL, NULL, '2023-08-23 15:33:33', '2023-08-23 15:33:33'),
-(50, 20, NULL, 42, '2023-08-27', '09:18:00', NULL, '', '', 'yes', '', 0, NULL, NULL, '2023-08-24 05:48:57', '2023-08-24 05:48:57'),
-(51, 8, NULL, 42, '2023-08-31', '11:51:00', NULL, '', '', '', '', 0, NULL, NULL, '2023-08-28 05:21:19', '2023-08-28 05:21:19');
+(141, 20, NULL, 83, '2023-09-30', '12:35:00', 'done', '', '', '', '', 0, NULL, NULL, '2023-09-22 04:05:04', '2023-09-23 11:44:39'),
+(142, 20, NULL, 83, '2023-09-24', '14:24:00', 'done', '', '', '', '', 0, NULL, NULL, '2023-09-22 18:54:33', '2023-09-23 11:45:36'),
+(143, 20, NULL, 73, '2023-09-25', '14:25:00', 'Approved', '', '', '', '', 0, NULL, NULL, '2023-09-22 18:55:10', '2023-09-23 08:17:12'),
+(145, 8, NULL, 73, '2023-09-25', '14:56:00', NULL, '', '', 'habo ko na po                                                    ', '', 0, NULL, NULL, '2023-09-23 06:26:27', '2023-09-23 03:08:04'),
+(146, 21, NULL, 83, '2023-09-30', '13:10:00', NULL, '', '', 'yawq na po                                                    ', '', 0, NULL, NULL, '2023-09-23 06:40:57', '2023-09-23 03:11:17'),
+(148, 8, NULL, 83, '2023-09-30', '10:16:00', NULL, '', '', '', '', 0, NULL, NULL, '2023-09-23 11:46:47', '2023-09-23 11:46:47');
 
 -- --------------------------------------------------------
 
@@ -159,6 +162,29 @@ INSERT INTO `patient` (`id`, `email`, `first_name`, `last_name`, `password`, `ad
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `records`
+--
+
+CREATE TABLE `records` (
+  `id` int(11) NOT NULL,
+  `doctor_id` int(11) DEFAULT NULL,
+  `appointment_id` int(11) NOT NULL,
+  `tooth_id` int(11) DEFAULT NULL,
+  `updated_at` datetime NOT NULL,
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `records`
+--
+
+INSERT INTO `records` (`id`, `doctor_id`, `appointment_id`, `tooth_id`, `updated_at`, `created_at`) VALUES
+(3, NULL, 141, 10, '0000-00-00 00:00:00', '2023-09-23 11:44:39'),
+(4, NULL, 142, 11, '0000-00-00 00:00:00', '2023-09-23 11:45:36');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `services`
 --
 
@@ -179,7 +205,8 @@ INSERT INTO `services` (`id`, `service`, `price`, `description`, `created_at`, `
 (7, 'Prophylaxis', 2000, 'A preventive dental procedure involving thorough cleaning, plaque and tartar removal, and enamel polishing, enhancing oral health and preventing cavities and gum problems.', '2023-08-23 15:25:13', '2023-08-23 15:25:13'),
 (42, 'Rooth Canal', 2000, 'A preventive dental procedure involving thorough cleaning, plaque and tartar removal, and enamel polishing, enhancing oral health and preventing cavities and gum problems.', '2023-08-23 21:30:32', '2023-08-23 21:30:32'),
 (73, 'Tooth Extraction', 1000, 'Have your teeth removed.', '2023-08-28 07:06:55', '2023-08-28 07:06:55'),
-(74, 'Teeth Whitening', 1000, 'Have your teeth whitened and get a sweet smile.', '2023-08-28 07:07:34', '2023-08-28 07:07:34');
+(83, 'Teeth Whitening', 2000, 'sample', '2023-09-17 08:56:07', '2023-09-17 08:56:07'),
+(85, 'Extraction', 5000, '321654', '2023-09-20 20:52:27', '2023-09-20 20:52:27');
 
 -- --------------------------------------------------------
 
@@ -189,12 +216,20 @@ INSERT INTO `services` (`id`, `service`, `price`, `description`, `created_at`, `
 
 CREATE TABLE `tooth` (
   `id` int(11) NOT NULL,
-  `patient_id` int(11) NOT NULL,
+  `appointment_id` int(11) NOT NULL,
   `tooth_number` int(11) NOT NULL,
-  `tooth_name` varchar(255) NOT NULL,
+  `tooth_name` varchar(50) NOT NULL,
   `created_at` datetime NOT NULL,
   `udpated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tooth`
+--
+
+INSERT INTO `tooth` (`id`, `appointment_id`, `tooth_number`, `tooth_name`, `created_at`, `udpated_at`) VALUES
+(10, 141, 1, 'Left Molar', '2023-09-23 11:44:39', '0000-00-00 00:00:00'),
+(11, 142, 2, 'Molar - Right', '2023-09-23 11:45:36', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -266,6 +301,15 @@ ALTER TABLE `patient`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `records`
+--
+ALTER TABLE `records`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `doctor_record_index` (`doctor_id`),
+  ADD KEY `appointment_records_index` (`appointment_id`) USING BTREE,
+  ADD KEY `tooth_records_index` (`tooth_id`) USING BTREE;
+
+--
 -- Indexes for table `services`
 --
 ALTER TABLE `services`
@@ -275,8 +319,7 @@ ALTER TABLE `services`
 -- Indexes for table `tooth`
 --
 ALTER TABLE `tooth`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `patient_id` (`patient_id`) USING BTREE;
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `webuser`
@@ -292,7 +335,7 @@ ALTER TABLE `webuser`
 -- AUTO_INCREMENT for table `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
 
 --
 -- AUTO_INCREMENT for table `doctor`
@@ -313,16 +356,22 @@ ALTER TABLE `patient`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
+-- AUTO_INCREMENT for table `records`
+--
+ALTER TABLE `records`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT for table `tooth`
 --
 ALTER TABLE `tooth`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables
@@ -342,10 +391,10 @@ ALTER TABLE `events`
   ADD CONSTRAINT `doctor_index` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `tooth`
+-- Constraints for table `records`
 --
-ALTER TABLE `tooth`
-  ADD CONSTRAINT `patiend_index_id` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `records`
+  ADD CONSTRAINT `tooth_index_id` FOREIGN KEY (`tooth_id`) REFERENCES `tooth` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
