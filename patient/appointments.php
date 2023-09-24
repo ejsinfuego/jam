@@ -6,7 +6,7 @@ include(__DIR__ . '/../_header_v2.php');
 
 //query that also gets the first and last name of the patient and inner join it in appointments table
 
-$result = $database->query("SELECT appointments.id, appointments.appointmentDate, appointments.appointmentTime, appointments.service_id, appointments.cancel_details, appointments.status, appointments.created_at, patient.first_name, patient.last_name, services.service FROM appointments INNER JOIN patient ON appointments.patient_id = patient.id INNER JOIN services ON appointments.service_id = services.id WHERE appointments.patient_id = '$userid';");
+$result = $database->query("SELECT appointments.id, appointments.appointmentDate, appointments.appointmentTime, appointments.service_id, appointments.cancel_details, appointments.status, appointments.resched_details, appointments.created_at, patient.first_name, patient.last_name, services.service FROM appointments INNER JOIN patient ON appointments.patient_id = patient.id INNER JOIN services ON appointments.service_id = services.id WHERE appointments.patient_id = '$userid';");
 
 //get all the appointments of patient by 10
 if($result->num_rows>0){
@@ -31,6 +31,7 @@ $services = $database->query('select * from services');
         $("#feedBackID").val(id);
 
     };
+
 </script>
 <!-- modal to edit appointment -->
 <div id="editAppointment" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
@@ -43,7 +44,7 @@ $services = $database->query('select * from services');
                                             <form class="form" method="post" action="editAppointment.php">
                                                 <label for="date">New Date:</label>
                                                 <input class="form-control" name="date" type="date">
-                                                <input type="hidden" name="id">
+                                                <input type="hidden" name="id" id="appointment_id">
                                                 <label for="time">New Time:</label>
                                                 <input class="form-control" name="time" type="time">
                                                 <label for="service_id">Service</label>
@@ -113,7 +114,9 @@ $services = $database->query('select * from services');
                                 <td><?php echo $appointment['first_name']." ".$appointment['last_name'] ?></td>
                                 <form class="d-flex justify-content-center flex-wrap my-2" method="post" action="deleteAppointment.php">
                                 <td><?php echo $appointment['service'];?></td>
-                                <td><?php echo date('M-d-Y', strtotime($appointment['appointmentDate'])); ?></td>
+                                <td>
+                                    <?php echo ($appointment['resched_details'] != null) ? date('M-d-Y', strtotime($appointment['resched_details'])): date('M-d-Y', strtotime($appointment['appointmentDate'])); ?>
+                                </td>
                                 <td><?php echo date('h:i A', strtotime($appointment['appointmentTime'])); ?></td>
                                 <td><?php echo date('m-d-y h:i A', strtotime($appointment['created_at'])); ?></td>
                                 <td>

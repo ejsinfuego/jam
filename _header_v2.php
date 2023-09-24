@@ -94,12 +94,13 @@ $title = $title ?? 'Famiñial Dental Clinic';
         }
        
     }
+    
 
     $(document).ready(function() {
     $('#sortTable').DataTable({
        destroy: true,
        responsive: true,
-       select: true,
+
     });
 
     $('#myModal').modal('show');
