@@ -30,9 +30,6 @@ if($_GET){
         $('#appDate').html(appointmentDate);
         $('#appTime').html(appointmentTime);
         $('#service').html(service);
-  
-       
-      
 
     }
 </script>

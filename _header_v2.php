@@ -94,7 +94,6 @@ $title = $title ?? 'Famiñial Dental Clinic';
         }
        
     }
-    
 
     $(document).ready(function() {
     $('#sortTable').DataTable({
@@ -228,13 +227,13 @@ session_start();
                             <p style="margin-bottom: 0px;">Services</p>
                         </div>
                 </a>
-                <a class="d-flex d-lg-flex d-xxl-flex p-1 nav-link" style="margin-top: 0px; border-radius: 5px; color: white;">
+                <a href="events.php" class="d-flex d-lg-flex d-xxl-flex p-1 nav-link" style="margin-top: 0px; border-radius: 5px; color: white;">
                         <div class="pe-2"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-file-earmark-image" style="font-size: 40px;padding: 8px;border-radius: 15px;border-color: #1abc9c;background: #6786a3;">
                                 <path d="M6.502 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
                                 <path d="M14 14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5V14zM4 1a1 1 0 0 0-1 1v10l2.224-2.224a.5.5 0 0 1 .61-.075L8 11l2.157-3.02a.5.5 0 0 1 .76-.063L13 10V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4z"></path>
                             </svg></div>
                         <div class="pt-2">
-                            <p style="margin-bottom: 0px;"><?php echo ($_SESSION['usertype'] == 'p') ? 'Records' : 'Patients' ; ?></p>
+                            <p style="margin-bottom: 0px;">Events</p>
                         </div>
                 </a>
             <a href="../logout.php" class="d-flex d-lg-flex d-xxl-flex p-1 nav-link" style="margin-top: 0px; border-radius: 5px; color: white;">
