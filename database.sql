@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 23, 2023 at 05:07 PM
+-- Generation Time: Sep 25, 2023 at 06:00 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -58,6 +58,7 @@ CREATE TABLE `appointments` (
   `cancel_details` varchar(255) NOT NULL,
   `doctor_remarks` varchar(255) NOT NULL,
   `service_charge` int(11) NOT NULL,
+  `feedback` varchar(500) DEFAULT NULL,
   `notif_status` varchar(255) DEFAULT NULL,
   `notif_status_client` varchar(255) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
@@ -68,13 +69,14 @@ CREATE TABLE `appointments` (
 -- Dumping data for table `appointments`
 --
 
-INSERT INTO `appointments` (`id`, `patient_id`, `doctor_id`, `service_id`, `appointmentDate`, `appointmentTime`, `status`, `details`, `resched_details`, `cancel_details`, `doctor_remarks`, `service_charge`, `notif_status`, `notif_status_client`, `created_at`, `updated_at`) VALUES
-(141, 20, NULL, 83, '2023-09-30', '12:35:00', 'done', '', '', '', '', 0, NULL, NULL, '2023-09-22 04:05:04', '2023-09-23 11:44:39'),
-(142, 20, NULL, 83, '2023-09-24', '14:24:00', 'done', '', '', '', '', 0, NULL, NULL, '2023-09-22 18:54:33', '2023-09-23 11:45:36'),
-(143, 20, NULL, 73, '2023-09-25', '14:25:00', 'Approved', '', '', '', '', 0, NULL, NULL, '2023-09-22 18:55:10', '2023-09-23 08:17:12'),
-(145, 8, NULL, 73, '2023-09-25', '14:56:00', NULL, '', '', 'habo ko na po                                                    ', '', 0, NULL, NULL, '2023-09-23 06:26:27', '2023-09-23 03:08:04'),
-(146, 21, NULL, 83, '2023-09-30', '13:10:00', NULL, '', '', 'yawq na po                                                    ', '', 0, NULL, NULL, '2023-09-23 06:40:57', '2023-09-23 03:11:17'),
-(148, 8, NULL, 83, '2023-09-30', '10:16:00', NULL, '', '', '', '', 0, NULL, NULL, '2023-09-23 11:46:47', '2023-09-23 11:46:47');
+INSERT INTO `appointments` (`id`, `patient_id`, `doctor_id`, `service_id`, `appointmentDate`, `appointmentTime`, `status`, `details`, `resched_details`, `cancel_details`, `doctor_remarks`, `service_charge`, `feedback`, `notif_status`, `notif_status_client`, `created_at`, `updated_at`) VALUES
+(141, 20, NULL, 83, '2023-09-30', '12:35:00', 'done', '', '', '', '', 0, 'as', NULL, NULL, '2023-09-22 04:05:04', '2023-09-23 00:00:00'),
+(142, 20, NULL, 83, '2023-09-24', '14:24:00', 'done', '', '', '', '', 0, '', NULL, NULL, '2023-09-22 18:54:33', '2023-09-23 11:45:36'),
+(143, 20, NULL, 73, '2023-09-25', '14:25:00', 'Approved', '', '', '', '', 0, '', NULL, NULL, '2023-09-22 18:55:10', '2023-09-23 08:17:12'),
+(145, 8, NULL, 73, '2023-09-25', '14:56:00', NULL, '', '', 'habo ko na po                                                    ', '', 0, '', NULL, NULL, '2023-09-23 06:26:27', '2023-09-23 03:08:04'),
+(146, 21, NULL, 83, '2023-09-30', '13:10:00', NULL, '', '', 'yawq na po                                                    ', '', 0, '', NULL, NULL, '2023-09-23 06:40:57', '2023-09-23 03:11:17'),
+(148, 8, NULL, 83, '2023-09-30', '10:16:00', 'Approved', '', '', '', '', 0, '', NULL, NULL, '2023-09-23 11:46:47', '2023-09-23 17:26:17'),
+(149, 20, NULL, 83, '2023-09-28', '13:58:00', NULL, '', '2023-09-30', '', '', 0, '', NULL, NULL, '2023-09-24 00:57:36', '2023-09-24 09:28:56');
 
 -- --------------------------------------------------------
 
@@ -109,11 +111,24 @@ INSERT INTO `doctor` (`id`, `first_name`, `last_name`, `email`, `password`, `sta
 CREATE TABLE `events` (
   `id` int(11) NOT NULL,
   `title` varchar(250) NOT NULL,
-  `status` varchar(50) NOT NULL,
-  `doctor_id` int(11) NOT NULL,
+  `description` varchar(50) NOT NULL,
+  `start` date NOT NULL,
+  `end` date NOT NULL,
+  `doctor_id` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `events`
+--
+
+INSERT INTO `events` (`id`, `title`, `description`, `start`, `end`, `doctor_id`, `created_at`, `updated_at`) VALUES
+(1, 'Sample Promo', 'We have a promo tomorrow', '2023-09-26', '2023-09-27', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'Sample Promo 1', 'This is the descripttion', '0000-00-00', '0000-00-00', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, 'afas', 'asdasdasd', '2023-09-20', '2023-09-27', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(4, 'asdasd', 'asdasd', '2023-09-27', '2023-09-29', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(5, 'asds', 'asdadasd', '2023-09-22', '2023-09-30', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -123,11 +138,10 @@ CREATE TABLE `events` (
 
 CREATE TABLE `gallery` (
   `id` int(11) NOT NULL,
-  `image_path` varchar(255) DEFAULT NULL,
+  `title` varchar(100) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `scheduledate` date DEFAULT NULL,
-  `scheduletime` time DEFAULT NULL,
-  `nop` int(4) DEFAULT NULL
+  `image_path` varchar(255) DEFAULT NULL,
+  `expirydate` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -154,8 +168,8 @@ CREATE TABLE `patient` (
 --
 
 INSERT INTO `patient` (`id`, `email`, `first_name`, `last_name`, `password`, `address`, `contact_number`, `sex`, `created_at`, `updated_at`) VALUES
-(8, 'mario@mail.com', 'Mario', 'Maurer', '123', '', NULL, '', '2023-08-23 15:06:44', '2023-08-23 15:06:44'),
-(20, 'peter@mail.com', 'Peter', 'Parker', '123', '', NULL, '', '2023-08-23 18:47:24', '2023-08-23 18:47:24'),
+(8, 'mario@mail.com', 'Mario', 'Maurer', '123', '', '09321654987', 'male', '2023-08-23 15:06:44', '2023-09-25 18:51:17'),
+(20, 'peter@mail.com', 'Peter', 'Patter', '123', '', '09123456789', 'male', '2023-08-23 18:47:24', '2023-09-24 12:36:27'),
 (21, 'pablo@mail.com', 'Pablo', 'Picasso', '123', '', NULL, '', '2023-08-23 20:17:24', '2023-08-23 20:17:24'),
 (22, 'damaso@mail.com', 'Padre', 'Damaso', '321654987', '', NULL, '', '2023-08-28 06:57:19', '2023-08-28 06:57:19');
 
@@ -284,9 +298,7 @@ ALTER TABLE `doctor`
 -- Indexes for table `events`
 --
 ALTER TABLE `events`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `doctor_id` (`doctor_id`),
-  ADD KEY `doctor_index_id` (`doctor_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `gallery`
@@ -335,13 +347,19 @@ ALTER TABLE `webuser`
 -- AUTO_INCREMENT for table `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
 
 --
 -- AUTO_INCREMENT for table `doctor`
 --
 ALTER TABLE `doctor`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `events`
+--
+ALTER TABLE `events`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `gallery`
@@ -383,12 +401,6 @@ ALTER TABLE `tooth`
 ALTER TABLE `appointments`
   ADD CONSTRAINT `patient_id` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `services_index_id` FOREIGN KEY (`service_id`) REFERENCES `services` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `events`
---
-ALTER TABLE `events`
-  ADD CONSTRAINT `doctor_index` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `records`
