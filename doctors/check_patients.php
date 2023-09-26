@@ -51,8 +51,8 @@ if($result->num_rows > 0){
                             <tr>
                                 <th>Complete Name</th>
                                 <th>Email</th>
-                                <th>Date Booked</th>
-                                <th></th>
+                                <!-- <th>Date Booked</th> -->
+                                <!-- <th></th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -65,9 +65,9 @@ if($result->num_rows > 0){
                                 </td>
                                 <form class="d-flex justify-content-center flex-wrap my-2" method="post" action="deleteAppointment.php">
                                 <td><?php echo $appointment['email'];?></td>
-                                <td><?php echo (isset($schedules)) ? $schedules : "None"; ?></td>
-                                <td class="d-lg-flex justify-content-lg-center">
-                                    <a href="edit_appointment.php" class="btn btn-danger btn-sm" type="button" style="background: #2ecc71;border-style: none;">Update</a>
+                                <!-- <td><?php echo (isset($schedules)) ? $schedules : "None"; ?></td> -->
+                                <!-- <td class="d-lg-flex justify-content-lg-center">
+                                    <a href="edit_appointment.php" class="btn btn-danger btn-sm" type="button" style="background: #2ecc71;border-style: none;">Update</a> -->
                                     <!-- <a href="cancellation.php" class="btn btn-danger btn-sm" type="button" style="background: #2ecc71;border-style: none; margin-left: 10px;">Cancel</a> -->
                             </tr>
                             <?php endforeach; ?>

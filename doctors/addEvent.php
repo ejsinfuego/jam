@@ -46,9 +46,14 @@ if($_POST){
     $tday = $today->toDateString();
 
     //image upload and normalized data
-    $normalized = normalize_submitted_data($_POST, $_FILES);
+    if($_FILES && $_FILES['file']['type'] == 'image/jpeg' && $_FILES['file']['error'] === UPLOAD_ERR_OK){
+        $picture = $_FILES['file']['tmp_name'];
+        $pictureName = date('YmdHis') . '.jpg'; // Use current date and time as the name of the picture
+        $picturePath = __DIR__ . '/eventpics/' . $pictureName;
+        move_uploaded_file($picture, $picturePath);
+    }
 
-    
+    $database->query("insert into events (title, description, start, end, image) values ('$title', '$description', '$start', '$end', '$pictureName')");
 
     $_SESSION['message'] = 'Events added Succesfully';
     $_SESSION['show_modal'] = 'myModal';

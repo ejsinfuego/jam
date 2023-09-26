@@ -184,7 +184,7 @@ session_start();
     <div class="container" style="margin-top: 18px;">
         <div class="row df-l mb-3">
             <nav class="col navbar d-flex navbar-expand-md bg-body d-flex d-xxl-flex flex-row justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center py-3" style="background: rgb(44,62,80);font-family: Alexandria, sans-serif;border-radius: 6px;box-shadow: 2px 2px var(--bs-primary-border-subtle);border: 2px solid var(--bs-primary-border-subtle);width: auto;">
-                <div class="container-fluid"><a class="navbar-brand d-flex align-items-center" href="index.php"><img src="../assets/img/logo.png" width="54" height="54" /><span class="d-flex px-sm-4" style="color: var(--bs-gray-600);font-size: 18px;text-shadow: 1px 1px #1abc9c;margin-left: -19px;margin-right: -19px;">Faminial-Mendoza Dental Clinic</span></a><button class="navbar-toggler" data-bs-toggle="collapse"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button></div>
+                <div class="container-fluid"><a class="navbar-brand d-flex align-items-center" href="index.php"><img src="../assets/img/logo.png" width="54" height="54" /><span class="d-flex px-sm-4" style="color: var(--bs-gray-600);font-size: 18px;text-shadow: 1px 1px #1abc9c;margin-left: -19px;margin-right: -19px;">Faminial-Mendoza Dental Clinic</span></a><a class="px-lg-5 px-xxl-3"><?php echo $username; ?></a><button class="navbar-toggler" data-bs-toggle="collapse"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button></div>
             </nav>
         </div>
     </div>

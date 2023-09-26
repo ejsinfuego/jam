@@ -39,6 +39,8 @@ $events = $database->query('select * from events');
                     <input type="date" class="form-control" name="start" id="start"/>
                     <label for="end">End</label>
                     <input type="date" class="form-control" name="end" id="end"/>
+                    <label for="file">Image</label>
+                    <input type="file" class="form-control" name="file" id="file"/>
                     <div class="pt-4">
                         <button type="submit" class="btn btn-primary">Add Event</button>
                     </div>
@@ -53,7 +55,7 @@ $events = $database->query('select * from events');
 <section>
     <div class="row gy-5 gy-lg-2 row-cols-1 row-cols-md-2 row-cols-lg-1">
         <div class="col-xxl-2 m-4">
-           <div class="card mx-4" style="Alexandria, sans-serif;border-radius: 6px;box-shadow: 2px 2px var(--bs-primary-border-subtle);border: 2px solid var(--bs-primary-border-subtle);width: auto;"><img class="card-img-top w-100 d-block fit-cover" style="height: 200px; " src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" />
+           <div class="card mx-4" style="Alexandria, sans-serif;border-radius: 6px;box-shadow: 2px 2px var(--bs-primary-border-subtle);border: 2px solid var(--bs-primary-border-subtle);width: auto;"><img class="card-img-top w-100 d-block fit-cover" style="height: 200px; " src="<?php echo (isset($event['image'])) ? 'eventpics/'.$event['image'] :'https://cdn.bootstrapstudio.io/placeholders/1400x800.png' ; ?>"/>
         <div class="card-body p-4">
             <p class="text-primary card-text mb-0">Promo</p>
             <h4 class="card-title"><?php echo $event['title']; ?></h4>

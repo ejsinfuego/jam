@@ -11,17 +11,19 @@ include '../vendor/autoload.php';
 
 use Carbon\Carbon;
 
-$today = Carbon::now()->format('Y-m-d');
+$today = Carbon::now('Asia/Kolkata')->format('Y-m-d');
 
 
 //get the name of user
 $name = $database->query("SELECT * FROM doctor WHERE id = {$_SESSION['id']}")->fetch_assoc();
 
 $appointments = $database->query("SELECT * FROM appointments WHERE cancel_details=''")->fetch_all();
-$appointmentsToday = count($database->query("SELECT * FROM appointments WHERE appointmentDate = '$today' AND cancel_details='no'")->fetch_all());
+$appointmentsToday = count($database->query("SELECT * FROM appointments WHERE appointmentDate = '$today'")->fetch_all());
 
 $patients = $database->query("SELECT * FROM patient")->fetch_all();
 $services = $database->query("SELECT * FROM services")->fetch_all();
+$events = count($database->query("SELECT * FROM events")->fetch_all());
+
 ?>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
@@ -75,7 +77,7 @@ $services = $database->query("SELECT * FROM services")->fetch_all();
                         </svg></div>
                     <div class="px-3">
                         <h2 class="fw-bold mb-0"><?php echo count($appointments); ?></h2>
-                        <p class="mb-0">Appointments</p>
+                        <p class="mb-0">Appointment/s</p>
                     </div>
                 </div>
                 </a>
@@ -110,13 +112,15 @@ $services = $database->query("SELECT * FROM services")->fetch_all();
             </a>
             </div>
             <div class="col">
+            <a href="events.php" class="text-decoration-none text-body">
                 <div class="text-center d-flex flex-column justify-content-center align-items-center py-3" style="border-style: solid;border-color: #6c757d;border-radius: 6px;box-shadow: 4px 3px #6c757d;">
                     <div class="bs-icon-xl bs-icon-circle bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-2 bs-icon lg"><i class="material-icons" style="font-size: 38px;">rss_feed</i></div>
                     <div class="px-3">
-                        <h2 class="fw-bold mb-0">89</h2>
-                        <p class="mb-0">Feedback</p>
+                        <h2 class="fw-bold mb-0"><?php echo $events; ?></h2>
+                        <p class="mb-0">Events</p>
                     </div>
                 </div>
+            </a>
             </div>
         </div>
     </div>
@@ -124,21 +128,10 @@ $services = $database->query("SELECT * FROM services")->fetch_all();
         <section class="py-4 py-xl-5 pt-xxl-0 pt-lg-0 my-lg-0 mb-lg-0" style="padding: 0px 0px;height: 194.4px;margin-bottom: -20px;">
             <div class="text-white bg-primary border rounded border-0 border-primary d-flex flex-column justify-content-between flex-lg-row p-4 p-md-5" style="border: 2px solid #6c757d;box-shadow: 4px 6px #6c757d;padding: 48px;">
                 <div class="pb-2 pb-lg-1">
-                    <h2 class="fw-bold mb-2"><?php echo $appointmentsToday; ?> Appointments today.&nbsp;</h2>
+                    <h2 class="fw-bold mb-2"><?php echo $appointmentsToday; ?> Appointment/s today.&nbsp;</h2>
                     <p class="mb-0">Click the button on the right to see.</p>
                 </div>
-                <div class="my-2"><a class="btn btn-light fs-5 py-2 px-4" role="button" href="#" style="background: var(--bs-secondary);color: #fbfff1;border-style: none;">Button</a></div>
-            </div>
-        </section>
-        <section class="py-4 py-xl-5 pt-lg-0 my-lg-0 pt-xxl-0 pb-xxl-5 mb-lg-0 pb-lg-5 mb-xxl-0" style="padding: 0px 0px;height: 252.4px;padding-top: 10px;margin-top: 0px;padding-bottom: 87px;margin-bottom: -64px;">
-            <div class="container" style="padding: 0px;">
-                <div class="text-white bg-primary border rounded border-0 border-primary d-flex flex-column justify-content-between flex-lg-row p-4 p-md-5" style="border: 2px solid #6c757d;box-shadow: 4px 6px #6c757d;">
-                    <div class="order-last pb-2 pb-lg-1">
-                        <h2 class="fw-bold mb-2">5 Feedbacks from yesterday's patients</h2>
-                        <p class="mb-0">Click the button on the right to see.</p>
-                    </div>
-                    <div class="my-2"><a class="btn btn-light fs-5 py-2 px-4" role="button" href="#" style="background: var(--bs-secondary);color: #fbfff1;border-style: none;">Button</a></div>
-                </div>
+                <div class="my-2"><a class="btn btn-light fs-5 py-2 px-4" role="button" href="appointments.php" style="background: var(--bs-secondary);color: #fbfff1;border-style: none;">Check Here</a></div>
             </div>
         </section>
     </div>

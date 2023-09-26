@@ -17,8 +17,23 @@ if ($result->num_rows > 0) {
     $patient = [];
 }
 
+$records = $database->query("SELECT * FROM records INNER JOIN appointments ON records.appointment_id = appointments.id INNER JOIN tooth ON records.tooth_id = tooth.id WHERE patient_id = '$userid'");
+
 ?>
 <script>
+    $(document).ready(function(){
+        $('#teethTable').DataTable({
+        paginate: false,
+    });
+    });
+    
+    function viewDetails(appointmentDate, appointmentTime, service){
+        $('#my-modal').modal('show');
+        $('#appDate').html(appointmentDate);
+        $('#appTime').html(appointmentTime);
+        $('#service').html(service);
+
+    }
     $(document).ready(function(){
         $('#sex').click(function(){
             $('#sex').empty();
@@ -77,9 +92,51 @@ if ($result->num_rows > 0) {
                     </form>
                     </div>                    
                     <div class="row gutters">
-                            <div class="text-start"><button id="submit" class="btn btn-sm" style="background: #1abc9c;border-style: none;color: rgb(213,219,219); color: white;" type="button" name="submit">Dental Records</button>
+                            <div class="text-start"><a href="#dentalRecords" id="submit" class="btn btn-sm" style="background: #1abc9c;border-style: none;color: rgb(213,219,219); color: white;" type="button" name="submit">Dental Records</a>
                             <div class="text-start my-3"><button id="submit" class="btn btn-sm btn-secondary" type="button" name="submit">Change Password</button></div>
                 </div>
+                <div id="dentalRecords" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <h6 class="mb-2 text-primary">Dental Records</h6>
+                    </div>
+                    <div class="d-flex">
+                        <table id="teethTable" class="table table-bordered table-sm table-responsive">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Tooth Name</th>
+                                    <th scope="col">Tooth Number</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($records as $record): ?>
+                                    <?php $service = $database->query('select service from services where id = '.$record['service_id'].'');
+                                    $service = $service->fetch_column(); ?>
+                                <tr>
+                                    <td><?php echo $record['tooth_name']; ?></td>
+                                    <td><?php echo $record['tooth_number']; ?></td>
+                                    <td>
+                                        <button onclick="viewDetails('<?php echo $record['appointmentDate']; ?>', '<?php echo date('h:i A', strtotime($record['appointmentTime'])); ?>', '<?php echo $service; ?>')" class="btn btn-sm btn-primary">View Details</button>
+                                    </td>
+                                    <div id="my-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="false">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <label>Appointment Date</label>
+                                                    <p class="form-control" id="appDate"><?php echo $record['appointmentDate'];?></p>
+                                                    <label>Appointment Time</label>
+                                                    <p class="form-control" id="appTime"></p>
+                                                    <label>Service</label>
+                                                    <p class="form-control" id="service"><?php echo $service; ?></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
                     <!-- <div class="row gutters">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <h6 class="mb-2 text-primary">Dental Records</h6>
