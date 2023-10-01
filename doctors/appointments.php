@@ -47,6 +47,12 @@ if($result->num_rows>0){
             $('#doneDetails').modal('show');
             $('input[name="appointment_id"]').val(id);
         };
+
+        function generateReport(id){
+            $('input[name="appointment_id"]').val(id);
+            window.location.href = "generateReport.php?id="+id;
+        };
+        
 </script>
                                     <!-- modal for done appointment records -->
                 <div id="doneDetails" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
@@ -62,6 +68,10 @@ if($result->num_rows>0){
                                                     <label for="tooth_name">Number of Teeth</label>
                                                     <input type="text" name="tooth_number" class="form-control" placeholder="Number of Teeth">
                                                     <input type="hidden" name="appointment_id">
+                                                    <label for="tooth_name">Prescribe Medicine</label>
+                                                    <textarea type="text" name="prescribemedicine" class="form-control" placeholder="Prescribe medicine for the patient"></textarea>
+                                                    <!-- button to generate report -->
+                                                    
                                                     <div class="pt-3">
                                                         <button class="btn btn-outline-primary type="submit">Save
                                                         </button>

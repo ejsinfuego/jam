@@ -32,6 +32,8 @@ if($_GET){
         $('#service').html(service);
 
     }
+
+ 
 </script>
 <div class="col">
    
@@ -83,16 +85,24 @@ if($_GET){
                                     </td>
                                     <div id="my-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="false">
                                         <div class="modal-dialog" role="document">
+                                        <form method="get" action="generateReport.php">
                                             <div class="modal-content">
                                                 <div class="modal-body">
                                                     <label>Appointment Date</label>
+                                                    <input type="hidden" id="appointment_id" name="appointment_id" value="<?php echo $record['appointment_id']; ?>">
                                                     <p class="form-control" id="appDate"><?php echo $record['appointmentDate'];?></p>
                                                     <label>Appointment Time</label>
                                                     <p class="form-control" id="appTime"></p>
                                                     <label>Service</label>
                                                     <p class="form-control" id="service"><?php echo $service; ?></p>
                                                 </div>
+                                                <div class="pt-3">
+                                                        <button class="btn btn-outline-primary"
+                                                        type="submit">Generate Report
+                                                    </button>
+                                                </div>
                                             </div>
+                                        </form>
                                         </div>
                                     </div>
                                 </tr>
