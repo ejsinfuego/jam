@@ -14,10 +14,11 @@ if($_SESSION['usertype'] != 'd'){
 }
 if($_POST){
     $service_name = $_POST['service_name'];
-    $price = $_POST['price'];
     $description = $_POST['description'];
 
-    $addService = $database->query("INSERT INTO services (service, price, description, created_at, updated_at) VALUES('$service_name', '$price', '$description', '$today', '$today')");
+    $addService = $database->query("
+        INSERT INTO services (service, description, created_at)
+        VALUES ('$service_name', '$description', '$today')");
     $_SESSION['message'] = 'Service was added.';
     header('location: services.php');
 }

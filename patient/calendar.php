@@ -10,7 +10,7 @@ $today = Carbon::today();
 
 include(__DIR__ . '/../_header_v2.php'); 
 
-$available = $database->query('select appointmentDate, appointmentTime from appointments where cancel_details = "" and status = "approved"');
+$available = $database->query('select appointmentDate, appointmentTime from appointments where cancel_details = ""');
 $availableDates = $available->fetch_assoc();
 
 $dateTaken = Carbon::today();
@@ -104,11 +104,6 @@ $availableServices = $services->fetch_assoc();
                 <h1 class="text-center" style="font-family: Alexandria, sans-serif;"><?php echo $today->format('F Y') ?></h1>
             </div>
             <div class="col-5"></div>
-                <?php foreach ($daysOfWeek as $dayOfWeek) : ?>
-                <div class="col-md-3 col-lg-1 flex-wrap" style="border: 1.4px none #1abc9c;border-top-style: none;border-top-color: var(--bs-gray-500);border-right-style: solid;border-right-color: var(--bs-primary-border-subtle);border-bottom-style: solid;border-bottom-color: var(--bs-primary-border-subtle);border-left-style: solid;border-left-color: var(--bs-primary-border-subtle);color: var(--bs-gray-600);">
-                    <h5 class="text-start d-xxl-flex flex-column align-content-center align-self-center flex-wrap justify-content-xxl-center pt-lg-0" style="font-size: 11px;margin-top: 11px;color: #6c757d;padding-left: 0px;margin-left: -4px;"><?php echo $dayOfWeek; ?></h5>
-                </div>
-                <?php endforeach; ?>
             </div>
             <div class="d-flex d-xxl-flex flex-wrap">
             <?php foreach ($days as $day) :?>

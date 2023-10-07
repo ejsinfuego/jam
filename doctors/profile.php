@@ -35,6 +35,11 @@ if($_GET){
 
  
 </script>
+<style>
+    .form-control{
+        font-family: Inter, sans-serif;
+    }
+</style>
 <div class="col">
    
         <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
@@ -55,7 +60,7 @@ if($_GET){
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group"><label for="phone">Phone</label><input id="phone" class="form-control" type="text" placeholder="<?php echo $patient['contact_number']; ?>" /></div>
-                        </div>
+                        </div>a
                          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group"><label for="phone">Sex</label><input id="phone" class="form-control" type="text" placeholder="<?php echo ucfirst($patient['sex']); ?>"/></div>
                         </div>
@@ -86,7 +91,7 @@ if($_GET){
                                     <div id="my-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="false">
                                         <div class="modal-dialog" role="document">
                                         <form method="get" action="generateReport.php">
-                                            <div class="modal-content">
+                                            <div class="modal-content p-4">
                                                 <div class="modal-body">
                                                     <label>Appointment Date</label>
                                                     <input type="hidden" id="appointment_id" name="appointment_id" value="<?php echo $record['appointment_id']; ?>">
@@ -95,9 +100,11 @@ if($_GET){
                                                     <p class="form-control" id="appTime"></p>
                                                     <label>Service</label>
                                                     <p class="form-control" id="service"><?php echo $service; ?></p>
+                                                    <label>Prescription</label>
+                                                    <textarea class="form-control" id="service" readonly><?php echo $record['prescription']; ?></textarea>
                                                 </div>
                                                 <div class="pt-3">
-                                                        <button class="btn btn-outline-primary"
+                                                        <button class="btn btn-outline-info"
                                                         type="submit">Generate Report
                                                     </button>
                                                 </div>

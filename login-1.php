@@ -48,8 +48,7 @@ if($_POST){
                 header('location: patient/index.php');
 
             }else{
-                $_SESSION['message'] = 'Invalid email or password';
-                header('location: login-1.php');
+                $error='<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Wrong credentials: Invalid email or password</label>';
             }
 
         }elseif($utype=='a'){

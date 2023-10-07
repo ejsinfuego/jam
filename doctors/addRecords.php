@@ -16,11 +16,11 @@ if($_POST){
     $tooth_name = $_POST['tooth_name'];
     $prescribemedicine = $_POST['prescribemedicine'];
 
-    $database->query("insert into tooth (appointment_id, tooth_number, tooth_name, prescription, created_at) values ('$appointment_id', '$tooth_number', '$tooth_name', '$prescribemedicine', '$today')");
+    $database->query("insert into tooth (appointment_id, tooth_number, tooth_name, created_at) values ('$appointment_id', '$tooth_number', '$tooth_name', '$today')");
 
     $tooth_id = $database->insert_id;
 
-    $database->query("insert into records (tooth_id, appointment_id, created_at) values ('$tooth_id', '$appointment_id', '$today')");
+    $database->query("insert into records (appointment_id, tooth_id, prescription, created_at) values ('$appointment_id','$tooth_id', '$prescribemedicine', '$today')");
 
     $database->query("update appointments set status='done', updated_at='$today' where id=".$_POST['appointment_id']);
 

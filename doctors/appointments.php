@@ -33,7 +33,7 @@ if($result->num_rows>0){
             if(this.readyState == 4 && this.status == 200){
                 window.location.reload();
             }
-        };
+        }; 
             xhttp.open("GET", "doneAppointment.php?id="+id, true);
             xhttp.send();
         };
@@ -54,6 +54,14 @@ if($result->num_rows>0){
         };
         
 </script>
+<style>
+    .form-control{
+        font-family: Inter, sans-serif;
+    }
+    td{
+        font-family: Inter, sans-serif;
+    }
+</style>
                                     <!-- modal for done appointment records -->
                 <div id="doneDetails" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
@@ -143,10 +151,8 @@ if($result->num_rows>0){
                             </td>
                                 <td><?php echo date('M-d-Y', strtotime($appointment['created_at'])); ?></td>
                                 <td class="d-lg-flex justify-content-lg-start">
-                                    <?php if($appointment['status'] == null && $appointment['cancel_details'] == null) : ?>
-                                    <button onclick="approveAppointment(<?php echo $appointment['id']; ?>)" class="btn btn-primary btn-sm" type="button" style="background: #2ecc71;border-style: none;">Approve</button>
-                                    <?php endif; ?>
-                                    <?php if($appointment['status'] != 'done' and $appointment['cancel_details'] == null and $appointment['status'] != 'approved' and $appointment['status'] != null) : ?>
+                        
+                                    <?php if($appointment['status'] != 'done' and $appointment['cancel_details'] == null) :?>
                                     <button onclick="addRecords(<?php echo $appointment['id']; ?>)" class="btn btn-outline-info btn-sm" 
                                     type="button" style="border-style: none; margin-left: 10px;">Done</button>
                                     <?php endif ; ?>

@@ -10,7 +10,7 @@ $today = Carbon::today();
 
 include(__DIR__ . '/../_header_v2.php'); 
 
-$available = $database->query('select appointmentDate, appointmentTime from appointments where cancel_details = "" and status = "approved"');
+$available = $database->query('select appointmentDate, appointmentTime from appointments where cancel_details = ""');
 $availableDates = $available->fetch_assoc();
 
 

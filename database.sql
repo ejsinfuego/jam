@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 25, 2023 at 06:00 PM
+-- Generation Time: Oct 07, 2023 at 04:02 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -59,24 +59,9 @@ CREATE TABLE `appointments` (
   `doctor_remarks` varchar(255) NOT NULL,
   `service_charge` int(11) NOT NULL,
   `feedback` varchar(500) DEFAULT NULL,
-  `notif_status` varchar(255) DEFAULT NULL,
-  `notif_status_client` varchar(255) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `appointments`
---
-
-INSERT INTO `appointments` (`id`, `patient_id`, `doctor_id`, `service_id`, `appointmentDate`, `appointmentTime`, `status`, `details`, `resched_details`, `cancel_details`, `doctor_remarks`, `service_charge`, `feedback`, `notif_status`, `notif_status_client`, `created_at`, `updated_at`) VALUES
-(141, 20, NULL, 83, '2023-09-30', '12:35:00', 'done', '', '', '', '', 0, 'as', NULL, NULL, '2023-09-22 04:05:04', '2023-09-23 00:00:00'),
-(142, 20, NULL, 83, '2023-09-24', '14:24:00', 'done', '', '', '', '', 0, '', NULL, NULL, '2023-09-22 18:54:33', '2023-09-23 11:45:36'),
-(143, 20, NULL, 73, '2023-09-25', '14:25:00', 'Approved', '', '', '', '', 0, '', NULL, NULL, '2023-09-22 18:55:10', '2023-09-23 08:17:12'),
-(145, 8, NULL, 73, '2023-09-25', '14:56:00', NULL, '', '', 'habo ko na po                                                    ', '', 0, '', NULL, NULL, '2023-09-23 06:26:27', '2023-09-23 03:08:04'),
-(146, 21, NULL, 83, '2023-09-30', '13:10:00', NULL, '', '', 'yawq na po                                                    ', '', 0, '', NULL, NULL, '2023-09-23 06:40:57', '2023-09-23 03:11:17'),
-(148, 8, NULL, 83, '2023-09-30', '10:16:00', 'Approved', '', '', '', '', 0, '', NULL, NULL, '2023-09-23 11:46:47', '2023-09-23 17:26:17'),
-(149, 20, NULL, 83, '2023-09-28', '13:58:00', NULL, '', '2023-09-30', '', '', 0, '', NULL, NULL, '2023-09-24 00:57:36', '2023-09-24 09:28:56');
 
 -- --------------------------------------------------------
 
@@ -114,6 +99,7 @@ CREATE TABLE `events` (
   `description` varchar(50) NOT NULL,
   `start` date NOT NULL,
   `end` date NOT NULL,
+  `image` varchar(50) DEFAULT NULL,
   `doctor_id` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
@@ -123,12 +109,9 @@ CREATE TABLE `events` (
 -- Dumping data for table `events`
 --
 
-INSERT INTO `events` (`id`, `title`, `description`, `start`, `end`, `doctor_id`, `created_at`, `updated_at`) VALUES
-(1, 'Sample Promo', 'We have a promo tomorrow', '2023-09-26', '2023-09-27', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(2, 'Sample Promo 1', 'This is the descripttion', '0000-00-00', '0000-00-00', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(3, 'afas', 'asdasdasd', '2023-09-20', '2023-09-27', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(4, 'asdasd', 'asdasd', '2023-09-27', '2023-09-29', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(5, 'asds', 'asdadasd', '2023-09-22', '2023-09-30', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `events` (`id`, `title`, `description`, `start`, `end`, `image`, `doctor_id`, `created_at`, `updated_at`) VALUES
+(14, 'asdfgh', 'adasd', '2023-09-30', '2023-09-30', '20230926155458.jpg', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(15, 'November Promo', '10% off to all services for first 2 comers per on ', '2023-10-01', '2023-10-30', '20230926181332.jpg', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -184,6 +167,7 @@ CREATE TABLE `records` (
   `doctor_id` int(11) DEFAULT NULL,
   `appointment_id` int(11) NOT NULL,
   `tooth_id` int(11) DEFAULT NULL,
+  `prescription` varchar(200) DEFAULT NULL,
   `updated_at` datetime NOT NULL,
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -192,9 +176,10 @@ CREATE TABLE `records` (
 -- Dumping data for table `records`
 --
 
-INSERT INTO `records` (`id`, `doctor_id`, `appointment_id`, `tooth_id`, `updated_at`, `created_at`) VALUES
-(3, NULL, 141, 10, '0000-00-00 00:00:00', '2023-09-23 11:44:39'),
-(4, NULL, 142, 11, '0000-00-00 00:00:00', '2023-09-23 11:45:36');
+INSERT INTO `records` (`id`, `doctor_id`, `appointment_id`, `tooth_id`, `prescription`, `updated_at`, `created_at`) VALUES
+(3, NULL, 141, 10, NULL, '0000-00-00 00:00:00', '2023-09-23 11:44:39'),
+(4, NULL, 142, 11, NULL, '0000-00-00 00:00:00', '2023-09-23 11:45:36'),
+(5, NULL, 150, 12, NULL, '0000-00-00 00:00:00', '2023-09-26 21:19:46');
 
 -- --------------------------------------------------------
 
@@ -205,22 +190,10 @@ INSERT INTO `records` (`id`, `doctor_id`, `appointment_id`, `tooth_id`, `updated
 CREATE TABLE `services` (
   `id` int(11) NOT NULL,
   `service` varchar(255) NOT NULL,
-  `price` float NOT NULL,
   `description` varchar(500) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `services`
---
-
-INSERT INTO `services` (`id`, `service`, `price`, `description`, `created_at`, `updated_at`) VALUES
-(7, 'Prophylaxis', 2000, 'A preventive dental procedure involving thorough cleaning, plaque and tartar removal, and enamel polishing, enhancing oral health and preventing cavities and gum problems.', '2023-08-23 15:25:13', '2023-08-23 15:25:13'),
-(42, 'Rooth Canal', 2000, 'A preventive dental procedure involving thorough cleaning, plaque and tartar removal, and enamel polishing, enhancing oral health and preventing cavities and gum problems.', '2023-08-23 21:30:32', '2023-08-23 21:30:32'),
-(73, 'Tooth Extraction', 1000, 'Have your teeth removed.', '2023-08-28 07:06:55', '2023-08-28 07:06:55'),
-(83, 'Teeth Whitening', 2000, 'sample', '2023-09-17 08:56:07', '2023-09-17 08:56:07'),
-(85, 'Extraction', 5000, '321654', '2023-09-20 20:52:27', '2023-09-20 20:52:27');
 
 -- --------------------------------------------------------
 
@@ -243,7 +216,8 @@ CREATE TABLE `tooth` (
 
 INSERT INTO `tooth` (`id`, `appointment_id`, `tooth_number`, `tooth_name`, `created_at`, `udpated_at`) VALUES
 (10, 141, 1, 'Left Molar', '2023-09-23 11:44:39', '0000-00-00 00:00:00'),
-(11, 142, 2, 'Molar - Right', '2023-09-23 11:45:36', '0000-00-00 00:00:00');
+(11, 142, 2, 'Molar - Right', '2023-09-23 11:45:36', '0000-00-00 00:00:00'),
+(12, 150, 1, 'Canine', '2023-09-26 21:19:46', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -347,7 +321,7 @@ ALTER TABLE `webuser`
 -- AUTO_INCREMENT for table `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
 
 --
 -- AUTO_INCREMENT for table `doctor`
@@ -359,7 +333,7 @@ ALTER TABLE `doctor`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `gallery`
@@ -377,7 +351,7 @@ ALTER TABLE `patient`
 -- AUTO_INCREMENT for table `records`
 --
 ALTER TABLE `records`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `services`
@@ -389,7 +363,7 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT for table `tooth`
 --
 ALTER TABLE `tooth`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
