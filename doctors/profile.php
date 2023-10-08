@@ -60,7 +60,7 @@ if($_GET){
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group"><label for="phone">Phone</label><input id="phone" class="form-control" type="text" placeholder="<?php echo $patient['contact_number']; ?>" /></div>
-                        </div>a
+                        </div>
                          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group"><label for="phone">Sex</label><input id="phone" class="form-control" type="text" placeholder="<?php echo ucfirst($patient['sex']); ?>"/></div>
                         </div>

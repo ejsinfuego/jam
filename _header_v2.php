@@ -130,6 +130,7 @@ session_start();
         $userrow = $database->query("select * from patient where email='$useremail'");
         $userfetch=$userrow->fetch_assoc();
         $userid= $userfetch["id"];
+        $_SESSION['userid'] = $userid;
         $username=$userfetch["first_name"];
         //THese are the link for patient. Will have to fix the routing.
         $med_link = "../patients/request_medicine.php";

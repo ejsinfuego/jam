@@ -7,7 +7,7 @@ use Carbon\Carbon;
 $today = Carbon::now('Asia/Kolkata');
 
 include('../connection.php');
-
+session_start();
 if($_POST){
 
     //add records

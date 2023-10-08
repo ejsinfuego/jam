@@ -1,13 +1,11 @@
 <?php
 
 $title = 'Profile';
-include_once(__DIR__ . '/../_header_v2.php');
+include(__DIR__ . '/../_header_v2.php');
 
-if ($_SESSION['usertype'] == ' ') {
+if ($_SESSION['usertype'] != 'p') {
     header('location: ../login-1.php');
-    exit;
 }
-
 
 $result = $database->query("SELECT * FROM patient WHERE id = '$userid'");
 
@@ -42,6 +40,10 @@ $records = $database->query("SELECT * FROM records INNER JOIN appointments ON re
             $('#sex').append(male, female);
 
         });
+
+        $('#pwreset').click(function(){
+            $('#changePassword').modal('show');
+        });
     });
    
     function updateProfile(id){
@@ -58,7 +60,36 @@ $records = $database->query("SELECT * FROM records INNER JOIN appointments ON re
 
     }
 </script>
-        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+<style>
+    .form-control{
+        font-family: Inter, sans-serif;
+    }
+</style>
+<div id="changePassword" class="modal fade p-5" tabindex="-1" role="dialog" aria-hidden="false">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content p-5">
+                <div class="modal-body">
+                <div>
+                <h2 class="text-center mb-4" style="color: #6c757d;">Change Password</h2>
+                <hr class="border-2 border-black">
+                </div>
+                <form method="post" action="changePassword.php">
+                <label for="oldPassword">Old Password</label>
+                <input type="password" class="form-control" name="oldPassword" id="oldPassword"/>
+                <label for="newPassword">New Password</label>
+                <input type="password" class="form-control" name="newPassword" id="newPassword"/>
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" class="form-control" name="confirmPassword" id="confirmPassword"/>
+                <input type="hidden" name="id" value="<?php echo $userid; ?>">
+                <div class="pt-4">
+                <button type="submit" class="btn btn-primary">Change Password</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
             <div class="card h-100 p-4" style="font-family: Alexandria, sans-serif;border-radius: 6px;box-shadow: 2px 2px var(--bs-primary-border-subtle);border: 2px solid var(--bs-primary-border-subtle);width: auto;">
                 <div class="card-body">
                     <div class="row gutters">
@@ -93,7 +124,7 @@ $records = $database->query("SELECT * FROM records INNER JOIN appointments ON re
                     </div>                    
                     <div class="row gutters">
                             <div class="text-start"><a href="#dentalRecords" id="submit" class="btn btn-sm" style="background: #1abc9c;border-style: none;color: rgb(213,219,219); color: white;" type="button" name="submit">Dental Records</a>
-                            <div class="text-start my-3"><button id="submit" class="btn btn-sm btn-secondary" type="button" name="submit">Change Password</button></div>
+                            <div class="text-start my-3"><button id="pwreset" class="btn btn-sm btn-secondary" type="button" name="submit">Change Password</button></di>
                 </div>
                 <div id="dentalRecords" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <h6 class="mb-2 text-primary">Dental Records</h6>
@@ -119,16 +150,26 @@ $records = $database->query("SELECT * FROM records INNER JOIN appointments ON re
                                     </td>
                                     <div id="my-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="false">
                                         <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
+                                        <form method="get" action="generateReport.php">
+                                            <div class="modal-content p-4">
                                                 <div class="modal-body">
                                                     <label>Appointment Date</label>
+                                                    <input type="hidden" id="appointment_id" name="appointment_id" value="<?php echo $record['appointment_id']; ?>">
                                                     <p class="form-control" id="appDate"><?php echo $record['appointmentDate'];?></p>
                                                     <label>Appointment Time</label>
                                                     <p class="form-control" id="appTime"></p>
                                                     <label>Service</label>
                                                     <p class="form-control" id="service"><?php echo $service; ?></p>
+                                                    <label>Prescription</label>
+                                                    <textarea class="form-control" id="service" readonly><?php echo $record['prescription']; ?></textarea>
+                                                </div>
+                                                <div class="pt-3">
+                                                        <button class="btn btn-outline-info"
+                                                        type="submit">Generate Report
+                                                    </button>
                                                 </div>
                                             </div>
+                                        </form>
                                         </div>
                                     </div>
                                 </tr>
@@ -177,4 +218,4 @@ $records = $database->query("SELECT * FROM records INNER JOIN appointments ON re
         </div>
     </div>
 </div>
-<?php include_once(__DIR__ . '/../_footer.php'); ?>
+<?php include(__DIR__ . '/../_footer.php'); ?>

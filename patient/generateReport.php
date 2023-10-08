@@ -49,7 +49,7 @@ class PDF extends FPDF
         $this->Cell(0,10,'JOSEFINA ELIGIA L. ORFANEL-MENDOZA, DMD',0,0,'R');
         $this->Ln(5);
         $this->setX(55);
-        $this->Cell(50,10,'Lic. No. 0041638',0,0,'L');
+        $this->Cell(50,10,'LIC. No. 0041638',0,0,'L');
         $this->Ln(5);
         $this->setX(55);
         $this->Cell(50,10,'PTR No. ',0,0,'L');
@@ -64,27 +64,36 @@ if($_GET){
     $patient = $patient->fetch_assoc();
     $age = (isset($patient['age']) ? $patient['age'] : ' ');
     $appointmentTime = date('h:i A', strtotime($patient['appointmentTime']));
+    $sex = (isset($patient['sex']) ? $patient['sex'] : ' ');
     $pdf = new PDF('P','mm','A5');
     $pdf->AddPage();
-    $pdf->SetFont('Arial','B',10);
-    $pdf->Cell(80,10,'Name: '.$patient['first_name'].' '.$patient['last_name']);
+    $pdf->SetFont('Arial','',10);
+    $pdf->Cell(70,10,'Name: '.$patient['first_name'].' '.$patient['last_name']);
     //create underline the name
     $pdf->SetLineWidth(0.5);
-    $pdf->Line('23', '52', '90', '52');
+    $pdf->Line('23', '52', '80', '52');
     $pdf->Cell(40,10,'Age: '.$age);
     $pdf->SetLineWidth(0.5);
-    $pdf->Line('100', '52', '140', '52');
-    $pdf->Ln();
+    $pdf->Line('90', '52', '120', '52');
+    $pdf->Cell(40,10,'Sex: '.ucfirst($sex));
+    $pdf->SetLineWidth(0.5);
+    $pdf->Line('130', '52', '140', '52');
+    $pdf->Ln(8);
     $pdf->Cell(40,10,'Date: '.date('M d, Y', $dateNow->timestamp));
+    $pdf->SetLineWidth(0.5);
+    $pdf->Line('20', '60', '80', '60');
+    $pdf->Ln(10);
     //insert image of rx for prescription
     $pdf->Image('../assets/img/R.png', 10, 65, 25);
-    $pdf->Ln(40);
-    $prescription = explode('\n',$patient['prescription']);
+    $pdf->Ln(30);
+    $prescription = explode('
+    ',$patient['prescription']);
     foreach($prescription as $pres){
+        $pdf->Ln(5);
         $pdf->Cell(40,10,$pres);
-        $pdf->Ln();
+        
     }
-    $pdf->Output('D', 'patient.pdf');
+    $pdf->Output('D', $patient['first_name'].'-'.$patient['last_name'].'-'.$dateNow.'.pdf');
 }
 
 ?>
