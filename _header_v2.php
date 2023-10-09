@@ -24,6 +24,10 @@ $title = $title ?? 'Famiñial Dental Clinic';
         text-decoration: none;
         background-color: #6786a3;
     }
+
+    .card-text{
+        font-family: Inter, sans-serif;
+    }
 </style>
 <script>
     //ajax function to delete a service from database

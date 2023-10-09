@@ -26,6 +26,13 @@ $services = $database->query('select * from services');
     <link rel="stylesheet" href="../assets/css/styles.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+
 </head>
 
 <body style="font-family: Alexandria, sans-serif;background: #fbfff1;">
@@ -109,7 +116,7 @@ $services = $database->query('select * from services');
         <section class="position-relative py-4 py-xl-5" style="border-radius: 5px;border-style: solid;border-color: var(--bs-primary-border-subtle);box-shadow: 5px 5px var(--bs-primary-border-subtle);">
     <div class="container position-relative">
         <div class="row">
-            <div class="col"><iframe allowfullscreen frameborder="0" src="https://cdn.bootstrapstudio.io/placeholders/map.html" width="100%" height="100%"></iframe></div>
+            <div id="map" class="col"></div>
             <div class="col-md-6 col-lg-6 col-xl-4">
                 <div>
                     <form class="p-3 p-xl-4" method="post">
@@ -146,6 +153,18 @@ $services = $database->query('select * from services');
             <p class="mb-0">Copyright © 2023 Brand</p>
         </div>
     </footer>
+    <script>
+    var map = L.map('map').setView([13.6328271, 123.4980034],50);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    var marker = L.marker([13.6328271,123.4980034]).addTo(map);
+
+    marker.bindPopup("Orfanel-Mendoza Dental Clinic").openPopup();
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="../assets/js/script.min.js"></script>

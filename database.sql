@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 07, 2023 at 04:02 AM
+-- Generation Time: Oct 09, 2023 at 03:46 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -62,6 +62,18 @@ CREATE TABLE `appointments` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `appointments`
+--
+
+INSERT INTO `appointments` (`id`, `patient_id`, `doctor_id`, `service_id`, `appointmentDate`, `appointmentTime`, `status`, `details`, `resched_details`, `cancel_details`, `doctor_remarks`, `service_charge`, `feedback`, `created_at`, `updated_at`) VALUES
+(153, 20, NULL, 89, '2023-10-29', '10:38:00', 'done', '', '', '', '', 0, NULL, '2023-10-07 11:08:16', '2023-10-07 11:09:24'),
+(154, 8, NULL, 88, '2023-10-28', '09:15:00', 'done', '', '', '', '', 0, 'What good service', '2023-10-07 11:45:29', '2023-10-08 00:00:00'),
+(155, 8, NULL, 87, '2023-10-20', '09:15:00', NULL, '', '', '', '', 0, NULL, '2023-10-07 11:45:44', '2023-10-07 11:45:44'),
+(156, 8, NULL, 89, '2023-10-30', '15:46:00', NULL, '', '', '', '', 0, NULL, '2023-10-08 09:16:52', '2023-10-08 09:16:52'),
+(157, 22, NULL, 89, '2023-10-30', '13:15:00', 'done', '', '', '', '', 0, NULL, '2023-10-08 19:45:35', '2023-10-08 19:55:24'),
+(158, 22, NULL, 87, '2023-10-17', '14:22:00', NULL, '', '', '', '', 0, NULL, '2023-10-08 19:49:42', '2023-10-08 19:49:42');
 
 -- --------------------------------------------------------
 
@@ -151,10 +163,10 @@ CREATE TABLE `patient` (
 --
 
 INSERT INTO `patient` (`id`, `email`, `first_name`, `last_name`, `password`, `address`, `contact_number`, `sex`, `created_at`, `updated_at`) VALUES
-(8, 'mario@mail.com', 'Mario', 'Maurer', '123', '', '09321654987', 'male', '2023-08-23 15:06:44', '2023-09-25 18:51:17'),
+(8, 'mario@mail.com', 'Mario', 'Maurer', 'password', '', '09321654987', 'male', '2023-08-23 15:06:44', '2023-09-25 18:51:17'),
 (20, 'peter@mail.com', 'Peter', 'Patter', '123', '', '09123456789', 'male', '2023-08-23 18:47:24', '2023-09-24 12:36:27'),
 (21, 'pablo@mail.com', 'Pablo', 'Picasso', '123', '', NULL, '', '2023-08-23 20:17:24', '2023-08-23 20:17:24'),
-(22, 'damaso@mail.com', 'Padre', 'Damaso', '321654987', '', NULL, '', '2023-08-28 06:57:19', '2023-08-28 06:57:19');
+(22, 'damaso@mail.com', 'Padre', 'Damaso', 'password', '', NULL, 'male', '2023-08-28 06:57:19', '2023-10-08 19:27:00');
 
 -- --------------------------------------------------------
 
@@ -167,7 +179,7 @@ CREATE TABLE `records` (
   `doctor_id` int(11) DEFAULT NULL,
   `appointment_id` int(11) NOT NULL,
   `tooth_id` int(11) DEFAULT NULL,
-  `prescription` varchar(200) DEFAULT NULL,
+  `prescription` varchar(500) DEFAULT NULL,
   `updated_at` datetime NOT NULL,
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -179,7 +191,10 @@ CREATE TABLE `records` (
 INSERT INTO `records` (`id`, `doctor_id`, `appointment_id`, `tooth_id`, `prescription`, `updated_at`, `created_at`) VALUES
 (3, NULL, 141, 10, NULL, '0000-00-00 00:00:00', '2023-09-23 11:44:39'),
 (4, NULL, 142, 11, NULL, '0000-00-00 00:00:00', '2023-09-23 11:45:36'),
-(5, NULL, 150, 12, NULL, '0000-00-00 00:00:00', '2023-09-26 21:19:46');
+(5, NULL, 150, 12, NULL, '0000-00-00 00:00:00', '2023-09-26 21:19:46'),
+(7, NULL, 153, 18, 'Pain Killer - 1x/day', '0000-00-00 00:00:00', '2023-10-07 11:09:24'),
+(8, NULL, 154, 19, 'Pain Killer - 3x/day\r\nStop Bleeding - If necessary', '0000-00-00 00:00:00', '2023-10-07 18:44:03'),
+(9, NULL, 157, 20, 'Acetaminophen - when aching', '0000-00-00 00:00:00', '2023-10-08 19:55:24');
 
 -- --------------------------------------------------------
 
@@ -190,10 +205,20 @@ INSERT INTO `records` (`id`, `doctor_id`, `appointment_id`, `tooth_id`, `prescri
 CREATE TABLE `services` (
   `id` int(11) NOT NULL,
   `service` varchar(255) NOT NULL,
-  `description` varchar(500) NOT NULL,
+  `description` varchar(2000) NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL
+  `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `services`
+--
+
+INSERT INTO `services` (`id`, `service`, `description`, `created_at`, `updated_at`) VALUES
+(87, 'Oral Prophylaxis', 'Oral prophylaxis, commonly known as a dental cleaning, is a crucial part of maintaining excellent oral health. This routine procedure involves the removal of plaque, tartar, and stains from your teeth and gums. By having regular oral prophylaxis, you can prevent tooth decay, gum disease, and maintain a fresh, vibrant smile.', '2023-10-07 10:47:18', NULL),
+(88, 'Restoration (Pasta)', 'Restoration in dentistry is a specialized procedure aimed at repairing and rejuvenating damaged or decayed teeth. This process involves the removal of damaged tooth structure and the replacement of missing or compromised parts with durable materials like dental fillings, crowns, or bridges. Restoration not only restores the aesthetic appeal of your smile but also ensures proper function and comfort.', '2023-10-07 10:49:45', NULL),
+(89, 'Extraction', 'Tooth extraction is a dental procedure performed when a tooth is severely damaged, infected, or causing significant pain. During this procedure, a dentist carefully removes the affected tooth to alleviate discomfort and prevent potential complications.', '2023-10-07 10:50:14', NULL),
+(90, 'Braces', 'Braces are recommended to correct various orthodontic issues, including crooked teeth, misaligned bites, and overcrowding. They not only enhance the aesthetics of your smile but also contribute to better dental hygiene and overall oral health. By aligning your teeth, braces can reduce the risk of gum disease, tooth decay, and jaw joint problems.', '2023-10-09 08:58:03', NULL);
 
 -- --------------------------------------------------------
 
@@ -217,7 +242,15 @@ CREATE TABLE `tooth` (
 INSERT INTO `tooth` (`id`, `appointment_id`, `tooth_number`, `tooth_name`, `created_at`, `udpated_at`) VALUES
 (10, 141, 1, 'Left Molar', '2023-09-23 11:44:39', '0000-00-00 00:00:00'),
 (11, 142, 2, 'Molar - Right', '2023-09-23 11:45:36', '0000-00-00 00:00:00'),
-(12, 150, 1, 'Canine', '2023-09-26 21:19:46', '0000-00-00 00:00:00');
+(12, 150, 1, 'Canine', '2023-09-26 21:19:46', '0000-00-00 00:00:00'),
+(13, 152, 1, 'Molar - Right', '2023-10-07 11:02:29', '0000-00-00 00:00:00'),
+(14, 152, 1, 'Molar - Right', '2023-10-07 11:03:44', '0000-00-00 00:00:00'),
+(15, 152, 1, 'Molar - Right', '2023-10-07 11:05:19', '0000-00-00 00:00:00'),
+(16, 152, 1, 'Molar - Right', '2023-10-07 11:05:26', '0000-00-00 00:00:00'),
+(17, 152, 1, 'Molar - Right', '2023-10-07 11:05:35', '0000-00-00 00:00:00'),
+(18, 153, 2, 'Left Molar', '2023-10-07 11:09:24', '0000-00-00 00:00:00'),
+(19, 154, 1, 'Canine', '2023-10-07 18:44:03', '0000-00-00 00:00:00'),
+(20, 157, 1, 'Molar - Right', '2023-10-08 19:55:24', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -321,7 +354,7 @@ ALTER TABLE `webuser`
 -- AUTO_INCREMENT for table `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
 
 --
 -- AUTO_INCREMENT for table `doctor`
@@ -351,19 +384,19 @@ ALTER TABLE `patient`
 -- AUTO_INCREMENT for table `records`
 --
 ALTER TABLE `records`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT for table `tooth`
 --
 ALTER TABLE `tooth`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Constraints for dumped tables
