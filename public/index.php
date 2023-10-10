@@ -62,7 +62,7 @@ $services = $database->query('select * from services');
         <div class="col-md-6 d-md-flex align-items-md-center">
             <div style="max-width: 400px;">
                 <h2 class="text-uppercase fw-bold">Dr. Josefina Eligia Orfanel-Mendoza</h2>
-                <p class="my-3">With over 10 years of experience, <strong>Dr. Josefina Eligia Orfanel-Mendoza</strong> is a trusted name in the field of dentistry. Our state-of-the-art dental practice is equipped with the latest technology to ensure that you receive the best possible care.</p><a class="btn btn-primary btn-lg me-2" role="button" href="#services">Services</a>
+                <p class="my-3">With over 20 years of experience, <strong>Dr. Josefina Eligia Orfanel-Mendoza</strong> is a trusted name in the field of dentistry. Our state-of-the-art dental practice is equipped with the latest technology to ensure that you receive the best possible care.</p><a class="btn btn-primary btn-lg me-2" role="button" href="#services">Services</a>
             </div>
         </div>
     </div>
@@ -169,5 +169,5 @@ $services = $database->query('select * from services');
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="../assets/js/script.min.js"></script>
 </body>
-
+    
 </html>
