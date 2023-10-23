@@ -1,6 +1,6 @@
 <?php
 $title = "Cancellation";
-include_once(__DIR__ .'/../_header_v2.php');
+include(__DIR__ .'/../_header_v2.php');
 
 $appointment = $database->query('select appointments.id, appointments.appointmentDate, appointments.appointmentTime, services.service from appointments inner join services on appointments.service_id = services.id where appointments.id='.$_SESSION['appointment_id']);
 $appointments = $appointment->fetch_assoc();

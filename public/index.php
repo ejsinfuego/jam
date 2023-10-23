@@ -1,3 +1,18 @@
+<?php
+
+session_start();
+
+require '../vendor/autoload.php';
+
+use Carbon\Carbon;
+
+$today = Carbon::today();
+
+include('../connection.php');
+
+$services = $database->query('select * from services');
+
+?>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 
@@ -11,19 +26,26 @@
     <link rel="stylesheet" href="../assets/css/styles.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+
 </head>
 
 <body style="font-family: Alexandria, sans-serif;background: #fbfff1;">
     <div class="container">
-        <section class="text-white py-4 py-xl-5" style="height: 534px;">
+        <section class="text-white py-4 py-xl-5">
             <div class="container">
                 <div class="border rounded border-0 d-flex flex-column justify-content-center align-items-center p-4 py-5" style="background: linear-gradient(rgba(0,123,255,0.2) 0%, rgba(0,123,255,0.2) 84%, rgb(44,62,80) 100%), url(&quot;../assets/img/bg.png&quot;) center / cover;height: 500px;box-shadow: 5px 5px var(--bs-primary-border-subtle);border: 2px solid var(--bs-gray-500);border-bottom: 2px none #abb2b9;" data-aos="fade-up">
                     <div class="row">
                         <div class="col-md-10 col-xl-8 text-center d-flex d-sm-flex d-md-flex justify-content-center align-items-center mx-auto justify-content-md-start align-items-md-center justify-content-xl-center">
                             <div>
                                 <h1 class="text-uppercase fw-bold animated mb-3" style="text-shadow: -3px 4px #1abc9c;">Orfanel-Mendoza Dental Clinic</h1>
-                                <p class="faded animated mb-4" data-aos="fade-up">Have your teeth a treat.</p>
-                                <a href="../login-1.php"class="btn btn-primary fs-5 me-2 py-2 px-4" type="button" style="background: #1abc9c;border-style: none;color: rgb(213,219,219);">Login</a><a href="../sign_up.php" class="btn btn-light fs-5 py-2 px-4 my-0 mx-0" type="button" style="background: transparent;border-style: none;color: #1abc9c;">Register</a>
+                                <p class="faded animated mb-4" data-aos="fade-up">At Orfanel-Mendoza Dental Clinic, your oral health and smile are our top priorities. We are a dedicated team of dental professionals committed to providing you and your family with the highest quality dental care in a warm and welcoming environment.</p>
+                                <a href="../login-1.php"class="btn btn-primary fs-5 me-2 py-2 px-4" type="button" style="background: #1abc9c;border-style: none;color: rgb(213,219,219);">Login</a><a href="#register" class="btn btn-light fs-5 py-2 px-4 my-0 mx-0" type="button" style="background: transparent;border-style: none;color: #1abc9c;">Register</a>
                             </div>
                         </div>
                     </div>
@@ -31,53 +53,39 @@
             </div>
         </section>
     </div>
-    <div class="container py-4 py-xl-5" data-aos="fade-up">
-        <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
-            <div class="col">
-                <div class="card"><img class="img-fluid card-img-top w-100 d-block bounce animated fit-cover" style="height: 200px;box-shadow: 5px 5px var(--bs-primary-border-subtle);border-radius: 6px;border-top-left-radius: 6px;border: 2px solid var(--bs-primary-border-subtle) ;" src="../assets/img/Screenshot%202023-08-15%20202507.png">
-                    <div class="card-body bounce animated p-4" style="box-shadow: 5px 5px var(--bs-primary-border-subtle);border-radius: 6px;border-top-left-radius: 6px;border: 2px solid var(--bs-primary-border-subtle) ;">
-                        <p class="text-primary card-text mb-0">Article</p>
-                        <h4 class="card-title">Services for all ages.</h4>
-                        <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                        <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                            <div>
-                                <p class="fw-bold mb-0">John Smith</p>
-                                <p class="text-muted mb-0">Erat netus</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="container">
+         <div class="container">
+    <div class="row gy-4 gy-md-0">
+        <div class="col-md-6">
+            <div class="p-xl-5 d-flex justify-content-end"><img class="rounded img-fluid w-50 fit-cover" style="min-height: 300px; max-height: 500px; box-shadow: 5px 5px var(--bs-primary-border-subtle);border: 2px solid var(--bs-primary-border-subtle);border-radius: 5px;" src="../assets/img/dentist.jpg" /></div>
+        </div>
+        <div class="col-md-6 d-md-flex align-items-md-center">
+            <div style="max-width: 400px;">
+                <h2 class="text-uppercase fw-bold">Dr. Josefina Eligia Orfanel-Mendoza</h2>
+                <p class="my-3">With over 20 years of experience, <strong>Dr. Josefina Eligia Orfanel-Mendoza</strong> is a trusted name in the field of dentistry. Our state-of-the-art dental practice is equipped with the latest technology to ensure that you receive the best possible care.</p><a class="btn btn-primary btn-lg me-2" role="button" href="#services">Services</a>
             </div>
+        </div>
+    </div>
+    </div>
+    </div>
+   
+    <div class="container py-4 py-xl-5" data-aos="fade-up" id="services">
+        <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
+            <?php foreach($services as $service) : ?>
             <div class="col">
                 <div class="card"><img class="card-img-top w-100 d-block bounce animated fit-cover" style="height: 200px;border: 2px solid var(--bs-primary-bg-subtle);border-radius: 6px;box-shadow: 5px 5px var(--bs-primary-border-subtle);" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
                     <div class="card-body bounce animated p-4" style="border: 2px solid var(--bs-primary-bg-subtle);border-radius: 6px;box-shadow: 5px 5px var(--bs-primary-border-subtle);">
-                        <p class="text-primary card-text mb-0">Article</p>
-                        <h4 class="card-title">Lorem libero donec</h4>
-                        <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                        <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                            <div>
-                                <p class="fw-bold mb-0">John Smith</p>
-                                <p class="text-muted mb-0">Erat netus</p>
-                            </div>
+                        <p class="text-primary card-text mb-0">Service</p>
+                        <h4 class="card-title"><?php echo $service['service'] ?></h4>
+                        <p class="card-text"><?php echo $service['description']; ?></p>
+                        <div class="d-flex"><a href="../login-1.php">
+                            Book an appointment..
+                        </a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="card"><img class="card-img-top w-100 d-block bounce animated fit-cover" style="height: 200px;box-shadow: 5px 5px var(--bs-primary-border-subtle);border-radius: 6px;border-style: solid;border-color: var(--bs-primary-bg-subtle);" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                    <div class="card-body bounce animated p-4" style="box-shadow: 5px 5px var(--bs-primary-border-subtle);border-style: solid;border-color: var(--bs-primary-border-subtle);border-radius: 6px;">
-                        <p class="text-primary card-text mb-0">Article</p>
-                        <h4 class="card-title">Lorem libero donec</h4>
-                        <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                        <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                            <div>
-                                <p class="fw-bold mb-0">John Smith</p>
-                                <p class="text-muted mb-0">Erat netus</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
         <section class="position-relative py-4 py-xl-5" id="register">
             <div class="container position-relative">
@@ -90,8 +98,12 @@
                             <div class="card-body p-sm-5" data-aos="slide-up" style="color: #3c3744;border: 2px solid var(--bs-primary-border-subtle);border-radius: 6px;box-shadow: 5px 5px var(--bs-primary-border-subtle);">
                                 <h2 class="text-center mb-4">Register Here</h2>
                                 <form method="post" action="../sign_up.php">
-                                    <div class="mb-3"><input class="form-control" type="text" id="name-2" name="firstName" placeholder="First Name"></div>
-                                    <div class="mb-3"><input class="form-control" type="text" id="email-2" name="lastName" placeholder="Last Name"></div>
+                                    <div class="mb-3"></div>
+                                    <div class="mb-3">
+                                    <label for="firstName">First Name</label><input class="form-control" type="text" id="name-2" name="firstName" placeholder="First Name"></div>
+                                    <div class="mb-3">
+                                        <label for="firstName">Last Name</label>
+                                        <input class="form-control" type="text" id="email-2" name="lastName" placeholder="Last Name"></div>
                                     <div class="mb-3"></div>
                                     <div><button class="btn btn-secondary d-block w-100" type="submit" style="color: #f1f0f0;">Submit</button></div>
                                 </form>
@@ -101,6 +113,24 @@
                 </div>
             </div>
         </section>
+        <section class="position-relative py-4 py-xl-5" style="border-radius: 5px;border-style: solid;border-color: var(--bs-primary-border-subtle);box-shadow: 5px 5px var(--bs-primary-border-subtle);">
+    <div class="container position-relative">
+        <div class="row">
+            <div id="map" class="col"></div>
+            <div class="col-md-6 col-lg-6 col-xl-4">
+                <div>
+                    <form class="p-3 p-xl-4" method="post">
+                        <h4>Contact us</h4>
+                        <p class="text-muted">Eros ligula lobortis elementum amet commodo ac nibh ornare, eu lobortis.</p>
+                        <div class="mb-3"><label class="form-label" for="name">Name</label><input id="name" class="form-control" type="text" name="name" /></div>
+                        <div class="mb-3"><label class="form-label" for="email">Email</label><input id="email" class="form-control" type="email" name="email" /></div>
+                        <div class="mb-3"><label class="form-label" for="message">Message</label><textarea id="message" class="form-control" name="message" rows="6"></textarea></div>
+                        <div class="mb-3"><button class="btn btn-primary" type="submit">Send </button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
     <footer class="text-center">
         <div class="container text-muted py-4 py-lg-5" style="box-shadow: 8px 3px rgb(171,178,185);border-radius: 6px;border: 2px solid rgb(171,178,185);">
@@ -123,9 +153,21 @@
             <p class="mb-0">Copyright © 2023 Brand</p>
         </div>
     </footer>
+    <script>
+    var map = L.map('map').setView([13.6328271, 123.4980034],50);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    var marker = L.marker([13.6328271,123.4980034]).addTo(map);
+
+    marker.bindPopup("Orfanel-Mendoza Dental Clinic").openPopup();
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="../assets/js/script.min.js"></script>
 </body>
-
+    
 </html>

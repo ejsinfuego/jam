@@ -11,6 +11,6 @@
 	session_destroy();
 
 	// redirecting the user to the login page
-	header('location: ./public/index.html?action=logout');
+	header('location: ./public/index.php?action=logout');
 
  ?>

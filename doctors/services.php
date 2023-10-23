@@ -1,11 +1,15 @@
 <?php 
-include_once(__DIR__ . '/../_header_v2.php'); 
+include(__DIR__ . '/../_header_v2.php'); 
 $title = 'Services';
 
 $services = $database->query("select * from services");
 $availableServices = $services->fetch_assoc();
 ?>
-
+<style>
+    .card-text{
+        font-family: Inter, sans-serif;
+    }
+</style>
 <div class="col">
                 <section>
                     <p id="message"></p>
@@ -16,8 +20,7 @@ $availableServices = $services->fetch_assoc();
                                 <div class="card">
                                     <div class="card-body p-4" style="font-family: Alexandria, sans-serif;border: 2px solid #abb2b9;box-shadow: 3px 3px #abb2b9;border-radius: 6px;">
                                     <div class="d-flex justify-content-end align-items-end mb-2" style="margin-top: -20px; margin-right: -10px;"><button class="btn" onclick="deleteService(<?php echo $availableServices['id']; ?>)">×</button></div>
-                                        <h4 class="card-title"><?php echo $availableServices['service']; ?></h4>
-                                        <h6 class="text-muted card-subtitle mb-2">Price : ₱<?php echo $availableServices['price']; ?></h6>   
+                                        <h4 class="card-title"><?php echo $availableServices['service']; ?></h4>  
                                         <p class="card-text"><?php echo $availableServices['description']; ?></p>
                                     </div>
                                     <?php if($_SESSION['usertype'] == 'p') : ?>
@@ -33,7 +36,7 @@ $availableServices = $services->fetch_assoc();
                                 </div>
                             </div>
                             <?php endforeach; ?>
-                            <a href="add_service.php"><button class="btn" type="button" style="margin-top: 100px; background-color: #6786a3;">Add Service</button></a>
+                            <a href="add_service.php"><button class="btn" type="button" style="margin-top: 100px; background-color: #6786a3; font-family: Inter, sans-serif;">Add Service</button></a>
                         </div>
                     </div>
                 </section>
@@ -41,4 +44,4 @@ $availableServices = $services->fetch_assoc();
             </div>
         </div>
     </div>
-<?php include_once(__DIR__ . '/../_footer.php'); ?>
+<?php include(__DIR__ . '/../_footer.php'); ?>

@@ -1,10 +1,9 @@
 <?php 
-$title = 'Services  ';
+$title = 'Services';
 include_once(__DIR__ . '/../_header_v2.php'); 
 
 $services = $database->query("select * from services");
 $availableServices = $services->fetch_assoc();
-
 
 ?>
             <div class="col">
@@ -20,7 +19,6 @@ $availableServices = $services->fetch_assoc();
                                 <div class="card">
                                     <div class="card-body pt-4 p-4" style="font-family: Alexandria, sans-serif;border: 2px solid #abb2b9;box-shadow: 3px 3px #abb2b9;border-radius: 6px;">
                                         <h4 class="card-title"><?php echo $availableServices['service']; ?></h4>
-                                        <h6 class="text-muted card-subtitle mb-2">Price : ₱<?php echo $availableServices['price']; ?></h6>   
                                         <p class="card-text"><?php echo $availableServices['description']; ?></p>
                                     </div>
                                     <?php if(isset($_SESSION['usertype']) == 'p') : ?>
