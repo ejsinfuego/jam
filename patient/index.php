@@ -72,7 +72,7 @@ session_start();
                     <div class="row">
                         <div class="col-md-10 col-xl-8 text-center d-flex d-sm-flex d-md-flex justify-content-center align-items-center mx-auto justify-content-md-start align-items-md-center justify-content-xl-center">
                             <div>
-                                <h1 class="text-uppercase fw-bold bounce animated mb-3" style="text-shadow: -3px 4px #1abc9c;">Orfanel-MEnDOZA DENTAL CLINIC</h1>
+                                <h1 class="text-uppercase fw-bold bounce animated mb-3" style="text-shadow: -3px 4px #1abc9c;">Orfanel-Mendoza DENTAL CLINIC</h1>
                                 <p class="bounce animated mb-4">Have your teeth a treat.</p>
                                 <?php if(isset($_SESSION['usertype']) and $_SESSION['usertype'] != '') : ?>
                                     <a href="<?php echo $services; ?>" id="hover" class="btn fs-5 me-2 py-2 px-4" type="button" style="background: #1abc9c;border-style: none;color: rgb(213,219,219);">Check Services</a>
