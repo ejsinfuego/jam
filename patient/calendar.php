@@ -8,10 +8,18 @@ use Carbon\Carbon;
 
 $today = Carbon::today();
 
-include(__DIR__ . '/../_header_v2.php'); 
+include(__DIR__ . '/../_header_v2.php');
 
-$available = $database->query('select appointmentDate, appointmentTime from appointments where cancel_details = ""');
-$availableDates = $available->fetch_assoc();
+if(isset($_GET['serviceName'])){
+    $available = $database->query('select appointmentDate, appointmentTime, resched_details, cancel_details from appointments where cancel_details = "" and service_id = '.$_GET['serviceName'].';');
+    $availableDates = $available->fetch_assoc();
+    $serviceName = $database->query('select * from services where id = '.$_GET['serviceName'].';')->fetch_assoc();
+}else{
+    $available = $database->query('select appointmentDate, appointmentTime, resched_details, cancel_details from appointments where cancel_details = ""');
+    $availableDates = $available->fetch_assoc();
+}
+
+
 
 $dateTaken = Carbon::today();
 $timeTaken = Carbon::today();
@@ -64,12 +72,15 @@ $availableServices = $services->fetch_assoc();
         color
     }
 </style>
-<div id="appointment" style="font-family: Alexandria, sans-serif;border-radius: 6px;box-shadow: 2px 2px var(--bs-primary-border-subtle);border: 2px solid var(--bs-primary-border-subtle);" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div id="appointment" style="font-family: Alexandria, sans-serif;border-radius: 6px; box-shadow: 2px 2px var(--bs-primary-border-subtle); border: 2px solid var(--bs-primary-border-subtle);" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body p-5">
+            
             <h2 class="text-center mb-4" style="color: #6c757d;">Book an appointment</h2>
-                <h6 class="text-center mb-4">Check the calendar above to check the available dates for this month.</h6>
+            
+                <h6 class="text-center mb-4">Choose the date and time to book an appointment.</h6>
                 <form method="post" action="submitConsultation.php">
                     <div class="mb-3"><label class="form-label">Date</label>
                     <input class="form-control" id="name-2" name="date" placeholder="Date" type="date" min="<?php echo $today->toDateString(); ?>"><label class="form-label" style="padding-top: 0px;margin-top: 8px;">Time</label>
@@ -93,9 +104,15 @@ $availableServices = $services->fetch_assoc();
     </div>
 </div>
 <div class="col-2"></div>
-<div class="col-8" style="font-family: Alexandria, sans-serif; color: #6c757d; margin-bottom: 20px;">
-<h2 class="d-lg-flex" style="font-family: Alexandria, sans-serif; color: #6c757d; margin-bottom: 20px;">Calendar of Scheduled Appointment</h2>
-<p class="ms-5 ps-4">Click the dates of the calendar to book an appointment</p>
+<div class="col-8" style="font-family: Alexandria, sans-serif; color: #6c757d; background-image: url('./assets/img/back_ground.jpg');">
+<h2 class="d-lg-flex" style="font-family: Alexandria, sans-serif; color: #6c757d;">Calendar of Scheduled Appointment</h2>
+<p class="ms-5 ps-4 text-align-center">Click the dates of the calendar to book an
+appointment <br>
+<?php if(isset($_GET['serviceName'])) : ?>
+    <span style="margin: 35px;">Showing appointments for <?= $serviceName['service'] ?></span>
+<?php endif; ?></p>
+
+<p class="ms-5 ps-4" style="font-size: 15px; font-style:normal;">
 <div class="container ms-5 ps-5">
         <div class="d-xxl-flex">
         <div class="row d-flex d-xxl-flex align-content-center align-self-center flex-wrap" style="font-family: Alexandria, sans-serif;">
@@ -114,7 +131,18 @@ $availableServices = $services->fetch_assoc();
                     <h5 class="text-start d-xxl-flex flex-row align-content-center align-self-center flex-wrap pt-lg-0" style="font-size: 11px;margin-top: 11px;color: #6c757d;padding-left: 0px;margin-left: -4px;width: 100%;"><?php echo $day; ?></h5>
                     <h5 class="text-start d-xxl-flex flex-row align-content-center align-self-center flex-wrap pt-lg-0 pt-xxl-0" style="font-size: 11px;color: white; padding-left: 0px;margin-left: -4px;width: auto;margin-top: -2px; background-color:#1abc9c;">
                     <?php foreach ($available as $availableDates) : ?>
-                    <?php echo (($availableDates['appointmentDate'] == $today->format('Y-m-').$day)) ? date('h:ia', strtotime($availableDates['appointmentTime'])) : '';?>
+                    <?php
+                    if($availableDates['resched_details'] != ''){
+                        if($availableDates['resched_details'] == $today->format('Y-m-').$day){
+                            echo date('h:ia', strtotime($availableDates['appointmentTime']));
+                        }
+                    }else{
+                        if($availableDates['appointmentDate'] == $today->format('Y-m-').$day){
+                            echo date('h:ia', strtotime($availableDates['appointmentTime']));
+                        }
+                        
+                    } 
+                    ?>
                     <?php endforeach; ?>
                 </h5>
             </a>

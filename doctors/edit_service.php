@@ -42,8 +42,8 @@ if($_POST){
                                             <form method="post">
                                                 <div class="mb-3"><label class="form-label">Service</label>
                                                 <input class="form-control" type="text" id="name-2" name="service_name" placeholder="<?php echo $service['service']; ?>" value="">
-                                                <label class="form-label" style="padding-top: 0px;margin-top: 8px;">Price</label>
-                                                <input class="form-control" type="number" id="name-1" name="price" placeholder="<?php echo $service['price']; ?>"></div><label class="form-label">Description</label>
+                                                
+                                                <label class="form-label">Description</label>
                                                 <textarea class="form-control" id="name-3" name="description" placeholder="<?php echo $service['description']; ?>"></textarea>
                                                 <div class="mb-3"></div>
                                                 <div><button class="btn text-white d-block w-100" style="background-color:#1abc9c;" type="submit">Save</button></div>

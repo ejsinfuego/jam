@@ -86,7 +86,7 @@ if($_GET){
     //insert image of rx for prescription
     $pdf->Image('../assets/img/R.png', 10, 65, 25);
     $pdf->Ln(30);
-    $prescription = explode('\n',$patient['prescription']);
+    $prescription = explode("\n",$patient['prescription']);
     foreach($prescription as $pres){
         $pdf->Ln(5);
         $pdf->Cell(40,10,$pres);

@@ -162,6 +162,8 @@ $records = $database->query("SELECT * FROM records INNER JOIN appointments ON re
                                                     <p class="form-control" id="service"><?php echo $service; ?></p>
                                                     <label>Prescription</label>
                                                     <textarea class="form-control" id="service" readonly><?php echo $record['prescription']; ?></textarea>
+                                                    <label>Feedback</label>
+                                                    <textarea class="form-control" id="service" readonly><?php echo $record['feedback']; ?></textarea>
                                                 </div>
                                                 <div class="pt-3">
                                                         <button class="btn btn-outline-info"
