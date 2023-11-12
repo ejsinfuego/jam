@@ -102,6 +102,10 @@ if($_GET){
                                                     <p class="form-control" id="service"><?php echo $service; ?></p>
                                                     <label>Prescription</label>
                                                     <textarea class="form-control" id="service" readonly><?php echo $record['prescription']; ?></textarea>
+                                                    <label>Feedback</label>
+                                                    <textarea class="form-control" id="service" readonly><?php echo $record['feedback'] ?? 'Unavailable'; ?></textarea>
+                                                    
+                                                    
                                                 </div>
                                                 <div class="pt-3">
                                                         <button class="btn btn-outline-info"

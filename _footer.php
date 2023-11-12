@@ -5,9 +5,9 @@
 <footer class="text-center">
         <div class="container text-muted py-4 py-lg-5">
             <ul class="list-inline">
-                <li class="list-inline-item me-4" style="text-decoration:  underline;"><a class="link-secondary" href="#" style="font-family: Alexandria, sans-serif;">Web design</a></li>
-                <li class="list-inline-item me-4"><a class="link-secondary" href="#" style="font-family: Alexandria, sans-serif;">Development</a></li>
-                <li class="list-inline-item"><a class="link-secondary" href="#" style="font-family: Alexandria, sans-serif;">Hosting</a></li>
+                <li class="list-inline-item me-4" style="text-decoration:  none;"><a class="link-secondary" href="#" style="font-family: Alexandria, sans-serif;">Services</a></li>
+                <li class="list-inline-item me-4"><a class="link-secondary" href="#" style="font-family: Alexandria, sans-serif;">About Us</a></li>
+               
             </ul>
             <ul class="list-inline">
                 <li class="list-inline-item me-4"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-facebook">

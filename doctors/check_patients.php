@@ -9,7 +9,7 @@ if($_SESSION['usertype'] != 'd'){
 
 
 
-$result = $database->query("SELECT patient.id, patient.first_name, patient.last_name, patient.email from patient");
+$result = $database->query("SELECT * from appointments inner join patient on appointments.patient_id = patient.id");
 
 //get all the appointments of patient
 
@@ -51,6 +51,8 @@ if($result->num_rows > 0){
                             <tr>
                                 <th>Complete Name</th>
                                 <th>Email</th>
+                                <th>Sex</th>
+                                <th>Contact Number</th>
                                 <!-- <th>Date Booked</th> -->
                                 <!-- <th></th> -->
                             </tr>
@@ -65,7 +67,10 @@ if($result->num_rows > 0){
                                 </td>
                                 <form class="d-flex justify-content-center flex-wrap my-2" method="post" action="deleteAppointment.php">
                                 <td><?php echo $appointment['email'];?></td>
-                                <!-- <td><?php echo (isset($schedules)) ? $schedules : "None"; ?></td> -->
+                                <td><?php echo ucfirst($appointment['sex'] ?? 'Not Set'); ?>
+                                </td>
+                                <td><?php echo ($appointment['contact_number']) ?? 'Not Set'; ?>
+                                </td>
                                 <!-- <td class="d-lg-flex justify-content-lg-center">
                                     <a href="edit_appointment.php" class="btn btn-danger btn-sm" type="button" style="background: #2ecc71;border-style: none;">Update</a> -->
                                     <!-- <a href="cancellation.php" class="btn btn-danger btn-sm" type="button" style="background: #2ecc71;border-style: none; margin-left: 10px;">Cancel</a> -->

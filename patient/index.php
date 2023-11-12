@@ -42,11 +42,19 @@ session_start();
 
     $availServices = $database->query('select * from services');
 
+    $title = 'Orfanel-Mendoza Dental Clinic';
+    $page = 'Home';
+
+    
+$braces = '../assets/img/braces.jpg';
+$prophylaxis = '../assets/img/prophylaxis.jpg';
+$restoration = '../assets/img/restoration.jpg';
+$extraction = '../assets/img/extraction.jpg';
 
 ?><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>jam</title>
+    <title><?= $title.' | '.$page; ?></title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alexandria&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alumni+Sans+Collegiate+One&amp;display=swap">
@@ -66,7 +74,7 @@ session_start();
                     echo '<div id="message" class="alert text-center text-bold fade show" role="alert" style="margin-top: 18px; font-family: Alexandria, sans-serif; background-color: none;">'.$_SESSION['message'].'</div>';
                     unset($_SESSION['message']);} ?>
     </div>
-        <section class="text-white" style="height: 534px;">
+        <section class="text-white" style="height: auto;">
             <div class="container">
                 <div class="border rounded border-0 d-flex flex-column justify-content-center align-items-center p-4 py-5" style="background: linear-gradient(rgba(0,123,255,0.2) 0%, rgba(0,123,255,0.2) 84%, rgb(44,62,80) 100%), url(&quot;../assets/img/bg.png&quot;) center / cover;height: 500px;box-shadow: 5px 5px var(--bs-primary-border-subtle);border: 2px solid var(--bs-gray-500);border-bottom: 2px none #abb2b9;">
                     <div class="row">
@@ -87,11 +95,23 @@ session_start();
             </div>
         </section>
     </div>
-    <div class="container py-4 py-xl-5">
+    <div class="container py-3 py-xl-5">
         <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
         <?php foreach($availServices as $service) :?>
             <div class="col">
-                <div class="card"><img class="img-fluid card-img-top w-100 d-block bounce animated fit-cover" style="height: 200px;box-shadow: 5px 5px var(--bs-primary-border-subtle);border-radius: 6px;border-top-left-radius: 6px;border: 2px solid var(--bs-primary-border-subtle) ;" src="../assets/img/Screenshot%202023-08-15%20202507.png">
+                <div class="card"><img class="img-fluid card-img-top w-100 d-block bounce animated fit-cover" style="height: 200px;box-shadow: 5px 5px var(--bs-primary-border-subtle);border-radius: 6px;border-top-left-radius: 6px;border: 2px solid var(--bs-primary-border-subtle) ;" src="
+                <?php
+                if($service['service'] == 'Braces'){
+                    echo $braces;
+                }elseif($service['service'] == 'Oral Prophylaxis'){
+                    echo $prophylaxis;
+                }elseif($service['service'] == 'Restoration (Pasta)'){
+                    echo $restoration;
+                }elseif($service['service'] == 'Extraction'){
+                    echo $extraction;
+                }
+                ?>
+                ">
                     <div class="card-body bounce animated p-4" style="box-shadow: 5px 5px var(--bs-primary-border-subtle);border-radius: 6px;border-top-left-radius: 6px;border: 2px solid var(--bs-primary-border-subtle) ;">
                         <p class="text-primary card-text mb-0">Service</p>
                         <h4 class="card-title"><?php echo $service['service']; ?></h4>
@@ -125,4 +145,35 @@ session_start();
             </div>
         </section>';}  ?>
     </div>
+    <div class="card mb-3" style="max-width: auto;">
+    <div class="row g-0">
+        <?php
+            while(true){
+                $rand = rand(9, 15);
+                if($rand != 9 and $rand != 10 and $rand != 13){
+                    break;
+                }
+            }
+         ?>
+        <div id="carousel-1" class="carousel slide w-50 h-50" data-bs-ride="false">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+        <img class="w-100 h-50 img-responsive rounded" src="../assets/img/10.jpg" alt="Slide Image"/></div>
+        <div class="carousel-item rounded"><img class="w-100 d-block img-responsive rounded" src="../assets/img/9.jpg" alt="Slide Image" />
+        </div>
+        <div class="carousel-item"><img class="w-100 d-block img-responsive rounded" src="../assets/img/<?= $rand; ?>.jpg" alt="Slide Image" /></div>
+    </div>
+    <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next</span></a></div>
+    <div class="carousel-indicators"><button class="active" type="button" data-bs-target="#carousel-1" data-bs-slide-to="0"></button><button type="button" data-bs-target="#carousel-1" data-bs-slide-to="1"></button><button type="button" data-bs-target="#carousel-1" data-bs-slide-to="2"></button></div>
+</div>
+        <div class="col-md-3 mt-5 ms-2">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Whether you need a routine check-up, cosmetic dentistry, orthodontics, or specialized care, we offer a comprehensive range of dental services. Our goal is to be your go-to destination for all your oral health needs, providing personalized care that exceeds your expectations.</p>
+                <p class="card-text"><small class="text-muted"><a href="#"></a>Our Location</a></small></p>
+            </div>
+        </div>
+    </div>
+</div>
+    
 <?php include('../_footer.php'); ?>
