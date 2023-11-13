@@ -71,13 +71,13 @@ if($result->num_rows>0){
                                                 <h2 class="text-center mb-4" style="color: #6c757d;">Add Records</h2>
 
                                                 <form action="addRecords.php" method="post">
-                                                    <label for="tooth_name"><i class="fa fa-medkit" aria-hidden="true">Tooth Name</i></label>
-                                                    <input type="text" name="tooth_name" class="form-control" placeholder="Tooth Name">
-                                                    <label for="tooth_name">Number of Teeth</label>
-                                                    <input type="text" name="tooth_number" class="form-control" placeholder="Number of Teeth">
+                                                    <label for="tooth_name">Tooth Name <i><small>(Left or Right Canine, Molar, Front tooth)</small></i></label>
+                                                    <input type="text" name="tooth_name" class="form-control" placeholder="example: Left or Right Canine, Molar, Front tooth">
+                                                    <label for="tooth_name">Number of Teeth Operated <i><small>(1,2,3,4,5)</small></i></label>
+                                                    <input type="text" name="tooth_number" class="form-control" placeholder="1,2,3,4,5">
                                                     <input type="hidden" name="appointment_id">
                                                     <label for="tooth_name">Prescribe Medicine</label>
-                                                    <textarea type="text" name="prescribemedicine" class="form-control" placeholder="Prescribe medicine for the patient"></textarea>
+                                                    <textarea type="text" name="prescribemedicine" class="form-control" placeholder="Prescribe medicine for the patient. Separate each medicine by new line."></textarea>
                                                     <!-- button to generate report -->
                                                     
                                                     <div class="pt-3">
@@ -152,10 +152,14 @@ if($result->num_rows>0){
                                 <td><?php echo date('M-d-Y', strtotime($appointment['created_at'])); ?></td>
                                 <td class="d-lg-flex justify-content-lg-start">
                         
-                                    <?php if($appointment['status'] != 'done' and $appointment['cancel_details'] == null) :?>
+                                    <?php if($appointment['status'] == '' and $appointment['cancel_details'] == null ) :?>
+                                     <button onclick="approveAppointment(<?php echo $appointment['id']; ?>)" class="btn btn-outline-success btn-sm">Approve</button>
+                                    
+                                    <?php endif; ?>
+                                    <?php if($appointment['status'] == 'Approved') :?>
                                     <button onclick="addRecords(<?php echo $appointment['id']; ?>)" class="btn btn-outline-info btn-sm" 
                                     type="button" style="border-style: none; margin-left: 10px;">Done</button>
-                                    <?php endif ; ?>
+                                    <?php endif; ?>
                                     <button onclick="deleteAppointment(<?php echo $appointment['id']; ?>)" class="btn btn-outline-danger btn-sm" 
                                     type="button" style="border-style: none; margin-left: 10px;">Delete</button></td>
                             </tr>
