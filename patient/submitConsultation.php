@@ -51,11 +51,11 @@ $timeNow = Carbon::now('Asia/Kolkata');
                 //set each time to 30 minutes before and after the appointment time
                 //check if resched_details is not null
                 if($appointment['resched_details'] != null){
-                    $start = new DateTime(date('h:i', strtotime('-30 minutes', strtotime($appointment['resched_details']))));
-                    $end = new DateTime(date('h:i', strtotime('+30 minutes', strtotime($appointment['resched_details']))));
+                    $start = new DateTime(date('h:i', strtotime('-1 hour', strtotime($appointment['resched_details']))));
+                    $end = new DateTime(date('h:i', strtotime('+1 hour', strtotime($appointment['resched_details']))));
                 }else{
-                    $start = new DateTime(date('h:i', strtotime('-30 minutes', strtotime($appointment['appointmentTime']))));
-                    $end = new DateTime(date('h:i', strtotime('+30 minutes', strtotime($appointment['appointmentTime'])))); 
+                    $start = new DateTime(date('h:i', strtotime('-1 hour', strtotime($appointment['appointmentTime']))));
+                    $end = new DateTime(date('h:i', strtotime('+1 hour', strtotime($appointment['appointmentTime'])))); 
                 }
 
                 //interval in minutes
@@ -70,7 +70,7 @@ $timeNow = Carbon::now('Asia/Kolkata');
                     }
             }if($flag > 0){
                 $_SESSION['show_modal']="myModal";
-                $_SESSION['message']="Please choose another time. 30 minutes before and after the appointment time is already taken.";
+                $_SESSION['message']="Please choose another time. 1 hour before and after the appointment time is already taken.";
                 header("location: calendar.php");
             }
             else{

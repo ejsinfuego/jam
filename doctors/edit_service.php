@@ -21,7 +21,7 @@ if(isset($_GET['id'])){
 if($_POST){
     //code to update service from this client side-script.
     (isset($_POST['service_name']) && $_POST['service_name'] != '') ? $new_name = $_POST['service_name'] : $new_name = $service['service'];
-    (isset($_POST['price']) && $_POST['price'] != '') ? $new_price = $_POST['price'] : $new_price = $service['price'];
+
     (isset($_POST['description']) && $_POST['description'] != '') ? $new_description = $_POST['description'] : $new_description = $service['description'];
 
     $updateService = $database->query("update services set service='$new_name', price='$new_price', description='$new_description', updated_at='$today' where id='$service_id'");
