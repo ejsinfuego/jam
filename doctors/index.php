@@ -58,7 +58,7 @@ $events = count($database->query("SELECT * FROM events")->fetch_all());
                         <div class="col-md-10 col-xl-8 text-center d-flex d-sm-flex d-md-flex justify-content-center align-items-center mx-auto justify-content-md-start align-items-md-center justify-content-xl-center">
                             <div>
                                 <h1 class="text-uppercase fw-bold bounce animated mb-3" style="text-shadow: -3px 4px #1abc9c;padding-bottom: 0px;margin-top: 15px;margin-bottom: 15px;">welcome,
-                            <?php echo $name['first_name']." ".$name['last_name']; ?></h1>
+                            <?php echo $name['first_name']; ?></h1>
                             </div>
                         </div>
                     </div>

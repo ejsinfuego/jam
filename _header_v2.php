@@ -114,6 +114,8 @@ $title = $title ?? 'Famiñial Dental Clinic';
         });
 
     });
+
+
 </script>
 <?php
 session_start();
@@ -188,6 +190,30 @@ session_start();
         </div>
     </div>
 </div>
+
+<div id="logout" class="modal fade" style="font-family: Alexandria, sans-serif;">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="my-modal-title"></h5>
+                <button class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure to logout?</p>
+            </div>
+            <div class="modal-footer">
+                <button data-bs-dismiss="modal" class="btn btn-outline-primary">
+                    <a href="../logout.php" style="text-decoration: none;">Yes</a>
+                </button>
+                <button data-bs-dismiss="modal" class="btn btn-outline-primary">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
     <div class="container" style="margin-top: 18px;">
         <div class="row df-l mb-3" id="header">
             <nav class="col navbar d-flex navbar-expand-md bg-body d-flex d-xxl-flex flex-row justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center py-3" style="background: rgb(44,62,80);font-family: Alexandria, sans-serif;border-radius: 6px;box-shadow: 2px 2px var(--bs-primary-border-subtle);border: 2px solid var(--bs-primary-border-subtle);width: auto;">
@@ -243,7 +269,7 @@ session_start();
                             <p style="margin-bottom: 0px;">Events</p>
                         </div>
                 </a>
-            <a href="../logout.php" class="d-flex d-lg-flex d-xxl-flex p-1 nav-link" style="margin-top: 0px; border-radius: 5px; color: white;">
+            <a href="#" class="logoutButton d-flex d-lg-flex d-xxl-flex p-1 nav-link" style="margin-top: 0px; border-radius: 5px; color: white;">
                         <div class="pe-2"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-power" style="font-size: 40px;padding: 8px;border-radius: 15px;border-color: #1abc9c;background: #6786a3;">
                                 <path d="M7.5 1v7h1V1h-1z"></path>
                                 <path d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812z"></path>
@@ -252,7 +278,7 @@ session_start();
                             <p style="margin-bottom: 0px;">Logout</p>
                         </div>
             </a>
-                    <div class="logout modal fade" role="dialog" tabindex="-1" id="modal-1">
+                    <!-- <div class="logout modal fade" role="dialog" tabindex="-1" id="modal-1">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -264,5 +290,5 @@ session_start();
                                 <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Stay</button><button class="btn btn-primary" type="button">Yes</button></div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>

@@ -12,13 +12,15 @@ include('../connection.php');
 
 $services = $database->query('select * from services');
 
+$events = $database->query('select * from events');
+
 $title = $title ?? 'Orfanel-Mendoz Dental Clinic';
 $page = $page ?? 'Home';
 
 $braces = '../assets/img/braces.jpg';
 $prophylaxis = '../assets/img/prophylaxis.jpg';
 $restoration = '../assets/img/restoration.jpg';
-$extraction = '../assets/img/extraction.jpg';
+$extraction = '../assets/img/ext.jpg';
 
 ?>
 <!DOCTYPE html>
@@ -92,7 +94,21 @@ $extraction = '../assets/img/extraction.jpg';
                 </div>
             </div>
             <?php endforeach; ?>
-        </div> 
+            <div class="row gy-5 gy-lg-1 row-cols-4 row-cols-md-2 row-cols-lg-1">
+            <?php foreach($events as $event) : ?>
+                <div class="col ms-4">
+                <div class="card" style="Alexandria, sans-serif;border-radius: 6px;box-shadow: 2px 2px var(--bs-primary-border-subtle);border: 2px solid var(--bs-primary-border-subtle);width: auto;"><img class="card-img-top w-100 d-block fit-cover" style="height: 200px; " src="<?php echo (isset($event['image'])) ? '../doctors/eventpics/'.$event['image'] :'https://cdn.bootstrapstudio.io/placeholders/1400x800.png' ; ?>"/>
+                <div class="card-body p-4">
+                    <p class="text-primary card-text mb-0">Promo</p>
+                    <h4 class="card-title"><?php echo $event['title']; ?></h4>
+                    <hr style="border: 1px solid #6c757d;">
+                    <p class="card-text"><?php echo $event['description']; ?></p>
+                    <p>Start on <strong><?php echo date('F d, Y', strtotime($event['start'])); ?></strong> until <strong><?php echo date('F d, Y', strtotime($event['end'])); ?></strong></p>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <?php endforeach; ?>
         <div class="container">
          <div class="container">
     <div class="row gy-4 gy-md-0">
@@ -130,7 +146,7 @@ $extraction = '../assets/img/extraction.jpg';
 </div>
         <div class="col-md-3 mt-5 ms-2">
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
+                <h5 class="card-title">We're more than happy to serve you!</h5>
                 <p class="card-text">Whether you need a routine check-up, cosmetic dentistry, orthodontics, or specialized care, we offer a comprehensive range of dental services. Our goal is to be your go-to destination for all your oral health needs, providing personalized care that exceeds your expectations.</p>
                 <p class="card-text"><small class="text-muted"><a href="#map">Our Location</a></small></p>
             </div>
@@ -172,7 +188,7 @@ $extraction = '../assets/img/extraction.jpg';
                 <div>
                     <form class="p-3 p-xl-4" method="post">
                         <h4>Contact us</h4>
-                        <p class="text-muted">Eros ligula lobortis elementum amet commodo ac nibh ornare, eu lobortis.</p>
+                        <p class="text-muted">Come visit us. You can also send us a message</p>
                         <div class="mb-3"><label class="form-label" for="name">Name</label><input id="name" class="form-control" type="text" name="name" /></div>
                         <div class="mb-3"><label class="form-label" for="email">Email</label><input id="email" class="form-control" type="email" name="email" /></div>
                         <div class="mb-3"><label class="form-label" for="message">Message</label><textarea id="message" class="form-control" name="message" rows="6"></textarea></div>

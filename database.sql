@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 09, 2023 at 03:46 PM
+-- Generation Time: Nov 24, 2023 at 01:37 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -20,24 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `dental`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `admin`
---
-
-CREATE TABLE `admin` (
-  `aemail` varchar(255) NOT NULL,
-  `apassword` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `admin`
---
-
-INSERT INTO `admin` (`aemail`, `apassword`) VALUES
-('admin@edoc.com', '123');
 
 -- --------------------------------------------------------
 
@@ -68,12 +50,17 @@ CREATE TABLE `appointments` (
 --
 
 INSERT INTO `appointments` (`id`, `patient_id`, `doctor_id`, `service_id`, `appointmentDate`, `appointmentTime`, `status`, `details`, `resched_details`, `cancel_details`, `doctor_remarks`, `service_charge`, `feedback`, `created_at`, `updated_at`) VALUES
-(153, 20, NULL, 89, '2023-10-29', '10:38:00', 'done', '', '', '', '', 0, NULL, '2023-10-07 11:08:16', '2023-10-07 11:09:24'),
+(153, 20, NULL, 89, '2023-10-29', '10:38:00', 'done', '', '', 'yawq na                  ', '', 0, NULL, '2023-10-07 11:08:16', '2023-11-22 10:25:05'),
 (154, 8, NULL, 88, '2023-10-28', '09:15:00', 'done', '', '', '', '', 0, 'What good service', '2023-10-07 11:45:29', '2023-10-08 00:00:00'),
-(155, 8, NULL, 87, '2023-10-20', '09:15:00', NULL, '', '', '', '', 0, NULL, '2023-10-07 11:45:44', '2023-10-07 11:45:44'),
+(155, 8, NULL, 87, '2023-10-20', '09:15:00', 'Approved', '', '', '', '', 0, NULL, '2023-10-07 11:45:44', '2023-11-13 05:47:29'),
 (156, 8, NULL, 89, '2023-10-30', '15:46:00', NULL, '', '', '', '', 0, NULL, '2023-10-08 09:16:52', '2023-10-08 09:16:52'),
 (157, 22, NULL, 89, '2023-10-30', '13:15:00', 'done', '', '', '', '', 0, NULL, '2023-10-08 19:45:35', '2023-10-08 19:55:24'),
-(158, 22, NULL, 87, '2023-10-17', '14:22:00', NULL, '', '', '', '', 0, NULL, '2023-10-08 19:49:42', '2023-10-08 19:49:42');
+(158, 22, NULL, 87, '2023-10-17', '14:22:00', NULL, '', '', '', '', 0, NULL, '2023-10-08 19:49:42', '2023-10-08 19:49:42'),
+(192, 8, NULL, 88, '2023-11-23', '11:29:00', NULL, '', '2023-11-23', '', '', 0, NULL, '2023-11-11 16:00:09', '2023-11-11 17:58:03'),
+(213, 8, NULL, 89, '2023-11-30', '09:27:00', NULL, '', '', '', '', 0, NULL, '2023-11-11 17:53:47', '2023-11-11 17:53:47'),
+(214, 8, NULL, 88, '2023-11-29', '14:54:00', NULL, '', '2023-11-28', '', '', 0, NULL, '2023-11-11 18:09:29', '2023-11-11 18:24:48'),
+(216, 20, NULL, 89, '2023-11-23', '10:21:00', 'done', '', '', '', '', 0, NULL, '2023-11-22 14:48:52', '2023-11-22 15:00:05'),
+(217, 20, NULL, 87, '2023-11-28', '15:50:00', NULL, '', '', '', '', 0, NULL, '2023-11-22 15:06:14', '2023-11-22 15:06:14');
 
 -- --------------------------------------------------------
 
@@ -97,7 +84,7 @@ CREATE TABLE `doctor` (
 --
 
 INSERT INTO `doctor` (`id`, `first_name`, `last_name`, `email`, `password`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Test', 'Doctor', 'doctor@edoc.com', '123', '', NULL, NULL);
+(1, 'Josefina Eligia ', 'Orfanel-Mendoza', 'doctor@edoc.com', '123', '', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -108,7 +95,7 @@ INSERT INTO `doctor` (`id`, `first_name`, `last_name`, `email`, `password`, `sta
 CREATE TABLE `events` (
   `id` int(11) NOT NULL,
   `title` varchar(250) NOT NULL,
-  `description` varchar(50) NOT NULL,
+  `description` varchar(255) NOT NULL,
   `start` date NOT NULL,
   `end` date NOT NULL,
   `image` varchar(50) DEFAULT NULL,
@@ -122,22 +109,8 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`id`, `title`, `description`, `start`, `end`, `image`, `doctor_id`, `created_at`, `updated_at`) VALUES
-(14, 'asdfgh', 'adasd', '2023-09-30', '2023-09-30', '20230926155458.jpg', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(15, 'November Promo', '10% off to all services for first 2 comers per on ', '2023-10-01', '2023-10-30', '20230926181332.jpg', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `gallery`
---
-
-CREATE TABLE `gallery` (
-  `id` int(11) NOT NULL,
-  `title` varchar(100) NOT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `image_path` varchar(255) DEFAULT NULL,
-  `expirydate` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+(14, '✨ Discover Your Best Smile with Our Exclusive Checkup Special! ✨', '🦷 Complete Dental Examination: Our skilled dental professionals will assess every aspect of your oral health, from teeth and gums to jaw and bite. Uncover potential issues and pave the way for a healthier smile.', '2023-11-20', '2023-12-29', '20230926155458.jpg', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(15, 'Smile Makeover Month', '✨ Thorough Examination: Our experienced dental professionals will conduct a detailed assessment of your oral health, identifying any potential issues and creating a personalized plan for your smile.', '2023-12-28', '2024-01-30', '20230926181332.jpg', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -164,7 +137,7 @@ CREATE TABLE `patient` (
 
 INSERT INTO `patient` (`id`, `email`, `first_name`, `last_name`, `password`, `address`, `contact_number`, `sex`, `created_at`, `updated_at`) VALUES
 (8, 'mario@mail.com', 'Mario', 'Maurer', 'password', '', '09321654987', 'male', '2023-08-23 15:06:44', '2023-09-25 18:51:17'),
-(20, 'peter@mail.com', 'Peter', 'Patter', '123', '', '09123456789', 'male', '2023-08-23 18:47:24', '2023-09-24 12:36:27'),
+(20, 'peter@mail.com', 'Pedro', 'Patter', '123', '', '09123456789', 'male', '2023-08-23 18:47:24', '2023-11-22 14:52:23'),
 (21, 'pablo@mail.com', 'Pablo', 'Picasso', '123', '', NULL, '', '2023-08-23 20:17:24', '2023-08-23 20:17:24'),
 (22, 'damaso@mail.com', 'Padre', 'Damaso', 'password', '', NULL, 'male', '2023-08-28 06:57:19', '2023-10-08 19:27:00');
 
@@ -194,7 +167,8 @@ INSERT INTO `records` (`id`, `doctor_id`, `appointment_id`, `tooth_id`, `prescri
 (5, NULL, 150, 12, NULL, '0000-00-00 00:00:00', '2023-09-26 21:19:46'),
 (7, NULL, 153, 18, 'Pain Killer - 1x/day', '0000-00-00 00:00:00', '2023-10-07 11:09:24'),
 (8, NULL, 154, 19, 'Pain Killer - 3x/day\r\nStop Bleeding - If necessary', '0000-00-00 00:00:00', '2023-10-07 18:44:03'),
-(9, NULL, 157, 20, 'Acetaminophen - when aching', '0000-00-00 00:00:00', '2023-10-08 19:55:24');
+(9, NULL, 157, 20, 'Acetaminophen - when aching', '0000-00-00 00:00:00', '2023-10-08 19:55:24'),
+(10, NULL, 216, 21, 'Pain Killer - 3x/day\r\nMefenamic - if bleeding', '0000-00-00 00:00:00', '2023-11-22 15:00:05');
 
 -- --------------------------------------------------------
 
@@ -250,7 +224,8 @@ INSERT INTO `tooth` (`id`, `appointment_id`, `tooth_number`, `tooth_name`, `crea
 (17, 152, 1, 'Molar - Right', '2023-10-07 11:05:35', '0000-00-00 00:00:00'),
 (18, 153, 2, 'Left Molar', '2023-10-07 11:09:24', '0000-00-00 00:00:00'),
 (19, 154, 1, 'Canine', '2023-10-07 18:44:03', '0000-00-00 00:00:00'),
-(20, 157, 1, 'Molar - Right', '2023-10-08 19:55:24', '0000-00-00 00:00:00');
+(20, 157, 1, 'Molar - Right', '2023-10-08 19:55:24', '0000-00-00 00:00:00'),
+(21, 216, 2, 'Left Molar', '2023-11-22 15:00:05', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -282,12 +257,6 @@ INSERT INTO `webuser` (`email`, `usertype`) VALUES
 --
 
 --
--- Indexes for table `admin`
---
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`aemail`);
-
---
 -- Indexes for table `appointments`
 --
 ALTER TABLE `appointments`
@@ -305,12 +274,6 @@ ALTER TABLE `doctor`
 -- Indexes for table `events`
 --
 ALTER TABLE `events`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `gallery`
---
-ALTER TABLE `gallery`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -354,7 +317,7 @@ ALTER TABLE `webuser`
 -- AUTO_INCREMENT for table `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=218;
 
 --
 -- AUTO_INCREMENT for table `doctor`
@@ -369,12 +332,6 @@ ALTER TABLE `events`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT for table `gallery`
---
-ALTER TABLE `gallery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
 -- AUTO_INCREMENT for table `patient`
 --
 ALTER TABLE `patient`
@@ -384,19 +341,19 @@ ALTER TABLE `patient`
 -- AUTO_INCREMENT for table `records`
 --
 ALTER TABLE `records`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT for table `tooth`
 --
 ALTER TABLE `tooth`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Constraints for dumped tables

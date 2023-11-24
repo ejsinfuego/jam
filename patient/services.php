@@ -2,6 +2,7 @@
 $title = 'Services';
 include_once(__DIR__ . '/../_header_v2.php'); 
 
+//code to retreive services from database
 $services = $database->query("select * from services");
 $availableServices = $services->fetch_assoc();
 
