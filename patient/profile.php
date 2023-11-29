@@ -112,14 +112,22 @@ $records = $database->query("SELECT * FROM records INNER JOIN appointments ON re
                             <div class="form-group"><label for="phone">Phone</label><input id="phone" class="form-control" name="contact_number" type="text" placeholder="<?php echo $patient['contact_number']; ?>" /></div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                            <div class="form-group"><label for="dob">Date of Birth</label><input id="phone" class="form-control" name="dob" type="date" value="<?php echo $patient['dob']; ?>" /></div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group"><label for="phone">Sex</label>
                             <select name="sex" id="sex" class="form-control" type="text" placeholder="<?php echo $patient['sex']; ?>">
                             <option aria-placeholder="<?php echo $patient['sex']; ?>" value="<?php echo $patient['sex']; ?>"><?php echo ucfirst($patient['sex']); ?></option>
                             </select>
                             </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                            <div class="form-group"><label for="phone">Address</label><textarea id="phone" class="form-control" name="address" type="date" placeholder="<?php echo $patient['address'] ?? 'Address not set'; ?>"><?php echo $patient['address'] ?? 'Address not set'; ?></textarea></div>
+                        </div>
                             <div class="text-start">
                             <button id="submit" class="btn btn-outline-info btn-sm my-3" type="submit" name="submit">Update</button></div>
                         </div>
+                        
                     </form>
                     </div>                    
                     <div class="row gutters">

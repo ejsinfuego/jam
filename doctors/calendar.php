@@ -6,9 +6,18 @@ require '../vendor/autoload.php';
 
 use Carbon\Carbon;
 
-$today = Carbon::today();
+$today = Carbon::today('Asia/Kolkata');
 
-include(__DIR__ . '/../_header_v2.php'); 
+include(__DIR__ . '/../_header_v2.php');
+
+if(isset($_GET['month'])){
+    if($_GET['month'] == 'back'){
+        $today = Carbon::today('Asia/Kolkata');
+    }elseif($_GET['month'] == 'next'){
+        $today = Carbon::today('Asia/Kolkata')->addMonth();
+    }
+}
+
 
 $available = $database->query('select appointmentDate, appointmentTime from appointments where cancel_details = ""');
 $availableDates = $available->fetch_assoc();
@@ -28,7 +37,7 @@ $firstDay = $today->copy()->startOfMonth(); // Clone the original $firstDay for 
 $days = [];
 
 for ($i = 1; $i <= $daysInMonth; $i++) {
-    $days[] = $firstDay->copy()->addDay($i - 1)->format('j');
+    $days[] = $firstDay->copy()->addDay($i - 1)->format('d');
 }
 
 //get days of the week
@@ -56,7 +65,7 @@ $availableServices = $services->fetch_assoc();
         <div class="row d-flex d-xxl-flex align-content-center align-self-center flex-wrap" style="font-family: Alexandria, sans-serif;">
             <div class="d-flex flex-wrap">
             <div class="col-7" style="background: #1abc9c;color: #f1f0f0;">
-                <h1 class="text-center" style="font-family: Alexandria, sans-serif;"><?php echo $today->format('F Y') ?></h1>
+                <h1 class="text-center" style="font-family: Alexandria, sans-serif;"><a href="calendar.php?month=back" style="font-size: 25px; color: white; "><small><i><<</i></small></a><?php echo $today->format('F Y') ?><a href="calendar.php?month=next" style="color: white; font-size: 25px; "><small><i>>></i></small></a></h1>
             </div>
             <!-- <div class="col-5"></div>
                 <?php foreach ($daysOfWeek as $dayOfWeek) : ?>

@@ -60,7 +60,7 @@ $extraction = '../assets/img/ext.jpg';
 
 </head>
 
-<body style="font-family: Alexandria, sans-serif;background: #fbfff1; background-image: url('../assets/img/main_bg.png'); background-size: 400px 200px; background-attachment: fixed;">
+<body style="font-family: Alexandria, sans-serif;background: #fbfff1; background-image: url('../assets/img/main_bg.png'); background-repeat: inherit; background-size: 500px 300px; background-attachment: fixed;">
     <div class="container">
         <section class="text-white py-4 py-xl-5">
             <div class="container">

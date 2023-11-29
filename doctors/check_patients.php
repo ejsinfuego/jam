@@ -9,7 +9,7 @@ if($_SESSION['usertype'] != 'd'){
 
 
 
-$result = $database->query("SELECT * from appointments inner join patient on appointments.patient_id = patient.id");
+$result = $database->query("SELECT * from patient");
 
 //get all the appointments of patient
 
@@ -18,8 +18,6 @@ $result = $database->query("SELECT * from appointments inner join patient on app
 //get all the appointments of patient by 10
 if($result->num_rows > 0){
     $appointments = $result->fetch_all(MYSQLI_ASSOC);
-    $appointments = array_chunk($appointments, 10);
-    $appointments = $appointments[0];
 }else{
     $appointments = [];
 }
@@ -52,6 +50,8 @@ if($result->num_rows > 0){
                                 <th>Complete Name</th>
                                 <th>Email</th>
                                 <th>Sex</th>
+                                <th>Address</th>
+                                <th>Date of Birth</th>
                                 <th>Contact Number</th>
                                 <!-- <th>Date Booked</th> -->
                                 <!-- <th></th> -->
@@ -68,6 +68,10 @@ if($result->num_rows > 0){
                                 <form class="d-flex justify-content-center flex-wrap my-2" method="post" action="deleteAppointment.php">
                                 <td><?php echo $appointment['email'];?></td>
                                 <td><?php echo ucfirst($appointment['sex'] ?? 'Not Set'); ?>
+                                </td>
+                                <td><?php echo ucfirst($appointment['address'] ?? 'Not Set'); ?>
+                                </td>
+                                <td><?php echo $appointment['dob'] ? date('M d, Y', strtotime(($appointment['dob']))) : 'Not Set'; ?>
                                 </td>
                                 <td><?php echo ($appointment['contact_number']) ?? 'Not Set'; ?>
                                 </td>
