@@ -43,7 +43,7 @@ $events = count($database->query("SELECT * FROM events")->fetch_all());
     <link rel="stylesheet" href="../assets/css/Navbar-Centered-Brand-icons.css">
 </head>
 
-<body style="font-family: Alexandria, sans-serif;background: #fbfff1;">
+<body style="font-family: Alexandria, sans-serif;background: #fbfff1; background-image: url('../assets/img/main_bg.png'); background-size: 400px 200px; background-attachment: fixed;">
  <div class="container" style="margin-top: 1rem;">
     <div class="row df-l mb-3">
         <nav class="col navbar d-flex navbar-expand-md bg-body d-flex d-xxl-flex flex-row justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center rubberBand animated py-3" style="background: rgb(44,62,80);font-family: Alexandria, sans-serif;border-radius: 6px;box-shadow: 2px 2px var(--bs-primary-border-subtle);border: 2px solid var(--bs-primary-border-subtle);width: auto;">

@@ -18,7 +18,7 @@ $availableServices = $services->fetch_assoc();
                         <?php foreach($services as $availableServices) : ?>
                             <div class="col">
                                 <div class="card">
-                                    <div class="card-body pt-4 p-4" style="font-family: Alexandria, sans-serif;border: 2px solid #abb2b9;box-shadow: 3px 3px #abb2b9;border-radius: 6px;">
+                                    <div class="card-body pt-4 p-4" style="font-family: Alexandria, sans-serif;border: 2px solid #abb2b9;box-shadow: 3px 3px #abb2b9;border-radius: 6px; height: 450px;">
                                     <form method="get" action="calendar.php">
                                         <input type="hidden" name="serviceName" value="<?php echo $availableServices['id']; ?>">
                                         <h4 class="card-title" id="serviceName"><?php echo $availableServices['service']; ?></h4>   

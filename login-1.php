@@ -85,7 +85,7 @@ if($_POST){
     }
 }
 ?>
-<body>
+<body style="background-image: url('assets/img/main_bg.png'); background-size: 400px 200px; background-attachment: fixed;">
     <section class="position-relative py-4 py-xl-5" style="font-family: Alexandria, sans-serif;">
         <div class="container">
             <div class="row mb-5">
