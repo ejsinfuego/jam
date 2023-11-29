@@ -85,7 +85,7 @@ if($_POST){
     }
 }
 ?>
-<body>
+<body style="background-image: url('assets/img/main_bg.png'); background-size: 400px 200px; background-attachment: fixed;">
     <section class="position-relative py-4 py-xl-5" style="font-family: Alexandria, sans-serif;">
         <div class="container">
             <div class="row mb-5">
@@ -111,7 +111,7 @@ if($_POST){
                                 <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="Password">
                                 </div>
                                 <div class="mb-3" style="--bs-body-color: #d5dbdb;"><button class="btn btn-primary d-block w-100" type="submit" style="background: rgb(26,188,156);border-style: none;--bs-body-color: #d5dbdb;color: #fbfff1;">Login</button>
-                                <a href="public/index.html#register" class="btn btn-primary shadow-sm d-block w-100 mt-xxl-2 my-sm-2" type="submit" style="background: rgba(44,62,80,0.23);color: var(--bs-dark-text-emphasis);border-color: #1abc9c;">Sign up</a></div>
+                                <a href="public/index.php#register" class="btn btn-primary shadow-sm d-block w-100 mt-xxl-2 my-sm-2" type="submit" style="background: rgba(44,62,80,0.23);color: var(--bs-dark-text-emphasis);border-color: #1abc9c;">Sign up</a></div>
                                 <a href="#" class="text-muted">Forgot your password?</a>
                             </form>
                         </div>

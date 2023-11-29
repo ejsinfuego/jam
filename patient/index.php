@@ -61,9 +61,20 @@ $extraction = '../assets/img/extraction.jpg';
     <link rel="stylesheet" href="../assets/css/styles.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <style>
+         .btn:hover{
+            background: white;
+            height: auto;
+        }
+        
+        .serv:hover{
+            background: white;
+            color: #1abc9c;
+        }
+</style>
 </head>
 
-<body style="font-family: Alexandria, sans-serif;background: #fbfff1;">
+<body style="font-family: Alexandria, sans-serif;background: #fbfff1;  background-image: url('../assets/img/main_bg.png'); background-size: 400px 200px; background-attachment: fixed;">
     <div class="container py-2">
     <div class="row df-l mb-3">
         <nav class="col navbar d-flex navbar-expand-md bg-body d-flex d-xxl-flex flex-row justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center py-3" style="background: rgb(44,62,80);font-family: Alexandria, sans-serif;border-radius: 6px;box-shadow: 2px 2px var(--bs-primary-border-subtle);border: 2px solid var(--bs-primary-border-subtle);width: auto;">
@@ -83,7 +94,7 @@ $extraction = '../assets/img/extraction.jpg';
                                 <h1 class="text-uppercase fw-bold bounce animated mb-3" style="text-shadow: -3px 4px #1abc9c;">Orfanel-Mendoza DENTAL CLINIC</h1>
                                 <p class="bounce animated mb-4">Have your teeth a treat.</p>
                                 <?php if(isset($_SESSION['usertype']) and $_SESSION['usertype'] != '') : ?>
-                                    <a href="<?php echo $services; ?>" id="hover" class="btn fs-5 me-2 py-2 px-4" type="button" style="background: #1abc9c;border-style: none;color: rgb(213,219,219);">Check Services</a>
+                                    <a href="<?php echo $services; ?>" id="" class="btn serv fs-5 me-2 py-2 px-4" type="button" style="background: #1abc9c;border-style: none;color: rgb(213,219,219);">Check Services</a>
                                     <a href="appointments.php" class="btn btn-light fs-5 py-2 px-4 my-0 mx-0" type="button" style="background: transparent;border-style: none;color: #1abc9c;">Book an Appointment</a>
                                 <?php else :?>
                                     <a href="../login-1.php"class="btn btn-primary fs-5 me-2 py-2 px-4" type="button" style="background: #1abc9c;border-style: none;color: rgb(213,219,219);">Login</a><a href="../sign_up.php" class="btn btn-light fs-5 py-2 px-4 my-0 mx-0" type="button" style="background: transparent;border-style: none;color: #1abc9c;">Register</a>
@@ -112,7 +123,7 @@ $extraction = '../assets/img/extraction.jpg';
                 }
                 ?>
                 ">
-                    <div class="card-body bounce animated p-4" style="box-shadow: 5px 5px var(--bs-primary-border-subtle);border-radius: 6px;border-top-left-radius: 6px;border: 2px solid var(--bs-primary-border-subtle) ;">
+                    <div class="card-body bounce animated p-4" style="box-shadow: 5px 5px var(--bs-primary-border-subtle);border-radius: 6px;border-top-left-radius: 6px;border: 2px solid var(--bs-primary-border-subtle) ; height: 400px;">
                         <p class="text-primary card-text mb-0">Service</p>
                         <h4 class="card-title"><?php echo $service['service']; ?></h4>
                         <p class="card-text"><?php echo $service['description']; ?></p>
@@ -145,7 +156,7 @@ $extraction = '../assets/img/extraction.jpg';
             </div>
         </section>';}  ?>
     </div>
-    <div class="card mb-3" style="max-width: auto;">
+    <div class="card my-5" style="max-width: auto; box-shadow: 5px 5px var(--bs-primary-border-subtle);border-radius: 6px;border-top-left-radius: 6px;border: 2px solid var(--bs-primary-border-subtle) ;">
     <div class="row g-0">
         <?php
             while(true){
@@ -168,7 +179,7 @@ $extraction = '../assets/img/extraction.jpg';
 </div>
         <div class="col-md-3 mt-5 ms-2">
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
+                <h5 class="card-title">Visit Us</h5>
                 <p class="card-text">Whether you need a routine check-up, cosmetic dentistry, orthodontics, or specialized care, we offer a comprehensive range of dental services. Our goal is to be your go-to destination for all your oral health needs, providing personalized care that exceeds your expectations.</p>
                 <p class="card-text"><small class="text-muted"><a href="#"></a>Our Location</a></small></p>
             </div>

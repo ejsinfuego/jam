@@ -32,20 +32,35 @@ $extraction = '../assets/img/ext.jpg';
     <title><?= $title.' | '.$page; ?></title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alexandria&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alumni+Sans+Collegiate+One&amp;display=swap">
+    <link rel="preconnect" href="https://rsms.me/">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <link rel="stylesheet" href="../assets/css/styles.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
     crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
      crossorigin=""></script>
+     <style>
+        .btn:hover{
+            background: white;
+            height: auto;
+        }
+        
+        .serv:hover{
+            background: white;
+            color: #1abc9c;
+        }
+    </style>
 
 </head>
 
-<body style="font-family: Alexandria, sans-serif;background: #fbfff1;">
+<body style="font-family: Alexandria, sans-serif;background: #fbfff1; background-image: url('../assets/img/main_bg.png'); background-repeat: inherit; background-size: 500px 300px; background-attachment: fixed;">
     <div class="container">
         <section class="text-white py-4 py-xl-5">
             <div class="container">
@@ -55,7 +70,11 @@ $extraction = '../assets/img/ext.jpg';
                             <div>
                                 <h1 class="text-uppercase fw-bold animated mb-3" style="text-shadow: -3px 4px #1abc9c;">Orfanel-Mendoza Dental Clinic</h1>
                                 <p class="faded animated mb-4" data-aos="fade-up">At Orfanel-Mendoza Dental Clinic, your oral health and smile are our top priorities. We are a dedicated team of dental professionals committed to providing you and your family with the highest quality dental care in a warm and welcoming environment.</p>
-                                <a href="../login-1.php"class="btn btn-primary fs-5 me-2 py-2 px-4" type="button" style="background: #1abc9c;border-style: none;color: rgb(213,219,219);">Login</a><a href="#services" class="btn btn-light fs-5 py-2 px-4 my-0 mx-0" type="button" style="background: transparent;border-style: none;color: #1abc9c;">Services</a>
+                                
+                                <a href="../login-1.php" class="btn btn-primary fs-5 me-2 py-2 px-4 serv" type="button" style="background: #1abc9c;border-style: none;color: white;">Login</a>
+                                <button class="btn cool-button">
+                                <a href="#services" class="btn btn-light fs-5 py-2 px-4 my-0 mx-0" type="button" style="background: transparent;border-style: none; color: #1abc9c;">Services</a>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -82,7 +101,7 @@ $extraction = '../assets/img/ext.jpg';
                 }
                 ?>
                 ">
-                    <div class="card-body bounce animated p-4" style="border: 2px solid var(--bs-primary-bg-subtle);border-radius: 6px;box-shadow: 5px 5px var(--bs-primary-border-subtle);">
+                    <div class="card-body bounce animated p-4" style="border: 2px solid var(--bs-primary-bg-subtle);border-radius: 6px;box-shadow: 5px 5px var(--bs-primary-border-subtle); height: 450px;">
                         <p class="text-primary card-text mb-0">Service</p>
                         <h4 class="card-title"><?php echo $service['service'] ?></h4>
                         <p class="card-text ps-2" style="font-family:Arial, Helvetica, sans-serif;"><?php echo $service['description']; ?></p>
@@ -94,21 +113,27 @@ $extraction = '../assets/img/ext.jpg';
                 </div>
             </div>
             <?php endforeach; ?>
-            <div class="row gy-5 gy-lg-1 row-cols-4 row-cols-md-2 row-cols-lg-1">
+        </div>
+        <div class="text-center">
+            <h1>Promos</h1>
+        </div>
+            <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3 my-2">
             <?php foreach($events as $event) : ?>
-                <div class="col ms-4">
-                <div class="card" style="Alexandria, sans-serif;border-radius: 6px;box-shadow: 2px 2px var(--bs-primary-border-subtle);border: 2px solid var(--bs-primary-border-subtle);width: auto;"><img class="card-img-top w-100 d-block fit-cover" style="height: 200px; " src="<?php echo (isset($event['image'])) ? '../doctors/eventpics/'.$event['image'] :'https://cdn.bootstrapstudio.io/placeholders/1400x800.png' ; ?>"/>
-                <div class="card-body p-4">
-                    <p class="text-primary card-text mb-0">Promo</p>
-                    <h4 class="card-title"><?php echo $event['title']; ?></h4>
-                    <hr style="border: 1px solid #6c757d;">
-                    <p class="card-text"><?php echo $event['description']; ?></p>
-                    <p>Start on <strong><?php echo date('F d, Y', strtotime($event['start'])); ?></strong> until <strong><?php echo date('F d, Y', strtotime($event['end'])); ?></strong></p>
+            <div class="col">
+                <div class="card"><img class="card-img-top w-100 d-block bounce animated fit-cover" style="height: 200px;border: 2px solid var(--bs-primary-bg-subtle);border-radius: 6px;box-shadow: 5px 5px var(--bs-primary-border-subtle);" src="<?php echo (isset($event['image'])) ? '../doctors/eventpics/'.$event['image'] :'https://cdn.bootstrapstudio.io/placeholders/1400x800.png' ; ?>">
+                    <div class="card-body bounce animated p-4" style="border: 2px solid var(--bs-primary-bg-subtle);border-radius: 6px;box-shadow: 5px 5px var(--bs-primary-border-subtle); height: 400px;">
+                        <p class="text-primary card-text mb-0">Promo</p>
+                        <h4 class="card-title"><?php echo $event['title'] ?></h4>
+                        <p class="card-text ps-2" style="font-family:Arial, Helvetica, sans-serif;"><?php echo $event['description']; ?></p>
+                        <div class="d-flex"><a href="../login-1.php">
+                            Book an appointment..
+                        </a>
+                        </div>
                     </div>
                 </div>
             </div>
-            </div>
             <?php endforeach; ?>
+            </div>
         <div class="container">
          <div class="container">
     <div class="row gy-4 gy-md-0">

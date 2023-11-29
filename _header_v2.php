@@ -169,7 +169,7 @@ session_start();
     }
 
 
-?><body style="background: #fbfff1;">
+?><body style="background: #fbfff1; background-image: url('../assets/img/main_bg.png'); background-size: 400px 200px; background-attachment: fixed;">
 <div id="<?php echo $myModal; ?>" class="modal fade" style="font-family: Alexandria, sans-serif;">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -195,7 +195,7 @@ session_start();
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="my-modal-title"></h5>
+                <h5 class="modal-title" id="my-modal-title">Confirmation</h5>
                 <button class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -204,8 +204,8 @@ session_start();
                 <p>Are you sure to logout?</p>
             </div>
             <div class="modal-footer">
-                <button data-bs-dismiss="modal" class="btn btn-outline-primary">
-                    <a href="../logout.php" style="text-decoration: none;">Yes</a>
+                <button data-bs-dismiss="modal" class="btn btn-outline-danger">
+                    <a href="../logout.php" style="text-decoration: none; color: red;">Yes</a>
                 </button>
                 <button data-bs-dismiss="modal" class="btn btn-outline-primary">
                     Close
@@ -214,14 +214,14 @@ session_start();
         </div>
     </div>
 </div>
-    <div class="container" style="margin-top: 18px;">
-        <div class="row df-l mb-3" id="header">
+    <div class="container" style="margin-top: 18px; background: #fbfff1;">
+        <div class="row df-l mb-3" style="background: #fbfff1;" id="header">
             <nav class="col navbar d-flex navbar-expand-md bg-body d-flex d-xxl-flex flex-row justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center py-3" style="background: rgb(44,62,80);font-family: Alexandria, sans-serif;border-radius: 6px;box-shadow: 2px 2px var(--bs-primary-border-subtle);border: 2px solid var(--bs-primary-border-subtle);width: auto;">
                 <div class="container-fluid"><a class="navbar-brand d-flex align-items-center" href="index.php"><img src="../assets/img/logo.png" width="65" height="65" /><span class="d-flex px-sm-4" style="color: var(--bs-gray-600);text-shadow: 1px 1px #1abc9c;margin-left: -19px;margin-right: -19px;">Orfanel-Mendoza Dental Clinic</span></a><a class="px-lg-5 px-xxl-3"><?php echo $username; ?></a><button class="navbar-toggler" data-bs-toggle="collapse"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button></div>
             </nav>
         </div>
     </div>
-            <div class="container" style="margin-top: 15px;">
+            <div class="container" style="margin-top: 15px; background: #fbfff1;">
             <div class="row">
             <div class="col pt-3 col-md-2 col-lg-2 col-xxl-2 d-flex flex-column pb-4" style="background: #4c657d; font-family:'Inter', sans-serif;border-radius: 6px;box-shadow: 5px 5px 0px var(--bs-primary-border-subtle); font-size: 14px; font-size: 15px;">
                 <a href="calendar.php" class="d-flex d-lg-flex d-xxl-flex p-1 nav-link" style="margin-top: 0px; border-radius: 5px; color: white;">

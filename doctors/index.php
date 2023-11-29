@@ -43,7 +43,7 @@ $events = count($database->query("SELECT * FROM events")->fetch_all());
     <link rel="stylesheet" href="../assets/css/Navbar-Centered-Brand-icons.css">
 </head>
 
-<body style="font-family: Alexandria, sans-serif;background: #fbfff1;">
+<body style="font-family: Alexandria, sans-serif;background: #fbfff1; background-image: url('../assets/img/main_bg.png'); background-size: 400px 200px; background-attachment: fixed;">
  <div class="container" style="margin-top: 1rem;">
     <div class="row df-l mb-3">
         <nav class="col navbar d-flex navbar-expand-md bg-body d-flex d-xxl-flex flex-row justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center rubberBand animated py-3" style="background: rgb(44,62,80);font-family: Alexandria, sans-serif;border-radius: 6px;box-shadow: 2px 2px var(--bs-primary-border-subtle);border: 2px solid var(--bs-primary-border-subtle);width: auto;">
@@ -68,7 +68,7 @@ $events = count($database->query("SELECT * FROM events")->fetch_all());
     </div>
     <div class="container py-4 py-xl-5 mb-lg-0 pb-lg-3 pb-xxl-4" style="margin-bottom: 1px;">
         <div class="row gy-4 row-cols-2 row-cols-md-4" style="font-family: Alexandria, sans-serif;">
-            <div class="col">
+            <div class="col" style="background-color:#fbfff1;" style="background-color:#fbfff1;">
                 <a href="appointments.php" class="text-decoration-none text-body">
                 <div class="text-center d-flex flex-column justify-content-center align-items-center py-3" style="border-style: solid;border-color: #6c757d;border-radius: 6px;box-shadow: 4px 3px #6c757d;">
                     <div class="bs-icon-xl bs-icon-circle bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-2 bs-icon lg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-32 0 512 512" width="1em" height="1em" fill="currentColor">
@@ -82,7 +82,7 @@ $events = count($database->query("SELECT * FROM events")->fetch_all());
                 </div>
                 </a>
             </div>
-            <div class="col">
+            <div class="col" style="background-color:#fbfff1;">
             <a href="check_patients.php" class="text-decoration-none text-body">
                 <div class="text-center d-flex flex-column justify-content-center align-items-center py-3" style="border-style: solid;border-color: #6c757d;border-radius: 6px;box-shadow: 4px 3px #6c757d;">
                     <div class="bs-icon-xl bs-icon-circle bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-2 bs-icon lg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="1em" height="1em" fill="currentColor">
@@ -96,7 +96,7 @@ $events = count($database->query("SELECT * FROM events")->fetch_all());
                 </div>
             </a>
             </div>
-            <div class="col">
+            <div class="col" style="background-color:#fbfff1;">
             <a href="services.php" class="text-decoration-none text-body">
 
                 <div class="text-center d-flex flex-column justify-content-center align-items-center py-3" style="border-style: solid;border-color: #6c757d;border-radius: 6px;box-shadow: 4px 3px #6c757d;">
@@ -111,7 +111,7 @@ $events = count($database->query("SELECT * FROM events")->fetch_all());
                 </div>
             </a>
             </div>
-            <div class="col">
+            <div class="col" style="background-color:#fbfff1;">
             <a href="events.php" class="text-decoration-none text-body">
                 <div class="text-center d-flex flex-column justify-content-center align-items-center py-3" style="border-style: solid;border-color: #6c757d;border-radius: 6px;box-shadow: 4px 3px #6c757d;">
                     <div class="bs-icon-xl bs-icon-circle bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-2 bs-icon lg"><i class="material-icons" style="font-size: 38px;">rss_feed</i></div>

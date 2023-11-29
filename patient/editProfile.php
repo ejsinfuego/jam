@@ -27,10 +27,16 @@ if($_POST){
      if(isset($_POST['contact_number']) && !empty($_POST['contact_number'])){
          $fieldsToUpdate['contact_number'] = $_POST['contact_number'];
      }
+     if(isset($_POST['dob']) && !empty($_POST['dob'])){
+        $fieldsToUpdate['dob'] = $_POST['dob'];
+    }
      if(isset($_POST['sex']) && !empty($_POST['sex'])){
          $fieldsToUpdate['sex'] = $_POST['sex'];
      }
- 
+     
+     if(isset($_POST['address']) && !empty($_POST['address'])){
+        $fieldsToUpdate['address'] = $_POST['address'];
+    }
      // Check if there are any fields to update
      if(!empty($fieldsToUpdate)){
          // Build the SQL query to update the fields
