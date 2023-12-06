@@ -6,7 +6,7 @@ include(__DIR__ . '/../_header_v2.php');
 
 //query that also gets the first and last name of the patient and inner join it in appointments table
 
-$result = $database->query("SELECT appointments.id, appointments.appointmentDate, appointments.appointmentTime, appointments.service_id, appointments.cancel_details, appointments.status, appointments.resched_details, appointments.created_at, patient.first_name, patient.last_name, services.service FROM appointments INNER JOIN patient ON appointments.patient_id = patient.id INNER JOIN services ON appointments.service_id = services.id WHERE appointments.patient_id = '$userid';");
+$result = $database->query("SELECT appointments.id, appointments.appointmentDate, appointments.appointmentTime, appointments.bookthru, appointments.service_id, appointments.cancel_details, appointments.status, appointments.resched_details, appointments.created_at, patient.first_name, patient.last_name, services.service FROM appointments INNER JOIN patient ON appointments.patient_id = patient.id INNER JOIN services ON appointments.service_id = services.id WHERE appointments.patient_id = '$userid' order by appointments.created_at desc;");
 
 //get all the appointments of patient by 10
 if($result->num_rows>0){
@@ -104,7 +104,9 @@ $services = $database->query('select * from services');
                                 <th>Time</th>
                                 <th>Booked Date</th>
                                 <th>Status</th>
-                                <th></th>
+                                <th>Book Thru</th>
+                                
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -125,6 +127,12 @@ $services = $database->query('select * from services');
                                 : (($appointment['status'] == 'done') ? '<p class="text-success" style="margin-bottom: -10px;">'.ucfirst($appointment['status']).'<p>' :'<p class="text-info" style="margin-bottom: -10px;">'.ucfirst($appointment['status'].'<p>')))
                                 ; 
                                 ?>
+                                </td>
+                                <td><?php if($appointment['bookthru'] == 'online'):  ?>
+                                Online
+                                <?php else: ?>
+                                Walk In
+                                <?php endif; ?>
                                 </td>
                                 <td class="d-lg-flex">
 

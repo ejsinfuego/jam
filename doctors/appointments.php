@@ -5,7 +5,7 @@ include(__DIR__ . '/../_header_v2.php');
 if($_SESSION['usertype'] != 'd'){
     header('location: ../something_went_wrong.php');
 }
-$result = $database->query("SELECT appointments.id, appointments.appointmentDate, appointments.cancel_details,appointments.appointmentTime, appointments.status, appointments.service_id, appointments.created_at, appointments.updated_at, patient.first_name, patient.last_name, services.service FROM appointments INNER JOIN patient ON appointments.patient_id = patient.id INNER JOIN services ON appointments.service_id = services.id where appointments.status IS NULL or appointments.status='Approved' order by appointments.appointmentDate desc;");
+$result = $database->query("SELECT appointments.id, appointments.appointmentDate, appointments.cancel_details,appointments.appointmentTime, appointments.status, appointments.service_id, appointments.created_at, appointments.bookthru, appointments.updated_at, patient.first_name, patient.last_name, services.service FROM appointments INNER JOIN patient ON appointments.patient_id = patient.id INNER JOIN services ON appointments.service_id = services.id where appointments.status IS NULL or appointments.status='Approved' order by appointments.created_at desc;");
 
 
 if($result->num_rows>0){
@@ -104,7 +104,8 @@ if($result->num_rows>0){
                                 <th>Time</th>
                                 <th>Status</th>
                                 <th>Date Booked</th>
-                                <th></th>
+                                <th>Booked Thru</th>
+                                <th>Actions</th>
 
                             </tr>
                         </thead>
@@ -150,6 +151,12 @@ if($result->num_rows>0){
                                 <!-- End Modal -->
                             </td>
                                 <td><?php echo date('M-d-Y', strtotime($appointment['created_at'])); ?></td>
+                                <td><?php if($appointment['bookthru'] == 'online'):  ?>
+                                Online
+                                <?php else: ?>
+                                Walk In
+                                <?php endif; ?>
+                                </td>
                                 <td class="d-lg-flex justify-content-lg-start">
                         
                                     <?php if($appointment['status'] == '' and $appointment['cancel_details'] == null ) :?>

@@ -88,6 +88,18 @@ $availableServices = $services->fetch_assoc();
             
                 <h6 class="text-center mb-4">Choose the date and time to book an appointment.</h6>
                 <form method="post" action="submitConsultation.php">
+
+                <label class="form-label">Book Through</label>
+                <div class="dropdown bg-light-subtle d-flex justify-content-xxl-start text-align-left" style="width: auto;">
+
+                    <select class="btn dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" name="bookthru" type="button">
+                    <div class="dropdown-menu text-align-left">
+                    <option class="dropdown-item text-align-left" value="" selected></option>
+                    <option class="dropdown-item text-align-left" value="walkin">Walk In</option>
+                    <option class="dropdown-item text-align-left" value="online">Online</option>
+                    </div>
+                    </select>
+                </div>
                     <div class="mb-3"><label class="form-label">Date</label>
                     <input class="form-control" id="name-2" name="date" placeholder="Date" type="date" min="<?php echo Carbon::now()->toDateString(); ?>"><label class="form-label" style="padding-top: 0px;margin-top: 8px;">Time<i><small>(Choose between 9am to 5pm)</small></i></label>
                     <input class="form-control" id="name-1" name="time" placeholder="Name" type="time" min="09:00" max="18:00"></div>
