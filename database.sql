@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2023 at 01:37 PM
+-- Generation Time: Nov 30, 2023 at 04:00 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -60,7 +60,21 @@ INSERT INTO `appointments` (`id`, `patient_id`, `doctor_id`, `service_id`, `appo
 (213, 8, NULL, 89, '2023-11-30', '09:27:00', NULL, '', '', '', '', 0, NULL, '2023-11-11 17:53:47', '2023-11-11 17:53:47'),
 (214, 8, NULL, 88, '2023-11-29', '14:54:00', NULL, '', '2023-11-28', '', '', 0, NULL, '2023-11-11 18:09:29', '2023-11-11 18:24:48'),
 (216, 20, NULL, 89, '2023-11-23', '10:21:00', 'done', '', '', '', '', 0, NULL, '2023-11-22 14:48:52', '2023-11-22 15:00:05'),
-(217, 20, NULL, 87, '2023-11-28', '15:50:00', NULL, '', '', '', '', 0, NULL, '2023-11-22 15:06:14', '2023-11-22 15:06:14');
+(217, 20, NULL, 87, '2023-11-28', '15:50:00', NULL, '', '', '', '', 0, NULL, '2023-11-22 15:06:14', '2023-11-22 15:06:14'),
+(218, 20, NULL, 89, '2023-12-04', '13:43:00', NULL, '', '', '', '', 0, NULL, '2023-11-29 21:13:21', '2023-11-29 21:13:21'),
+(219, 20, NULL, 88, '2023-12-01', '14:49:00', NULL, '', '', '', '', 0, NULL, '2023-11-29 21:19:57', '2023-11-29 21:19:57'),
+(220, 20, NULL, 88, '2024-01-06', '14:57:00', NULL, '', '', '', '', 0, NULL, '2023-11-29 21:27:24', '2023-11-29 21:27:24'),
+(221, 20, NULL, 89, '2023-12-09', '16:10:00', NULL, '', '', '', '', 0, NULL, '2023-11-29 21:40:56', '2023-11-29 21:40:56'),
+(222, 20, NULL, 88, '2024-01-01', '15:43:00', NULL, '', '', '', '', 0, NULL, '2023-11-29 22:16:02', '2023-11-29 22:16:02'),
+(223, 20, NULL, 89, '2024-01-01', '03:46:00', NULL, '', '', '', '', 0, NULL, '2023-11-29 22:16:37', '2023-11-29 22:16:37'),
+(224, 20, NULL, 89, '2024-01-03', '14:47:00', NULL, '', '', '', '', 0, NULL, '2023-11-29 22:17:15', '2023-11-29 22:17:15'),
+(225, 20, NULL, 88, '2023-12-11', '15:47:00', NULL, '', '', '', '', 0, NULL, '2023-11-29 22:17:39', '2023-11-29 22:17:39'),
+(229, 20, NULL, 88, '2023-12-02', '09:07:00', NULL, '', '', '', '', 0, NULL, '2023-11-29 22:28:52', '2023-11-29 22:28:52'),
+(230, 20, NULL, 89, '2023-12-02', '11:59:00', NULL, '', '', '', '', 0, NULL, '2023-11-29 22:29:15', '2023-11-29 22:29:15'),
+(238, 20, NULL, 88, '2023-11-30', '15:18:00', NULL, '', '', '', '', 0, NULL, '2023-11-29 22:48:08', '2023-11-29 22:48:08'),
+(239, 20, NULL, 88, '2023-12-02', '13:20:00', NULL, '', '', '', '', 0, NULL, '2023-11-29 22:50:48', '2023-11-29 22:50:48'),
+(240, 20, NULL, 89, '2023-12-02', '14:20:00', NULL, '', '', '', '', 0, NULL, '2023-11-29 22:51:04', '2023-11-29 22:51:04'),
+(241, 20, NULL, 88, '2023-12-02', '15:23:00', NULL, '', '', '', '', 0, NULL, '2023-11-29 22:51:32', '2023-11-29 22:51:32');
 
 -- --------------------------------------------------------
 
@@ -127,6 +141,7 @@ CREATE TABLE `patient` (
   `address` varchar(500) NOT NULL,
   `contact_number` varchar(15) DEFAULT NULL,
   `sex` varchar(6) NOT NULL,
+  `dob` date DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -135,11 +150,11 @@ CREATE TABLE `patient` (
 -- Dumping data for table `patient`
 --
 
-INSERT INTO `patient` (`id`, `email`, `first_name`, `last_name`, `password`, `address`, `contact_number`, `sex`, `created_at`, `updated_at`) VALUES
-(8, 'mario@mail.com', 'Mario', 'Maurer', 'password', '', '09321654987', 'male', '2023-08-23 15:06:44', '2023-09-25 18:51:17'),
-(20, 'peter@mail.com', 'Pedro', 'Patter', '123', '', '09123456789', 'male', '2023-08-23 18:47:24', '2023-11-22 14:52:23'),
-(21, 'pablo@mail.com', 'Pablo', 'Picasso', '123', '', NULL, '', '2023-08-23 20:17:24', '2023-08-23 20:17:24'),
-(22, 'damaso@mail.com', 'Padre', 'Damaso', 'password', '', NULL, 'male', '2023-08-28 06:57:19', '2023-10-08 19:27:00');
+INSERT INTO `patient` (`id`, `email`, `first_name`, `last_name`, `password`, `address`, `contact_number`, `sex`, `dob`, `created_at`, `updated_at`) VALUES
+(8, 'mario@mail.com', 'Mario', 'Maurer', 'password', '', '09321654987', 'male', NULL, '2023-08-23 15:06:44', '2023-09-25 18:51:17'),
+(20, 'peter@mail.com', 'Pedro', 'Patter', 'password', 'Sample Address', '09123456789', 'male', '2023-11-14', '2023-08-23 18:47:24', '2023-11-29 23:08:27'),
+(21, 'pablo@mail.com', 'Pablo', 'Picasso', '123', '', NULL, '', NULL, '2023-08-23 20:17:24', '2023-08-23 20:17:24'),
+(22, 'damaso@mail.com', 'Padre', 'Damaso', 'password', '', NULL, 'male', NULL, '2023-08-28 06:57:19', '2023-10-08 19:27:00');
 
 -- --------------------------------------------------------
 
@@ -317,7 +332,7 @@ ALTER TABLE `webuser`
 -- AUTO_INCREMENT for table `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=218;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=242;
 
 --
 -- AUTO_INCREMENT for table `doctor`
