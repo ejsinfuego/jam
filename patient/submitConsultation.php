@@ -45,17 +45,17 @@ $timeNow = Carbon::now('Asia/Kolkata');
             }
         }elseif($search->num_rows>0){
             $flag = 0;
-            $time = date('h:i', strtotime($time));
+            $time = date('H:i:s', strtotime($time));
             foreach($search as $appointment){
 
                 //set each time to 30 minutes before and after the appointment time
                 //check if resched_details is not null
                 if($appointment['resched_details'] != null){
-                    $start = new DateTime(date('h:i', strtotime('-1 hour', strtotime($appointment['resched_details']))));
-                    $end = new DateTime(date('h:i', strtotime('+1 hour', strtotime($appointment['resched_details']))));
+                    $start = new DateTime(date('H:i:s', strtotime('-1 hour', strtotime($appointment['resched_details']))));
+                    $end = new DateTime(date('H:i:s', strtotime('+1 hour', strtotime($appointment['resched_details']))));
                 }else{
-                    $start = new DateTime(date('h:i', strtotime('-1 hour', strtotime($appointment['appointmentTime']))));
-                    $end = new DateTime(date('h:i', strtotime('+1 hour', strtotime($appointment['appointmentTime'])))); 
+                    $start = new DateTime(date('H:i:s', strtotime('-1 hour', strtotime($appointment['appointmentTime']))));
+                    $end = new DateTime(date('H:i:s', strtotime('+1 hour', strtotime($appointment['appointmentTime'])))); 
                 }
 
                 //interval in minutes
@@ -63,9 +63,11 @@ $timeNow = Carbon::now('Asia/Kolkata');
 
                 $period = new DatePeriod($start, $interval, $end);
                 foreach($period as $dt){
-                    if($dt->format('h:i') == $time or $dt->format('h:i') == $time or $dt->format('h:i') == date('h:i a', strtotime('+1hour', strtotime($time))) or $dt->format('h:i') == date('h:i a', strtotime('-1hour', strtotime($time)))){
+                    if($dt->format('H:i:s') == $time or $dt->format('H:i:s') == $time or $dt->format('H:i:s') == date('H:i:s', strtotime('+1hour', strtotime($time))) or $dt->format('H:i:s') == date('H:i:s', strtotime('-1hour', strtotime($time)))){
                         $flag = ++$flag;
-                        break;  
+                        $_SESSION['show_modal']="myModal";
+                        $_SESSION['message']="Please choose another time. 1 hour before and after the appointment time is already taken.";
+                        header("location: calendar.php");
                     }
                     }
             }if($flag > 0){
@@ -73,55 +75,55 @@ $timeNow = Carbon::now('Asia/Kolkata');
                 $_SESSION['message']="Please choose another time. 1 hour before and after the appointment time is already taken.";
                 header("location: calendar.php");
             }
-            else{
-                //insert
-                $time = $_POST['time'];
-                $database->query("insert into appointments(service_id, appointmentDate, appointmentTime, patient_id, created_at, updated_at) values('$type','$date','$time','$pid','$timestamp','$timestamp')");
-                $_SESSION['show_modal']="myModal";
-                $_SESSION['message']="Appointment Request Sent!";
-                header("location: calendar.php");
-            }
+            echo $flag;
+        
+                // //insert
+                // $time = $_POST['time'];
+                // $database->query("insert into appointments(service_id, appointmentDate, appointmentTime, patient_id, created_at, updated_at) values('$type','$date','$time','$pid','$timestamp','$timestamp')");
+                // $_SESSION['show_modal']="myModal";
+                // $_SESSION['message']="Appointment Request Sent!";
+                // header("location: calendar.php");
             // $_SESSION['show_modal']="myModal";
             // $_SESSION['message']="Time and Date already taken!";
             // header("location: calendar.php");
         }
-    }else{
+    }
        
-            $flag = 0;
-            $time = date('h:i', strtotime($time));
-            foreach($search as $appointment){
+            // $flag = 0;
+            // $time = date('h:i', strtotime($time));
+            // foreach($search as $appointment){
 
-                //set each time to 30 minutes before and after the appointment time
-                //check if resched_details is not null
-                if($appointment['resched_details'] != null){
-                    $start = new DateTime(date('h:i', strtotime('-1 hour', strtotime($appointment['resched_details']))));
-                    $end = new DateTime(date('h:i', strtotime('+1 hour', strtotime($appointment['resched_details']))));
-                }else{
-                    $start = new DateTime(date('h:i', strtotime('-1 hour', strtotime($appointment['appointmentTime']))));
-                    $end = new DateTime(date('h:i', strtotime('+1 hour', strtotime($appointment['appointmentTime'])))); 
-                }
+            //     //set each time to 30 minutes before and after the appointment time
+            //     //check if resched_details is not null
+            //     if($appointment['resched_details'] != null){
+            //         $start = new DateTime(date('h:i', strtotime('-1 hour', strtotime($appointment['resched_details']))));
+            //         $end = new DateTime(date('h:i', strtotime('+1 hour', strtotime($appointment['resched_details']))));
+            //     }else{
+            //         $start = new DateTime(date('h:i', strtotime('-1 hour', strtotime($appointment['appointmentTime']))));
+            //         $end = new DateTime(date('h:i', strtotime('+1 hour', strtotime($appointment['appointmentTime'])))); 
+            //     }
 
-                //interval in minutes
-               $interval = new DateInterval('PT1M');
+            //     //interval in minutes
+            //    $interval = new DateInterval('PT1M');
 
-                $period = new DatePeriod($start, $interval, $end);
-                foreach($period as $dt){
-                    if($dt->format('h:i') == $time or $dt->format('h:i') == $time or $dt->format('h:i') == date('h:i a', strtotime('+1hour', strtotime($time))) or $dt->format('h:i') == date('h:i a', strtotime('-1hour', strtotime($time)))){
-                        $flag = ++$flag;
-                        break;  
-                    }
-                    }
-            }if($flag > 0){
-                $_SESSION['show_modal']="myModal";
-                $_SESSION['message']="Please choose another time. 1 hour before and after the appointment time is already taken.";
-                header("location: calendar.php");
-            }
-            else{
-                //insert
-                $time = $_POST['time'];
-                $database->query("insert into appointments(service_id, appointmentDate, appointmentTime, patient_id, created_at, updated_at) values('$type','$date','$time','$pid','$timestamp','$timestamp')");
-                $_SESSION['show_modal']="myModal";
-                $_SESSION['message']="Appointment Request Sent!";
-                header("location: calendar.php");
-            }
-        }
+            //     $period = new DatePeriod($start, $interval, $end);
+            //     foreach($period as $dt){
+            //         if($dt->format('h:i') == $time or $dt->format('h:i') == $time or $dt->format('h:i') == date('h:i a', strtotime('+1hour', strtotime($time))) or $dt->format('h:i') == date('h:i a', strtotime('-1hour', strtotime($time)))){
+            //             $flag = ++$flag;
+            //             break;  
+            //         }
+            //         }
+            // }if($flag > 0){
+            //     $_SESSION['show_modal']="myModal";
+            //     $_SESSION['message']="Please choose another time. 1 hour before and after the appointment time is already taken.";
+            //     header("location: calendar.php");
+            // }
+            // else{
+            //     //insert
+            //     $time = $_POST['time'];
+            //     $database->query("insert into appointments(service_id, appointmentDate, appointmentTime, patient_id, created_at, updated_at) values('$type','$date','$time','$pid','$timestamp','$timestamp')");
+            //     $_SESSION['show_modal']="myModal";
+            //     $_SESSION['message']="Appointment Request Sent!";
+            //     header("location: calendar.php");
+            // }
+      

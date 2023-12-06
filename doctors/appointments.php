@@ -5,7 +5,7 @@ include(__DIR__ . '/../_header_v2.php');
 if($_SESSION['usertype'] != 'd'){
     header('location: ../something_went_wrong.php');
 }
-$result = $database->query("SELECT appointments.id, appointments.appointmentDate, appointments.cancel_details,appointments.appointmentTime, appointments.status, appointments.service_id, appointments.created_at, appointments.updated_at, patient.first_name, patient.last_name, services.service FROM appointments INNER JOIN patient ON appointments.patient_id = patient.id INNER JOIN services ON appointments.service_id = services.id");
+$result = $database->query("SELECT appointments.id, appointments.appointmentDate, appointments.cancel_details,appointments.appointmentTime, appointments.status, appointments.service_id, appointments.created_at, appointments.updated_at, patient.first_name, patient.last_name, services.service FROM appointments INNER JOIN patient ON appointments.patient_id = patient.id INNER JOIN services ON appointments.service_id = services.id where appointments.status IS NULL or appointments.status='Approved' order by appointments.appointmentDate desc;");
 
 
 if($result->num_rows>0){

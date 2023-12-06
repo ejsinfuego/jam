@@ -150,6 +150,7 @@ appointment <br>
                             
                             if($count >= 4){
                                 echo '<span style="color: red"><i>Fully Booked</i></span>';
+                                break;
                             }else{
                             echo date('h:ia', strtotime($availableDates['appointmentTime']));
                             }
